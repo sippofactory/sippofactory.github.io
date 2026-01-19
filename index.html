@@ -10,26 +10,21 @@
   <script>
     window.$docsify = {
       name: 'sippofactory',
+      // 【重要】Docsifyの標準タイトル更新機能をオフにする
+      // これを true にすると、docsify がタブを勝手にいじらなくなります
+      externalLinkTarget: '_self', 
+      cornerExternalLinkTarget: '_self',
+      
       plugins: [
         function(hook, vm) {
-          // ページが切り替わった直後の処理
           hook.doneEach(function() {
-            // タイトルを更新する関数
-            const updateTitle = () => {
-              const h1 = document.querySelector('h1');
-              if (h1 && h1.innerText) {
-                const newTitle = h1.innerText.trim() + " - " + vm.config.name;
-                // ブラウザの標準挙動に負けないよう、直接書き換える
-                document.title = newTitle;
-              }
-            };
-
-            // 1. まず実行
-            updateTitle();
-            // 2. 念のため少し遅れてもう一度実行（描画遅延対策）
-            setTimeout(updateTitle, 200);
-            // 3. さらに念のため1秒後にも実行
-            setTimeout(updateTitle, 1000);
+            // ページが完全に描画された後に実行される
+            const h1 = document.querySelector('h1');
+            if (h1) {
+              // ここで強制的に書き換える
+              const titleText = h1.innerText.trim() + " - " + vm.config.name;
+              document.title = titleText;
+            }
           });
         }
       ]
