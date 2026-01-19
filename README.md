@@ -1,3 +1,7 @@
+---
+title: トップ
+---
+
 # sippofactory.github.io
 ## 公開ページ 
 ### 教育用いろいろ
