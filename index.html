@@ -12,14 +12,24 @@
       name: 'sippofactory',
       plugins: [
         function(hook, vm) {
+          // ページが切り替わった直後の処理
           hook.doneEach(function() {
-            // 描画が終わるのを少しだけ（0.1秒）待ってから実行
-            setTimeout(function() {
-              var h1 = document.querySelector('h1');
-              if (h1) {
-                document.title = h1.innerText + " - " + vm.config.name;
+            // タイトルを更新する関数
+            const updateTitle = () => {
+              const h1 = document.querySelector('h1');
+              if (h1 && h1.innerText) {
+                const newTitle = h1.innerText.trim() + " - " + vm.config.name;
+                // ブラウザの標準挙動に負けないよう、直接書き換える
+                document.title = newTitle;
               }
-            }, 100); 
+            };
+
+            // 1. まず実行
+            updateTitle();
+            // 2. 念のため少し遅れてもう一度実行（描画遅延対策）
+            setTimeout(updateTitle, 200);
+            // 3. さらに念のため1秒後にも実行
+            setTimeout(updateTitle, 1000);
           });
         }
       ]
