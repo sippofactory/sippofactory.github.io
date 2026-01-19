@@ -13,6 +13,9 @@
     window.$docsify = {
       el: '#app',
       name: '',
+      frontMatter: {
+        installed: true,
+      },
       // フォルダの中のファイルではなく、直下の README.md を玄関にする
       homepage: 'README.md', 
       // basePath: './',
@@ -22,14 +25,12 @@
       // 以下の2行を追加すると、トップページがより「玄関」らしくなります
       loadSidebar: false, // サイドバーを自動で出さない
       hideSidebar: true,  // サイドバーを隠す
-
       plugins: [
         function(hook, vm) {
           hook.doneEach(function() {
-            // ページがロードされるたびに、h1の内容をタイトルに設定する
-            var title = document.querySelector('h1');
-            if (title) {
-              document.title = title.innerText + " - " + vm.config.name;
+            // フロントマターに title が設定されているか確認
+            if (vm.frontmatter && vm.frontmatter.title) {
+              document.title = vm.frontmatter.title + ' - ' + vm.config.name;
             }
           });
         }
