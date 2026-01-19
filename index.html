@@ -1,33 +1,49 @@
-<script>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>読み込み中...</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+</head>
+<body>
+  <div id="app">読み込み中...</div>
+  <script>
     window.$docsify = {
       name: 'sippofactory',
-      // フロントマター設定を有効にする
+      repo: '',
+      // フロントマター設定
       frontMatter: {
-        installed: true,
+        installed: true
       },
+      // タイトル制御プラグイン
       plugins: [
         function(hook, vm) {
           hook.doneEach(function() {
-            var title = '';
-            
-            // 1. フロントマターに title があるかチェック
+            var pageTitle = '';
+
+            // 1. フロントマターに title がある場合
             if (vm.frontmatter && vm.frontmatter.title) {
-              title = vm.frontmatter.title;
+              pageTitle = vm.frontmatter.title;
             } 
-            // 2. なければ、ページ内の最初の h1 要素を探す
+            // 2. なければ、ページ内の最初の h1 を探す
             else {
               var h1 = document.querySelector('h1');
               if (h1) {
-                title = h1.innerText;
+                pageTitle = h1.innerText;
               }
             }
 
-            // タイトルが決定したらブラウザのタブに反映
-            if (title) {
-              document.title = title + " - " + vm.config.name;
+            // タイトルが取得できたらタブ名を更新
+            if (pageTitle) {
+              document.title = pageTitle + " - " + vm.config.name;
             }
           });
         }
       ]
-    }
+    };
   </script>
+  <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+</body>
+</html>
