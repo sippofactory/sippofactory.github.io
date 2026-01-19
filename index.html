@@ -8,28 +8,35 @@
 <body>
   <div id="app">読み込み中...</div>
   <script>
-    window.$docsify = {
-      name: 'sippofactory',
-      // 【重要】Docsifyの標準タイトル更新機能をオフにする
-      // これを true にすると、docsify がタブを勝手にいじらなくなります
-      externalLinkTarget: '_self', 
-      cornerExternalLinkTarget: '_self',
-      
-      plugins: [
-        function(hook, vm) {
-          hook.doneEach(function() {
-            // ページが完全に描画された後に実行される
+  window.$docsify = {
+    name: 'sippofactory',
+    plugins: [
+      function(hook, vm) {
+        hook.doneEach(function() {
+          const updateTitle = () => {
             const h1 = document.querySelector('h1');
             if (h1) {
-              // ここで強制的に書き換える
-              const titleText = h1.innerText.trim() + " - " + vm.config.name;
-              document.title = titleText;
+              const newTitle = h1.innerText.trim() + " - " + vm.config.name;
+              if (document.title !== newTitle) {
+                document.title = newTitle;
+              }
             }
+          };
+
+          // 1. 描画直後に実行
+          updateTitle();
+
+          // 2. タイトルタグの変更を監視し、docsifyに勝手に書き換えられたら即座に書き戻す
+          const target = document.querySelector('title');
+          const observer = new MutationObserver(() => {
+            updateTitle();
           });
-        }
-      ]
-    };
-  </script>
-  <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+          observer.observe(target, { childList: true });
+        });
+      }
+    ]
+  };
+</script>
+<script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
 </body>
 </html>
