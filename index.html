@@ -2,9 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>読み込み中...</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <title>sippofactory</title>
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
 </head>
 <body>
@@ -12,30 +10,14 @@
   <script>
     window.$docsify = {
       name: 'sippofactory',
-      // フロントマター設定を有効化
-      frontMatter: {
-        installed: true
-      },
       plugins: [
         function(hook, vm) {
           hook.doneEach(function() {
-            var pageTitle = '';
-
-            // 1. フロントマターからタイトルを取得
-            // front-matterプラグインを入れることで vm.frontmatter が有効になります
-            if (vm.frontmatter && vm.frontmatter.title) {
-              pageTitle = vm.frontmatter.title;
-            } 
-            // 2. なければ H1 要素から取得
-            else {
-              var h1 = document.querySelector('h1');
-              if (h1) {
-                pageTitle = h1.innerText;
-              }
-            }
-
-            if (pageTitle) {
-              document.title = pageTitle + " - " + vm.config.name;
+            // ページ内の最初の h1 要素を探す
+            var h1 = document.querySelector('h1');
+            if (h1) {
+              // 見つかったら、その文字をタブのタイトルにする
+              document.title = h1.innerText + " - " + vm.config.name;
             }
           });
         }
@@ -43,6 +25,5 @@
     };
   </script>
   <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
-  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/front-matter.min.js"></script>
 </body>
 </html>
