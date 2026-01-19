@@ -35,17 +35,17 @@
       //     });
       //   }
       // ]
-      plugins: [
-        function(hook, vm) {
-          hook.doneEach(function() {
-            // ページがロードされるたびに、h1の内容をタイトルに設定する
-            var title = document.querySelector('h1');
-            if (title) {
-              document.title = "RRR";//title.innerText + " - " + vm.config.name;
-            }
-          });
-        }
-      ]
+      // plugins: [
+      //   function(hook, vm) {
+      //     hook.doneEach(function() {
+      //       // ページがロードされるたびに、h1の内容をタイトルに設定する
+      //       var title = document.querySelector('h1');
+      //       if (title) {
+      //         document.title = "RRR";//title.innerText + " - " + vm.config.name;
+      //       }
+      //     });
+      //   }
+      // ]
     }
   </script>
   <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
