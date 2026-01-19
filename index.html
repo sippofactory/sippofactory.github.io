@@ -2,31 +2,29 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>sippofactory</title>
+  <title>読み込み中...</title>
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
-  <script>
-    // docsifyが読み込まれる前に監視を開始する
-    const observer = new MutationObserver(() => {
-      const h1 = document.querySelector('h1');
-      const siteName = 'sippofactory';
-      if (h1) {
-        const newTitle = h1.innerText.trim() + " - " + siteName;
-        if (document.title !== newTitle) {
-          document.title = newTitle;
-        }
-      }
-    });
-    observer.observe(document.documentElement, { childList: true, subtree: true });
-  </script>
 </head>
 <body>
   <div id="app">読み込み中...</div>
   <script>
     window.$docsify = {
       name: 'sippofactory',
-      // 余計な動作を抑える
-      mergeNavbar: true,
-      loadSidebar: false
+      // 余計な機能をすべてオフにして、タイトルの干渉を防ぐ
+      loadSidebar: false,
+      loadNavbar: false,
+      subMaxLevel: 0,
+      // ページ読み込み後にタイトルを「一度だけ」上書きする
+      plugins: [
+        function(hook) {
+          hook.ready(function() {
+            const h1 = document.querySelector('h1');
+            if (h1) {
+              document.title = h1.innerText + " - sippofactory";
+            }
+          });
+        }
+      ]
     };
   </script>
   <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
