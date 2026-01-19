@@ -12,22 +12,21 @@
   <script>
     window.$docsify = {
       name: 'sippofactory',
-      repo: '',
-      // フロントマター設定
+      // フロントマター設定を有効化
       frontMatter: {
         installed: true
       },
-      // タイトル制御プラグイン
       plugins: [
         function(hook, vm) {
           hook.doneEach(function() {
             var pageTitle = '';
 
-            // 1. フロントマターに title がある場合
+            // 1. フロントマターからタイトルを取得
+            // front-matterプラグインを入れることで vm.frontmatter が有効になります
             if (vm.frontmatter && vm.frontmatter.title) {
               pageTitle = vm.frontmatter.title;
             } 
-            // 2. なければ、ページ内の最初の h1 を探す
+            // 2. なければ H1 要素から取得
             else {
               var h1 = document.querySelector('h1');
               if (h1) {
@@ -35,7 +34,6 @@
               }
             }
 
-            // タイトルが取得できたらタブ名を更新
             if (pageTitle) {
               document.title = pageTitle + " - " + vm.config.name;
             }
