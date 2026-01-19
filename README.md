@@ -1,6 +1,3 @@
----
-title: トップページ：フロントマター
----
 # sippofactory.github.io
 
 ## 公開ページ 
