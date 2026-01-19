@@ -13,12 +13,13 @@
       plugins: [
         function(hook, vm) {
           hook.doneEach(function() {
-            // ページ内の最初の h1 要素を探す
-            var h1 = document.querySelector('h1');
-            if (h1) {
-              // 見つかったら、その文字をタブのタイトルにする
-              document.title = h1.innerText + " - " + vm.config.name;
-            }
+            // 描画が終わるのを少しだけ（0.1秒）待ってから実行
+            setTimeout(function() {
+              var h1 = document.querySelector('h1');
+              if (h1) {
+                document.title = h1.innerText + " - " + vm.config.name;
+              }
+            }, 100); 
           });
         }
       ]
