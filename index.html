@@ -2,25 +2,23 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>読み込み中...</title>
+  <title>sippofactory</title>
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
 </head>
 <body>
   <div id="app">読み込み中...</div>
   <script>
     window.$docsify = {
-      name: 'sippofactory',
-      // 余計な機能をすべてオフにして、タイトルの干渉を防ぐ
-      loadSidebar: false,
-      loadNavbar: false,
-      subMaxLevel: 0,
-      // ページ読み込み後にタイトルを「一度だけ」上書きする
+      // 1. nameをあえて空、または最小限にする
+      name: '', 
       plugins: [
         function(hook) {
-          hook.ready(function() {
+          hook.doneEach(function() {
+            // 2. ページ内のH1を探す
             const h1 = document.querySelector('h1');
             if (h1) {
-              document.title = h1.innerText + " - sippofactory";
+              // 3. 直接ブラウザのタイトルを書き換える
+              document.title = h1.innerText.trim() + " - sippofactory";
             }
           });
         }
