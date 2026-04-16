@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>コーヒー 大図鑑</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #0C0600;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 24px;
+  font-family: 'Yu Mincho', 'YuMincho', 'Hiragino Mincho ProN', 'MS PMincho', Georgia, 'Times New Roman', serif;
+}
+
+.hint {
+  color: #6a5030;
+  font-family: sans-serif;
+  font-size: 13px;
+  margin-bottom: 28px;
+  text-align: center;
+  line-height: 1.9;
+  border: 1px solid #2a1800;
+  padding: 12px 24px;
+}
+
+/* =============================================
+   POSTER CANVAS  3240 × 3240 px
+   ============================================= */
+.poster {
+  width: 3240px;
+  height: 3240px;
+  background-color: #E8D4A2;
+  background-image:
+    radial-gradient(ellipse at  8%  6%, rgba(210,165,78,0.55) 0%, transparent 38%),
+    radial-gradient(ellipse at 94%  4%, rgba(140, 88,28,0.35) 0%, transparent 35%),
+    radial-gradient(ellipse at 85% 94%, rgba(155,100,38,0.42) 0%, transparent 40%),
+    radial-gradient(ellipse at 12% 92%, rgba(118, 76,22,0.30) 0%, transparent 34%),
+    radial-gradient(ellipse at 50% 50%, rgba(220,178,90,0.14) 0%, transparent 55%);
+  position: relative;
+  overflow: hidden;
+  padding: 60px;
+}
+
+/* Coffee ring stains */
+.stain {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50%;
+}
+.s1 { width:230px; height:230px; top:110px;  right:220px;
+  border:14px solid rgba(90,50,12,0.07);
+  box-shadow: inset 0 0 0 8px rgba(90,50,12,0.04), 0 0 30px rgba(90,50,12,0.04); }
+.s2 { width:180px; height:180px; bottom:290px; left:160px;
+  border:10px solid rgba(90,50,12,0.06);
+  box-shadow: inset 0 0 0 6px rgba(90,50,12,0.03); }
+.s3 { width:110px; height:110px; top:820px;  left:2800px;
+  border:8px solid rgba(90,50,12,0.08);
+  box-shadow: inset 0 0 0 4px rgba(90,50,12,0.04); }
+.s4 { width:155px; height:155px; top:2200px; right:140px;
+  border:10px solid rgba(90,50,12,0.06);
+  box-shadow: inset 0 0 0 5px rgba(90,50,12,0.03); }
+.s5 { width:80px;  height:80px;  top:1600px; left:90px;
+  border:6px solid rgba(90,50,12,0.07); }
+
+/* Outer decorative frame */
+.outer-frame {
+  position: absolute;
+  inset: 32px;
+  border: 3px solid #8B6B14;
+  z-index: 1;
+}
+.outer-frame::before {
+  content: '';
+  position: absolute;
+  inset: 10px;
+  border: 1px solid rgba(139,107,20,0.38);
+}
+.outer-frame::after {
+  content: '';
+  position: absolute;
+  inset: 16px;
+  border: 1px solid rgba(139,107,20,0.18);
+}
+
+/* Corner ornaments */
+.cnr { position: absolute; width: 56px; height: 56px; z-index: 2; }
+.cnr-tl { top:28px; left:28px;
+  border-top:3px solid #8B6B14; border-left:3px solid #8B6B14; }
+.cnr-tr { top:28px; right:28px;
+  border-top:3px solid #8B6B14; border-right:3px solid #8B6B14; }
+.cnr-bl { bottom:28px; left:28px;
+  border-bottom:3px solid #8B6B14; border-left:3px solid #8B6B14; }
+.cnr-br { bottom:28px; right:28px;
+  border-bottom:3px solid #8B6B14; border-right:3px solid #8B6B14; }
+
+/* ── Main grid ── */
+.inner {
+  position: relative;
+  z-index: 3;
+  width: 3120px;
+  height: 3120px;
+  display: grid;
+  grid-template-rows: 240px 840px 870px 950px 140px;
+  gap: 20px;
+}
+
+/* =============================================
+   ROW 1  — HEADER
+   ============================================= */
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-bottom: 2px solid #8B6B14;
+  padding-bottom: 14px;
+}
+.header::before, .header::after {
+  content: '';
+  position: absolute;
+  bottom: 7px;
+  left: 0; right: 0;
+  border-bottom: 1px solid rgba(139,107,20,0.38);
+}
+.header::after { bottom: 3px; border-color: rgba(139,107,20,0.18); }
+
+.h-eyebrow {
+  font-size: 20px;
+  letter-spacing: 18px;
+  color: #8B6B14;
+  margin-bottom: 6px;
+}
+.h-ornament {
+  font-size: 24px;
+  color: #8B6B14;
+  letter-spacing: 6px;
+  margin: 4px 0;
+}
+.h-title {
+  font-size: 136px;
+  font-weight: bold;
+  color: #1E0B02;
+  letter-spacing: 24px;
+  line-height: 1.1;
+  text-align: center;
+}
+.h-subtitle {
+  font-size: 26px;
+  color: #5A3A0A;
+  letter-spacing: 10px;
+  margin-top: 8px;
+}
+.h-credit {
+  font-size: 18px;
+  color: #8B6B14;
+  letter-spacing: 4px;
+  margin-top: 8px;
+}
+
+/* =============================================
+   ZONE A  — 3 columns
+   ============================================= */
+.zone-a {
+  display: grid;
+  grid-template-columns: 1024px 1024px 1072px;
+  gap: 0;
+  height: 840px;
+}
+
+/* ── shared cell styles ── */
+.cell {
+  border: 1px solid rgba(139,107,20,0.55);
+  padding: 18px 24px;
+  background: rgba(74,44,8,0.04);
+  position: relative;
+  overflow: hidden;
+}
+.cell + .cell { border-left: none; }
+
+.cell-title {
+  font-size: 17px;
+  letter-spacing: 8px;
+  color: #8B6B14;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(139,107,20,0.40);
+  text-align: center;
+}
+.cell-title-left {
+  font-size: 17px;
+  letter-spacing: 6px;
+  color: #8B6B14;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(139,107,20,0.40);
+}
+
+/* ────── SPECIES cell ────── */
+.species-block { margin: 10px 0; }
+
+.sp-name {
+  font-size: 30px;
+  font-weight: bold;
+  color: #1E0B02;
+  letter-spacing: 3px;
+}
+.sp-latin {
+  font-size: 17px;
+  font-style: italic;
+  color: #7A5410;
+  margin-top: 2px;
+  letter-spacing: 1px;
+}
+.sp-bar-wrap { display: flex; align-items: center; gap: 12px; margin: 8px 0; }
+.sp-bar-bg {
+  flex: 1;
+  height: 22px;
+  background: rgba(74,44,8,0.1);
+  border: 1px solid rgba(139,107,20,0.3);
+  position: relative;
+}
+.sp-bar-fill {
+  height: 100%;
+  background: linear-gradient(to right, #3A2006, #8B6B14);
+}
+.sp-pct {
+  font-size: 20px;
+  font-weight: bold;
+  color: #4A2C08;
+  width: 80px;
+  text-align: right;
+  flex-shrink: 0;
+}
+.sp-note {
+  font-size: 17px;
+  color: #4A2C08;
+  line-height: 1.6;
+  margin-top: 4px;
+}
+
+.sp-divider {
+  border: none;
+  border-top: 1px dashed rgba(139,107,20,0.35);
+  margin: 5px 0;
+}
+
+/* ────── HISTORY timeline ────── */
+.timeline { display: flex; flex-direction: column; gap:0; }
+
+.tl-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 5px 0;
+  border-bottom: 1px dashed rgba(139,107,20,0.25);
+}
+.tl-row:last-child { border-bottom: none; }
+
+.tl-yr {
+  flex-shrink: 0;
+  width: 128px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #8B6B14;
+  letter-spacing: 1px;
+  padding-top: 2px;
+  text-align: right;
+}
+.tl-dot {
+  flex-shrink: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #8B6B14;
+  margin-top: 7px;
+  border: 2px solid #C8A550;
+  box-shadow: 0 0 0 3px rgba(139,107,20,0.15);
+}
+.tl-ev {
+  font-size: 17px;
+  color: #1E0B02;
+  line-height: 1.55;
+  flex: 1;
+}
+.tl-ev strong { color: #4A2C08; }
+
+/* ────── ORIGINS cell ────── */
+.region-block { margin: 6px 0; }
+
+.region-hd {
+  font-size: 15px;
+  letter-spacing: 5px;
+  color: #8B6B14;
+  border-left: 4px solid #8B6B14;
+  padding-left: 10px;
+  margin-bottom: 7px;
+}
+.country-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  padding-left: 14px;
+}
+.cntry {
+  font-size: 19px;
+  color: #2A1508;
+  line-height: 1.6;
+}
+.cntry-star { color: #8B6B14; font-size: 14px; }
+
+.cntry-main {
+  font-size: 20px;
+  font-weight: bold;
+  color: #1E0B02;
+}
+
+.variety-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  margin-top: 5px;
+  padding-left: 14px;
+}
+.vtag {
+  font-size: 14px;
+  border: 1px solid rgba(139,107,20,0.45);
+  color: #5A3A0A;
+  padding: 1px 7px;
+  background: rgba(139,107,20,0.06);
+  letter-spacing: 0.5px;
+}
+
+/* =============================================
+   ZONE B  — 2/3 + 1/3
+   ============================================= */
+.zone-b {
+  display: grid;
+  grid-template-columns: 2074px 1046px;
+  gap: 0;
+  height: 870px;
+}
+
+/* ────── VARIETY TREE ────── */
+.variety-cell { padding: 24px 28px 20px; }
+
+.var-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 28px; height: calc(100% - 50px); }
+
+/* Species root badge */
+.species-badge {
+  border: 2px solid #8B6B14;
+  background: #3A2006;
+  color: #E8D4A2;
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: 4px;
+  padding: 8px 18px;
+  text-align: center;
+  margin-bottom: 14px;
+}
+.species-badge .lat { font-size: 14px; font-style: italic; font-weight: normal; opacity: 0.75; display: block; }
+
+/* Tree nodes */
+.tree { display: flex; flex-direction: column; gap: 0; }
+.tree-section { margin: 6px 0; }
+
+.branch-root {
+  font-size: 20px;
+  font-weight: bold;
+  color: #1E0B02;
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(139,107,20,0.35);
+  margin-bottom: 6px;
+  letter-spacing: 1px;
+}
+
+.branch-items {
+  margin-left: 18px;
+  border-left: 2px solid rgba(139,107,20,0.45);
+  padding-left: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bi {
+  font-size: 17px;
+  color: #2A1508;
+  line-height: 1.5;
+  position: relative;
+  padding: 2px 0;
+}
+.bi::before {
+  content: '';
+  position: absolute;
+  left: -14px;
+  top: 0.7em;
+  width: 10px;
+  border-top: 1px solid rgba(139,107,20,0.45);
+}
+
+.bi-note { font-size: 14px; color: #7A5410; margin-left: 4px; }
+
+.bi-sub {
+  margin-left: 14px;
+  border-left: 1px solid rgba(139,107,20,0.3);
+  padding-left: 10px;
+  margin-top: 2px;
+}
+.bi-sub .bi { font-size: 15px; }
+.bi-sub .bi::before { border-color: rgba(139,107,20,0.3); }
+
+.cross-note {
+  font-size: 17px;
+  color: #5A3A0A;
+  background: rgba(139,107,20,0.07);
+  border: 1px dashed rgba(139,107,20,0.4);
+  padding: 7px 12px;
+  margin: 8px 0 4px;
+  line-height: 1.6;
+}
+.cross-note .formula { font-size: 19px; font-weight: bold; color: #2A1508; }
+
+/* ────── ROASTING + EXTRACTION ────── */
+.roast-ext-cell { padding: 16px 20px; border-left: none; }
+
+.roast-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 5px 0;
+}
+.roast-name {
+  font-size: 17px;
+  color: #1E0B02;
+  width: 136px;
+  flex-shrink: 0;
+  letter-spacing: 0.5px;
+}
+.roast-bar-bg {
+  flex: 1;
+  height: 18px;
+  background: rgba(74,44,8,0.08);
+  border: 1px solid rgba(139,107,20,0.2);
+  position: relative;
+  display: flex;
+}
+.roast-bar-a { height: 100%; background: rgba(200,165,80,0.7); }  /* acidity */
+.roast-bar-b { height: 100%; background: rgba(60,30,8,0.65); }    /* bitterness */
+.roast-legend {
+  font-size: 13px;
+  width: 76px;
+  text-align: right;
+  color: #7A5410;
+  flex-shrink: 0;
+}
+
+.swatch {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,0.15);
+  flex-shrink: 0;
+}
+
+.roast-legend-row {
+  display: flex;
+  gap: 16px;
+  font-size: 13px;
+  color: #7A5410;
+  margin: 8px 0 14px;
+  align-items: center;
+}
+.roast-legend-row span { display: flex; align-items: center; gap: 5px; }
+.rl-sq { width: 14px; height: 14px; }
+
+.ext-block {
+  border: 1px solid rgba(139,107,20,0.4);
+  padding: 8px 12px;
+  margin: 5px 0;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  background: rgba(74,44,8,0.04);
+}
+.ext-icon { font-size: 28px; flex-shrink: 0; padding-top: 2px; }
+.ext-name { font-size: 19px; font-weight: bold; color: #1E0B02; letter-spacing: 1px; }
+.ext-note { font-size: 15px; color: #5A3A0A; line-height: 1.5; margin-top: 3px; }
+
+/* =============================================
+   ZONE C  — 3 columns
+   ============================================= */
+.zone-c {
+  display: grid;
+  grid-template-columns: 1024px 1024px 1072px;
+  gap: 0;
+  height: 950px;
+}
+
+/* ────── FLAVOR PROFILES ────── */
+.flavor-item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 7px 0;
+  border-bottom: 1px dashed rgba(139,107,20,0.25);
+}
+.flavor-item:last-child { border-bottom: none; }
+
+.fl-origin {
+  font-size: 21px;
+  font-weight: bold;
+  color: #1E0B02;
+  width: 155px;
+  flex-shrink: 0;
+  letter-spacing: 1px;
+  line-height: 1.3;
+}
+.fl-variety {
+  font-size: 13px;
+  color: #7A5410;
+  font-weight: normal;
+  margin-top: 2px;
+}
+.fl-tags {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+.fl-tag {
+  font-size: 17px;
+  color: #2A1508;
+  line-height: 1.5;
+}
+.fl-swatch {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  margin-top: 4px;
+  flex-shrink: 0;
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+/* ────── GEISHA spotlight ────── */
+.geisha-hero {
+  text-align: center;
+  padding: 8px 0 8px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid rgba(139,107,20,0.4);
+}
+.geisha-name { font-size: 54px; font-weight: bold; color: #1E0B02; letter-spacing: 6px; line-height: 1; }
+.geisha-ruby { font-size: 18px; color: #8B6B14; letter-spacing: 8px; margin-top: 3px; }
+
+.geisha-facts { display: flex; flex-direction: column; gap: 4px; margin: 6px 0; }
+.gf-row {
+  display: flex;
+  gap: 10px;
+  border: 1px solid rgba(139,107,20,0.35);
+  padding: 7px 12px;
+  background: rgba(74,44,8,0.04);
+}
+.gf-label {
+  font-size: 13px;
+  color: #8B6B14;
+  letter-spacing: 3px;
+  width: 72px;
+  flex-shrink: 0;
+  line-height: 1.5;
+  padding-top: 2px;
+}
+.gf-val {
+  font-size: 17px;
+  color: #1E0B02;
+  line-height: 1.6;
+}
+
+.premium-box {
+  border: 2px solid #8B6B14;
+  padding: 6px 14px;
+  text-align: center;
+  background: rgba(139,107,20,0.06);
+  margin-top: 5px;
+}
+.pb-title { font-size: 13px; letter-spacing: 5px; color: #8B6B14; margin-bottom: 4px; }
+.pb-price { font-size: 38px; font-weight: bold; color: #3A2006; line-height: 1; }
+.pb-per { font-size: 15px; color: #7A5410; margin-top: 3px; }
+
+/* ────── TRIVIA cell ────── */
+.trivia-item {
+  padding: 8px 0;
+  border-bottom: 1px dashed rgba(139,107,20,0.25);
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.trivia-item:last-child { border-bottom: none; }
+.tri-icon {
+  font-size: 22px;
+  flex-shrink: 0;
+  padding-top: 2px;
+  width: 36px;
+  text-align: center;
+}
+.tri-head { font-size: 18px; font-weight: bold; color: #1E0B02; margin-bottom: 3px; letter-spacing: 1px; }
+.tri-body { font-size: 16px; color: #2A1508; line-height: 1.65; }
+.tri-hl { color: #4A2C08; font-weight: bold; }
+
+/* =============================================
+   FOOTER
+   ============================================= */
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-top: 2px solid #8B6B14;
+  padding-top: 14px;
+  position: relative;
+  gap: 6px;
+}
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 7px;
+  left: 0; right: 0;
+  border-top: 1px solid rgba(139,107,20,0.38);
+}
+
+.f-ornament { font-size: 24px; color: #8B6B14; letter-spacing: 10px; }
+.f-title { font-size: 19px; color: #5A3A0A; letter-spacing: 6px; }
+.f-subtitle { font-size: 16px; color: #8B6B14; letter-spacing: 4px; }
+
+/* horizontal rule ornament */
+.div-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 8px 0;
+}
+.div-line::before, .div-line::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(139,107,20,0.6), transparent);
+}
+.div-diamond { color: #8B6B14; font-size: 12px; }
+
+</style>
+</head>
+<body>
+
+<div class="hint">
+  ブラウザのズームを <strong>100%</strong> に設定してからスクリーンショット（Win+Shift+S）で 3240×3240 px の正方形画像として保存できます。<br>
+  または右クリック → 印刷 → 「PDFとして保存」でベクター出力も可能です。
+</div>
+
+<!-- ============================================================
+     POSTER
+     ============================================================ -->
+<div class="poster">
+  <!-- stains -->
+  <div class="stain s1"></div>
+  <div class="stain s2"></div>
+  <div class="stain s3"></div>
+  <div class="stain s4"></div>
+  <div class="stain s5"></div>
+
+  <!-- frame -->
+  <div class="outer-frame"></div>
+  <div class="cnr cnr-tl"></div><div class="cnr cnr-tr"></div>
+  <div class="cnr cnr-bl"></div><div class="cnr cnr-br"></div>
+
+  <div class="inner">
+
+    <!-- ==================================================
+         ROW 1 — HEADER
+         ================================================== -->
+    <header class="header">
+      <div class="h-eyebrow">C O F F E E</div>
+      <div class="h-ornament">❦ ──── ✦ ──── ✦ ──── ❦</div>
+      <h1 class="h-title">コーヒー　大図鑑</h1>
+      <div class="h-subtitle">品種 · 産地 · 歴史 · 焙煎 · 抽出</div>
+      <div class="h-ornament" style="margin-top:6px">❧ ── ── ── ── ── ── ❧</div>
+      <div class="h-credit">大川昭子『コーヒーと紅茶』 ほか Vault ノートより編纂 · 2026</div>
+    </header>
+
+    <!-- ==================================================
+         ROW 2 — ZONE A (三大原種 | 歴史 | 産地)
+         ================================================== -->
+    <section class="zone-a">
+
+      <!-- ── CELL A1: 三大原種 ── -->
+      <div class="cell">
+        <div class="cell-title">☕ 三　大　原　種</div>
+
+        <div class="species-block">
+          <div class="sp-name">アラビカ種</div>
+          <div class="sp-latin">Coffea arabica</div>
+          <div class="sp-bar-wrap">
+            <div class="sp-bar-bg"><div class="sp-bar-fill" style="width:65%"></div></div>
+            <div class="sp-pct">60〜70%</div>
+          </div>
+          <div class="sp-note">繊細な風味と豊かな香り。高地（標高1,000〜2,000m）で栽培。カフェイン少なめ。世界市場の主役。エチオピア・イエメン・イエメン高地原産。</div>
+        </div>
+
+        <hr class="sp-divider">
+
+        <div class="species-block">
+          <div class="sp-name">ロブスタ種</div>
+          <div class="sp-latin">Coffea canephora var. robusta</div>
+          <div class="sp-bar-wrap">
+            <div class="sp-bar-bg"><div class="sp-bar-fill" style="width:36%"></div></div>
+            <div class="sp-pct">30〜38%</div>
+          </div>
+          <div class="sp-note">苦味が強く病害・害虫に強い。低地栽培。カフェイン含有量はアラビカの約2倍。エスプレッソのクレマやブレンドに活用。コンゴ民主共和国原産。</div>
+        </div>
+
+        <hr class="sp-divider">
+
+        <div class="species-block">
+          <div class="sp-name">リベリカ種</div>
+          <div class="sp-latin">Coffea liberica</div>
+          <div class="sp-bar-wrap">
+            <div class="sp-bar-bg"><div class="sp-bar-fill" style="width:2%"></div></div>
+            <div class="sp-pct">〜2%</div>
+          </div>
+          <div class="sp-note">非常に希少。フルーティで独特な風味。巨大な果実が特徴。分類上はエクセルサも同種に含む。リベリア原産。東南アジアの一部で栽培。</div>
+        </div>
+
+        <div class="div-line" style="margin-top:14px"><span class="div-diamond">✦</span></div>
+
+        <div style="font-size:16px; color:#5A3A0A; text-align:center; line-height:1.7; letter-spacing:1px;">
+          コーヒーベルト ── 赤道を中心に<strong style="color:#2A1508">南北25度</strong>以内の熱帯・亜熱帯地帯<br>
+          最適気温 15〜25℃ · 年間降水量 1,500〜2,500mm
+        </div>
+      </div>
+
+      <!-- ── CELL A2: 歴史タイムライン ── -->
+      <div class="cell">
+        <div class="cell-title">📜 コーヒー　歴史年表</div>
+
+        <div class="timeline">
+          <div class="tl-row">
+            <div class="tl-yr">9世紀頃</div>
+            <div class="tl-dot"></div>
+            <div class="tl-ev"><strong>エチオピア高地</strong>でコーヒーの樹が自生。修行僧シェーク・オマーが実の効能を発見（伝説）</div>
+          </div>
+          <div class="tl-row">
+            <div class="tl-yr">13〜15世紀</div>
+            <div class="tl-dot"></div>
+            <div class="tl-ev"><strong>アラビア</strong>で薬・飲料として普及。回教徒が酒の代わりに愛飲</div>
+          </div>
+          <div class="tl-row">
+            <div class="tl-yr">15世紀</div>
+            <div class="tl-dot"></div>
+            <div class="tl-ev">カイロに<strong>23軒</strong>のコーヒーハウス開業。トルコ式の「煮出し」が確立</div>
+          </div>
+          <div class="tl-row">
+            <div class="tl-yr">1582年</div>
+            <div class="tl-dot"></div>
+            <div class="tl-ev">ドイツ人医師ラヴォルフが『シリア旅行記』にコーヒーを記録。ヨーロッパ最初期の文献</div>
+          </div>
+          <div class="tl-row">
+            <div class="tl-yr">1600年頃</div>
+            <div class="tl-dot"></div>
+            <div class="tl-ev"><strong>ババ・ブタ</strong>がメッカの巡礼でコーヒーを知りインドへ苗木を持ち帰る</div>
+          </div>
+          <div class="tl-row">
+            <div class="tl-yr">1660年</div>
+            <div class="tl-dot"></div>
+            <div class="tl-ev">オランダ人，<strong>ジャワ</strong>で初の試験栽培。洪水で失敗</div>
+          </div>
+          <div class="tl-row">
+            <div class="tl-yr">1669年</div>
+            <div class="tl-dot"></div>
+            <div class="tl-ev">マラバール産苗木で再栽培成功。オランダ東インド会社支援のもと<strong>アラビカ種の基礎</strong>が築かれる</div>
+          </div>
+          <div class="tl-row">
+            <div class="tl-yr">1706年</div>
+            <div class="tl-dot"></div>
+            <div class="tl-ev">初のジャワ産豆（<strong>約894ポンド</strong>）がアムステルダムへ。苗木も同時に到着</div>
+          </div>
+          <div class="tl-row">
+            <div class="tl-yr">1724年</div>
+            <div class="tl-dot"></div>
+            <div class="tl-ev"><strong>ルイ14世</strong>へ献納 → パリ植物園 → マルティニーク島 → 南北アメリカへと伝播</div>
+          </div>
+          <div class="tl-row">
+            <div class="tl-yr">1789年</div>
+            <div class="tl-dot"></div>
+            <div class="tl-ev">フランス領の生産量が<strong>世界の3/4</strong>を占め世界最大の産地に</div>
+          </div>
+          <div class="tl-row">
+            <div class="tl-yr">1800年代初</div>
+            <div class="tl-dot"></div>
+            <div class="tl-ev"><strong>ドゥ・ベロイ</strong>のドリップポット発明。透過法（ドリップ）が確立。ブリア・サヴァランが称賛</div>
+          </div>
+          <div class="tl-row">
+            <div class="tl-yr">19世紀〜</div>
+            <div class="tl-dot"></div>
+            <div class="tl-ev"><strong>ブラジル・コロンビア</strong>が世界最大の産地に。アフリカでも栽培面積が拡大・現在に至る</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── CELL A3: 主要産地 ── -->
+      <div class="cell">
+        <div class="cell-title">🌍 主　要　産　地</div>
+
+        <div class="region-block">
+          <div class="region-hd">AFRICA ── アフリカ</div>
+          <div class="country-list">
+            <div>
+              <div class="cntry-main">エチオピア <span class="cntry-star">★</span></div>
+              <div class="variety-tags">
+                <span class="vtag">ゲイシャ</span><span class="vtag">74110</span><span class="vtag">74112</span>
+                <span class="vtag">74158</span><span class="vtag">レケンプティ</span><span class="vtag">モカシダモG4</span>
+              </div>
+            </div>
+            <div style="margin-top:8px">
+              <div class="cntry-main">ケニア <span class="cntry-star">★</span></div>
+              <div class="variety-tags">
+                <span class="vtag">SL28</span><span class="vtag">SL34</span>
+                <span class="vtag">Ruiru11</span><span class="vtag">Batian</span><span class="vtag">Neema ABC</span>
+              </div>
+            </div>
+            <div style="margin-top:8px; display:flex; gap:18px; flex-wrap:wrap;">
+              <span class="cntry">タンザニア（アルーシャ・タンザニアAA）</span>
+              <span class="cntry">ウガンダ（ルエンゾリ）</span>
+            </div>
+          </div>
+        </div>
+
+        <hr class="sp-divider">
+
+        <div class="region-block">
+          <div class="region-hd">MIDDLE EAST ── 中　東</div>
+          <div class="country-list">
+            <div>
+              <div class="cntry-main">イエメン <span class="cntry-star">★</span></div>
+              <div style="font-size:16px; color:#5A3A0A; padding-left:14px; margin-top:3px; line-height:1.6;">
+                「モカ」の語源となった港を持つコーヒー交易の発祥地<br>
+                品種: モカマタリ · イスマイリ
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr class="sp-divider">
+
+        <div class="region-block">
+          <div class="region-hd">ASIA ── ア　ジ　ア</div>
+          <div class="country-list" style="flex-direction:column; gap:5px;">
+            <div>
+              <span class="cntry-main">インドネシア</span>
+              <div class="variety-tags"><span class="vtag">マンデリンG1</span><span class="vtag">ジャワ・ロブスタ</span></div>
+            </div>
+            <div>
+              <span class="cntry">インド（インドモンスーン ピーベリー）</span>
+            </div>
+            <div>
+              <span class="cntry">ベトナム（ベトナムアラビカ エバグリン18M）</span>
+            </div>
+          </div>
+        </div>
+
+        <hr class="sp-divider">
+
+        <div class="region-block">
+          <div class="region-hd">AMERICAS ── 中南米</div>
+          <div class="country-list" style="flex-direction:column; gap:5px;">
+            <div>
+              <div class="cntry-main">ブラジル <span class="cntry-star">★★</span></div>
+              <div class="variety-tags">
+                <span class="vtag">サントスNo.2</span><span class="vtag">サンタアリーナ農園</span>
+                <span class="vtag">カトゥアイ</span><span class="vtag">ムンドノーボ</span>
+              </div>
+            </div>
+            <div style="margin-top:6px">
+              <div class="cntry-main">コロンビア <span class="cntry-star">★</span></div>
+              <div class="variety-tags">
+                <span class="vtag">カスティージョ</span><span class="vtag">ピンクブルボン</span>
+                <span class="vtag">オンブリゴン</span><span class="vtag">スプレモ</span>
+              </div>
+            </div>
+            <div style="margin-top:6px; display:flex; gap:8px; flex-wrap:wrap;">
+              <div>
+                <span class="cntry">グァテマラ</span>
+                <div class="variety-tags"><span class="vtag">SHB</span><span class="vtag">アカナンゴ テフヤ2000m</span></div>
+              </div>
+              <div>
+                <span class="cntry">ホンジュラス</span>
+                <div class="variety-tags"><span class="vtag">HG</span></div>
+              </div>
+              <div>
+                <span class="cntry">エルサルバドル</span>
+                <div class="variety-tags"><span class="vtag">サンタ・リタ ブルボン</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ==================================================
+         ROW 3 — ZONE B (品種系統 | 焙煎+抽出)
+         ================================================== -->
+    <section class="zone-b">
+
+      <!-- ── CELL B1: 品種系統図 ── -->
+      <div class="cell variety-cell">
+        <div class="cell-title">🌿 品　種　系　統　図  ── アラビカ種を中心に</div>
+
+        <div class="var-cols">
+
+          <!-- LEFT: ティピカ系 + ハイブリッド -->
+          <div>
+            <div class="species-badge">
+              アラビカ種　ティピカ系
+              <span class="lat">Coffea arabica var. Typica lineage</span>
+            </div>
+            <div class="tree">
+              <div class="branch-root">ティピカ（Typica）── 最古の栽培品種</div>
+              <div class="tree-section">
+                <div class="branch-items">
+                  <div class="bi">ゲイシャ（Geisha / Gesha）
+                    <div class="bi-note">エチオピア ゲシャ村原産 → パナマで世界的評価獲得</div>
+                  </div>
+                  <div class="bi">マラゴジッペ（Maragogipe）
+                    <div class="bi-note">大粒の突然変異種。ブラジル原産</div>
+                  </div>
+                  <div class="bi">レケンプティ（Reka Weti）
+                    <div class="bi-note">エチオピア原産。JARC選抜系統</div>
+                  </div>
+                  <div class="bi">
+                    <span style="color:#8B6B14">JARC系エチオピア原種：</span> 74110 · 74112 · 74158
+                  </div>
+                  <div class="bi">エチオピア ゲシャビレッジ ゲイシャ
+                    <div class="bi-note">原産地でのプレミアム栽培品</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="cross-note" style="margin-top:14px">
+              <div class="formula">ティピカ × ブルボン → ムンドノーボ</div>
+              ブラジル発見の自然交雑種。ムンドノーボは生産性が高くブラジル主要品種に。<br>さらに <span class="formula">ムンドノーボ × カトゥーラ → カトゥアイ</span>（ブラジル農業研究所育成）
+            </div>
+
+            <div class="cross-note" style="margin-top:8px">
+              <div class="formula">ロブスタ × アラビカ → ハイブリッド・デ・ティモール（HDT）</div>
+              東ティモールで自然交雑。耐病性を持つ重要な交配親として活用。<br>
+              <span class="formula">HDT × ティピカ → カティモール</span>（ポルトガル育成 · ベトナムに普及）<br>
+              <span class="formula">HDT × ビジャサルチ → サルチモール</span>（コスタリカ育成）
+            </div>
+          </div>
+
+          <!-- RIGHT: ブルボン系 + ケニア・その他 -->
+          <div>
+            <div class="species-badge">
+              アラビカ種　ブルボン系
+              <span class="lat">Coffea arabica var. Bourbon lineage</span>
+            </div>
+            <div class="tree">
+              <div class="branch-root">ブルボン（Bourbon）── レユニオン島から伝播</div>
+              <div class="tree-section">
+                <div class="branch-items">
+                  <div class="bi">カトゥーラ（Caturra）
+                    <div class="bi-note">ブルボンの矮性自然変異。ブラジル原産。</div>
+                    <div class="bi-sub">
+                      <div class="bi">カトゥアイ（Catuai）
+                        <div class="bi-note">カトゥーラ × ムンドノーボ</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bi">パカス（Pacas）
+                    <div class="bi-note">エルサルバドルのブルボン変異種</div>
+                    <div class="bi-sub">
+                      <div class="bi">パカマラ（Pacamara）
+                        <div class="bi-note">パカス × マラゴジッペ。大粒・独特の風味</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bi">ピンクブルボン（Pink Bourbon）
+                    <div class="bi-note">コロンビア発見のカラーブルボン変異</div>
+                  </div>
+                  <div class="bi">ブルボン・テキシック（Tekisic）
+                    <div class="bi-note">エルサルバドルのブルボン矮性変異</div>
+                  </div>
+                  <div class="bi">エルサルバドル サンタ・リタ ブルボン</div>
+                </div>
+              </div>
+            </div>
+
+            <div style="margin-top:14px;">
+              <div class="species-badge" style="font-size:19px">
+                ケニア育成品種
+                <span class="lat">Scott Lab (SL) breeds · CABI Kenya</span>
+              </div>
+              <div class="branch-items">
+                <div class="bi">SL28 ── ドライ・タナガ系統。ベリー＆ブラックカラント香</div>
+                <div class="bi">SL34 ── ブルボン系。重厚なコクとフルーツ感</div>
+                <div class="bi">Ruiru11 ── ケニア農業研究所育成。耐病性重視のハイブリッド</div>
+                <div class="bi">Batian ── Ruiru11後継。高品質・耐病性・高収量</div>
+                <div class="bi">コロンビア カスティージョ ── オンブリゴン（新品種）</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ── CELL B2: 焙煎 + 抽出方法 ── -->
+      <div class="cell roast-ext-cell">
+        <div class="cell-title">🔥 焙　煎　段　階</div>
+
+        <div style="margin-bottom:8px;">
+          <div class="roast-legend-row">
+            <span><div class="rl-sq" style="background:rgba(200,165,80,0.7)"></div> 酸味</span>
+            <span><div class="rl-sq" style="background:rgba(60,30,8,0.65)"></div> 苦味</span>
+          </div>
+        </div>
+
+        <!-- Roast level rows: acid + bitter proportional bars -->
+        <div class="roast-row">
+          <div class="swatch" style="background:#D4A96A"></div>
+          <div class="roast-name">ライトロースト</div>
+          <div class="roast-bar-bg">
+            <div class="roast-bar-a" style="width:85%"></div>
+            <div class="roast-bar-b" style="width:5%"></div>
+          </div>
+          <div class="roast-legend">酸 ◉◉◉◉◉</div>
+        </div>
+        <div class="roast-row">
+          <div class="swatch" style="background:#C09255"></div>
+          <div class="roast-name">ミディアム</div>
+          <div class="roast-bar-bg">
+            <div class="roast-bar-a" style="width:68%"></div>
+            <div class="roast-bar-b" style="width:14%"></div>
+          </div>
+          <div class="roast-legend">酸 ◉◉◉◉</div>
+        </div>
+        <div class="roast-row">
+          <div class="swatch" style="background:#A87840"></div>
+          <div class="roast-name">ハイロースト</div>
+          <div class="roast-bar-bg">
+            <div class="roast-bar-a" style="width:52%"></div>
+            <div class="roast-bar-b" style="width:28%"></div>
+          </div>
+          <div class="roast-legend">均 ◉◉◉</div>
+        </div>
+        <div class="roast-row">
+          <div class="swatch" style="background:#8A5C28"></div>
+          <div class="roast-name">シティロースト</div>
+          <div class="roast-bar-bg">
+            <div class="roast-bar-a" style="width:35%"></div>
+            <div class="roast-bar-b" style="width:45%"></div>
+          </div>
+          <div class="roast-legend">苦 ◉◉◉</div>
+        </div>
+        <div class="roast-row">
+          <div class="swatch" style="background:#6E4218"></div>
+          <div class="roast-name">フルシティ</div>
+          <div class="roast-bar-bg">
+            <div class="roast-bar-a" style="width:20%"></div>
+            <div class="roast-bar-b" style="width:62%"></div>
+          </div>
+          <div class="roast-legend">苦 ◉◉◉◉</div>
+        </div>
+        <div class="roast-row">
+          <div class="swatch" style="background:#4C2A0A"></div>
+          <div class="roast-name">フレンチ</div>
+          <div class="roast-bar-bg">
+            <div class="roast-bar-a" style="width:8%"></div>
+            <div class="roast-bar-b" style="width:80%"></div>
+          </div>
+          <div class="roast-legend">苦 ◉◉◉◉◉</div>
+        </div>
+        <div class="roast-row">
+          <div class="swatch" style="background:#2A1408"></div>
+          <div class="roast-name">イタリアン</div>
+          <div class="roast-bar-bg">
+            <div class="roast-bar-a" style="width:2%"></div>
+            <div class="roast-bar-b" style="width:92%"></div>
+          </div>
+          <div class="roast-legend">苦 ◉◉◉◉◉</div>
+        </div>
+
+        <div class="div-line" style="margin:8px 0 6px"><span class="div-diamond">✦</span></div>
+        <div class="cell-title" style="margin-bottom:6px">☕ 主　な　抽　出　方　法</div>
+
+        <div class="ext-block">
+          <div class="ext-icon">☕</div>
+          <div>
+            <div class="ext-name">ドリップ（透過法）</div>
+            <div class="ext-note">ドゥ・ベロイ考案。熱湯をコーヒー粉に通して抽出。ペーパー・ネル・金属フィルター等。</div>
+          </div>
+        </div>
+        <div class="ext-block">
+          <div class="ext-icon">🫖</div>
+          <div>
+            <div class="ext-name">フレンチプレス（浸漬法）</div>
+            <div class="ext-note">粉を湯に浸けてプランジャーで押す。オイル分が残りコクが強い。</div>
+          </div>
+        </div>
+        <div class="ext-block">
+          <div class="ext-icon">🏺</div>
+          <div>
+            <div class="ext-name">トルコ式（煮出し法）</div>
+            <div class="ext-note">最古の抽出法。イブリックで直火煮出し。超微粉砕で濃厚。</div>
+          </div>
+        </div>
+        <div class="ext-block">
+          <div class="ext-icon">⚡</div>
+          <div>
+            <div class="ext-name">エスプレッソ（高圧抽出）</div>
+            <div class="ext-note">9気圧で短時間抽出。クレマが特徴。カプチーノ・ラテのベース。</div>
+          </div>
+        </div>
+        <div class="ext-block">
+          <div class="ext-icon">🧊</div>
+          <div>
+            <div class="ext-name">コールドブリュー（水出し）</div>
+            <div class="ext-note">低温水で12〜24時間ゆっくり抽出。酸味穏やか・まろやかな甘み。</div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ==================================================
+         ROW 4 — ZONE C (フレーバー | ゲイシャ | 雑学)
+         ================================================== -->
+    <section class="zone-c">
+
+      <!-- ── CELL C1: フレーバープロファイル ── -->
+      <div class="cell">
+        <div class="cell-title">🍵 産地別　フレーバープロファイル</div>
+
+        <div class="flavor-item">
+          <div style="display:flex;flex-direction:column;gap:2px;">
+            <div class="fl-origin">エチオピア
+              <div class="fl-variety">Africa · ゲイシャ / 74系 / モカシダモ G4</div>
+            </div>
+          </div>
+          <div class="fl-swatch" style="background:#FFDB8B"></div>
+          <div class="fl-tags">
+            <div class="fl-tag">🌸 花の香り（ジャスミン・ベルガモット）</div>
+            <div class="fl-tag">🍑 ピーチ・アプリコット・トロピカルフルーツ</div>
+            <div class="fl-tag">🫖 ライトボディ · 繊細な甘み · 高い透明感</div>
+          </div>
+        </div>
+
+        <div class="flavor-item">
+          <div>
+            <div class="fl-origin">ケニア
+              <div class="fl-variety">Africa · SL28 / SL34 / Ruiru11 / Batian</div>
+            </div>
+          </div>
+          <div class="fl-swatch" style="background:#D04040"></div>
+          <div class="fl-tags">
+            <div class="fl-tag">🍇 ブラックカラント・ラズベリー・ベリー系</div>
+            <div class="fl-tag">🍷 ワインのような鮮明な酸味 · 重層的な甘み</div>
+            <div class="fl-tag">💪 ミディアム〜フルボディ</div>
+          </div>
+        </div>
+
+        <div class="flavor-item">
+          <div>
+            <div class="fl-origin">イエメン<br>（モカ）
+              <div class="fl-variety">Arabia · モカマタリ / イスマイリ</div>
+            </div>
+          </div>
+          <div class="fl-swatch" style="background:#8B2020"></div>
+          <div class="fl-tags">
+            <div class="fl-tag">🍷 ワインを思わせる芳醇な香り · 複雑な風味</div>
+            <div class="fl-tag">🍫 チョコレートのニュアンス · 長いフィニッシュ</div>
+            <div class="fl-tag">最上品: マタリ · ヤフェイ · シャキリ · アナジ · サナニ</div>
+          </div>
+        </div>
+
+        <div class="flavor-item">
+          <div>
+            <div class="fl-origin">ブラジル
+              <div class="fl-variety">S.America · サントスNo.2 / カトゥアイ</div>
+            </div>
+          </div>
+          <div class="fl-swatch" style="background:#8B6030"></div>
+          <div class="fl-tags">
+            <div class="fl-tag">🍫 チョコレート · キャラメル · ナッツ</div>
+            <div class="fl-tag">😌 穏やかな酸味 · 安定感のある甘み</div>
+            <div class="fl-tag">ブレンドのベースとして世界最多使用</div>
+          </div>
+        </div>
+
+        <div class="flavor-item">
+          <div>
+            <div class="fl-origin">コロンビア
+              <div class="fl-variety">S.America · カスティージョ / ピンクブルボン</div>
+            </div>
+          </div>
+          <div class="fl-swatch" style="background:#D09030"></div>
+          <div class="fl-tags">
+            <div class="fl-tag">🍮 キャラメル · バニラ · 柑橘系の爽やかさ</div>
+            <div class="fl-tag">⚖️ 酸味・甘味・苦味のバランスが良い</div>
+          </div>
+        </div>
+
+        <div class="flavor-item">
+          <div>
+            <div class="fl-origin">インドネシア
+              <div class="fl-variety">Asia · マンデリンG1 / ジャワ</div>
+            </div>
+          </div>
+          <div class="fl-swatch" style="background:#506830"></div>
+          <div class="fl-tags">
+            <div class="fl-tag">🌿 アース・スパイス・ハーブ · 独特の野趣</div>
+            <div class="fl-tag">💧 低酸味 · フルボディ · ダークチョコレート</div>
+          </div>
+        </div>
+
+        <div class="flavor-item">
+          <div>
+            <div class="fl-origin">グァテマラ
+              <div class="fl-variety">C.America · SHB / アカナンゴ テフヤ</div>
+            </div>
+          </div>
+          <div class="fl-swatch" style="background:#487848"></div>
+          <div class="fl-tags">
+            <div class="fl-tag">🍎 りんご · ブラウンシュガー · 力強い酸味</div>
+            <div class="fl-tag">高地（2000m超）栽培によりフレーバーが凝縮</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ── CELL C2: ゲイシャ スポットライト ── -->
+      <div class="cell">
+        <div class="cell-title">👑 プレミアム品種　スポットライト</div>
+
+        <div class="geisha-hero">
+          <div class="geisha-name">ゲイシャ</div>
+          <div class="geisha-ruby">Geisha / Gesha</div>
+        </div>
+
+        <div class="geisha-facts">
+          <div class="gf-row">
+            <div class="gf-label">原　産</div>
+            <div class="gf-val">エチオピア 南西部 ゲシャ（Gesha）村。標高1,500〜2,000m の高地原産</div>
+          </div>
+          <div class="gf-row">
+            <div class="gf-label">発　見</div>
+            <div class="gf-val">1930年代 エチオピアで採集 → ケニア → タンザニア → コスタリカ → パナマへ伝わる</div>
+          </div>
+          <div class="gf-row">
+            <div class="gf-label">世界的<br>評価</div>
+            <div class="gf-val">2004年パナマ国際品評会BOP（ベスト・オブ・パナマ）で全記録を塗り替え世界の注目を集める</div>
+          </div>
+          <div class="gf-row">
+            <div class="gf-label">風　味</div>
+            <div class="gf-val">えも言われぬ花の香り（ジャスミン・ベルガモット）とフルーツの甘み。「飲むお茶」とも形容される繊細さ</div>
+          </div>
+          <div class="gf-row">
+            <div class="gf-label">主産地</div>
+            <div class="gf-val">パナマ ボケテ地区 / エチオピア ゲシャビレッジ農園 / コロンビア高地</div>
+          </div>
+        </div>
+
+        <div class="premium-box">
+          <div class="pb-title">スターバックス パナマ アウロマール ゲイシャ（限定）</div>
+          <div class="pb-price">¥10,000</div>
+          <div class="pb-per">250g 当時価格</div>
+        </div>
+
+        <div class="div-line" style="margin:8px 0 6px"><span class="div-diamond">✦</span></div>
+
+        <div class="cell-title" style="margin-bottom:5px">注目品種</div>
+        <div class="gf-row" style="border:1px solid rgba(139,107,20,0.35); padding:6px 12px; margin:4px 0; background:rgba(74,44,8,0.04); gap:10px;">
+          <div class="gf-label" style="width:110px; font-size:12px; letter-spacing:2px;">ピンクブルボン</div>
+          <div class="gf-val" style="font-size:16px;">コロンビアのブルボン変異。ピンク色の果実。ストロベリー・レモン的な甘い香り</div>
+        </div>
+        <div class="gf-row" style="border:1px solid rgba(139,107,20,0.35); padding:6px 12px; margin:4px 0; background:rgba(74,44,8,0.04); gap:10px;">
+          <div class="gf-label" style="width:110px; font-size:12px; letter-spacing:2px;">オンブリゴン</div>
+          <div class="gf-val" style="font-size:16px;">コロンビア在来の新種。独特のフルーツ感と複雑な風味が研究者注目</div>
+        </div>
+        <div class="gf-row" style="border:1px solid rgba(139,107,20,0.35); padding:6px 12px; margin:4px 0; background:rgba(74,44,8,0.04); gap:10px;">
+          <div class="gf-label" style="width:110px; font-size:12px; letter-spacing:2px;">パカマラ</div>
+          <div class="gf-val" style="font-size:16px;">パカス × マラゴジッペ。豆が非常に大粒。エルサルバドル発の高評価品種</div>
+        </div>
+
+      </div>
+
+      <!-- ── CELL C3: 豆知識 ── -->
+      <div class="cell">
+        <div class="cell-title">📚 コーヒー　豆知識</div>
+
+        <div class="trivia-item">
+          <div class="tri-icon">🌐</div>
+          <div>
+            <div class="tri-head">コーヒーベルト</div>
+            <div class="tri-body">コーヒーは赤道を中心に<span class="tri-hl">南北25度以内</span>の「コーヒーベルト」と呼ばれる熱帯・亜熱帯地帯で栽培される。最適気温15〜25℃、年間降水量1,500〜2,500mm、排水性のよい土壌が条件。</div>
+          </div>
+        </div>
+
+        <div class="trivia-item">
+          <div class="tri-icon">💬</div>
+          <div>
+            <div class="tri-head">「コーヒー」の語源</div>
+            <div class="tri-body">エチオピアでは実を「バン」、樹を「バンカン」と呼んでいた。アラビアに伝わると「<span class="tri-hl">カーフィ</span>」と呼ばれるようになった。カーフィとはかつてアラビアで飲まれた酒の名称。飲酒を禁じられた回教徒が酒の代替として愛飲したことに由来する。</div>
+          </div>
+        </div>
+
+        <div class="trivia-item">
+          <div class="tri-icon">⚗️</div>
+          <div>
+            <div class="tri-head">カフェインの含有量</div>
+            <div class="tri-body"><span class="tri-hl">ロブスタ種はアラビカ種の約2倍</span>のカフェインを含む（ロブスタ 2.7%、アラビカ 1.5%）。高いカフェイン含有量が病害虫に対する自然防御として機能している。</div>
+          </div>
+        </div>
+
+        <div class="trivia-item">
+          <div class="tri-icon">🏔️</div>
+          <div>
+            <div class="tri-head">テロワールと高地栽培</div>
+            <div class="tri-body">ワインのように、コーヒーにも「<span class="tri-hl">テロワール</span>」（土地の個性）がある。高地では果実の成熟が遅くなり、豆が引き締まって酸味と甘みが凝縮する。グァテマラ アカナンゴ テフヤは標高<span class="tri-hl">2,000m超</span>の高地産。</div>
+          </div>
+        </div>
+
+        <div class="trivia-item">
+          <div class="tri-icon">⛵</div>
+          <div>
+            <div class="tri-head">ガブリエル・ド・クリューの逸話</div>
+            <div class="tri-body">18世紀初頭、フランス海軍将校ガブリエル・ド・クリューは、アムステルダムから持ち出したコーヒー苗木1本を命がけで<span class="tri-hl">マルティニーク島へ運んだ</span>。航海中も自分の飲料水を苗木に分け与えたとされる。この1本が南北アメリカのコーヒー産業の礎となった。</div>
+          </div>
+        </div>
+
+        <div class="trivia-item">
+          <div class="tri-icon">🪔</div>
+          <div>
+            <div class="tri-head">エチオピアのコーヒーセレモニー</div>
+            <div class="tri-body">エチオピアでは生豆を洗い、焙煎し、すり潰してジャバナ（土鍋）で煮出す伝統的な「<span class="tri-hl">コーヒーセレモニー</span>」が今も続く。一度のセレモニーで3杯（消費しきる）飲むのが礼儀。</div>
+          </div>
+        </div>
+
+        <div class="trivia-item">
+          <div class="tri-icon">🍾</div>
+          <div>
+            <div class="tri-head">モカの名の由来</div>
+            <div class="tri-body">イエメンの<span class="tri-hl">モカ港</span>（アル・マハー）を経由して輸出されたことから、アラビア産コーヒーは「モカ」と呼ばれるようになった。長い航海で熟成され独特の苦味が生まれ、ヨーロッパ人に珍重された。</div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ==================================================
+         ROW 5 — FOOTER
+         ================================================== -->
+    <footer class="footer">
+      <div class="f-ornament">✦ ──── ❦ ──── ❧ ──── ❦ ──── ✦</div>
+      <div class="f-ornament" style="margin-top:8px">❧ ──── ── ── ── ── ── ── ── ── ❧</div>
+    </footer>
+
+  </div><!-- /inner -->
+</div><!-- /poster -->
+
+</body>
+</html>
