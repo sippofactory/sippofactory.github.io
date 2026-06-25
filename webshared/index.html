@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>webshared - sippofactory</title>
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --panel: #111827;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --line: #243244;
+      --blue: #60a5fa;
+      --green: #34d399;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 20% 0%, rgba(96, 165, 250, .16), transparent 34rem),
+        #0b0f14;
+      color: var(--text);
+      font-family: "Yu Gothic UI", "Hiragino Sans", "Meiryo", sans-serif;
+      line-height: 1.7;
+    }
+    main {
+      width: min(920px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 48px 0 72px;
+    }
+    header {
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: rgba(17, 24, 39, .84);
+      padding: 30px;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(32px, 5vw, 52px);
+      line-height: 1.1;
+    }
+    p { color: var(--muted); }
+    .list {
+      display: grid;
+      gap: 14px;
+      margin-top: 24px;
+    }
+    a.card {
+      display: block;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(17, 24, 39, .72);
+      padding: 18px;
+      color: var(--text);
+      text-decoration: none;
+    }
+    a.card:hover {
+      border-color: rgba(96, 165, 250, .7);
+      background: rgba(30, 41, 59, .84);
+    }
+    .title {
+      color: #dbeafe;
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .desc {
+      margin-top: 6px;
+      color: var(--muted);
+    }
+    .tag {
+      display: inline-block;
+      margin-top: 12px;
+      border: 1px solid rgba(52, 211, 153, .35);
+      border-radius: 999px;
+      padding: 3px 10px;
+      color: #bbf7d0;
+      font-size: 12px;
+      background: rgba(52, 211, 153, .08);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>webshared</h1>
+      <p>GitHub Pages で公開している共有HTML置き場。</p>
+    </header>
+
+    <div class="list">
+      <a class="card" href="./yaruki-switch.html">
+        <div class="title">やる気は、待つより小さく動かす</div>
+        <div class="desc">Threads投稿「やる気は動いた後からついてくる」を図解したページ。</div>
+        <span class="tag">motivation</span>
+      </a>
+
+      <a class="card" href="./coffee-atlas.html">
+        <div class="title">coffee-atlas</div>
+        <div class="desc">既存の共有HTML。</div>
+        <span class="tag">archive</span>
+      </a>
+    </div>
+  </main>
+</body>
+</html>
