@@ -262,6 +262,34 @@
       color: var(--muted);
     }
 
+    blockquote {
+      margin: 0;
+      padding: 16px 18px;
+      border-left: 4px solid var(--accent);
+      background: rgba(96, 165, 250, 0.08);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      color: #dbeafe;
+    }
+
+    .claim {
+      padding: 16px 18px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--line);
+      background: rgba(15, 23, 42, 0.86);
+    }
+
+    .claim strong {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .strike {
+      color: #cbd5e1;
+      text-decoration: line-through;
+      text-decoration-color: var(--danger);
+      text-decoration-thickness: 2px;
+    }
+
     .warn {
       border-left-color: var(--warn);
       background: rgba(245, 158, 11, 0.08);
@@ -544,6 +572,57 @@
           </ul>
         </article>
       </div>
+    </section>
+
+    <section class="section">
+      <h2>元投稿</h2>
+      <blockquote>
+        クレアチン、ローディングで失敗する人めちゃくちゃ多いです。医師視点で整理すると、<br>
+        ・初週は1日20gを5gずつ4回に分ける（一気飲みはお腹を壊す）<br>
+        ・2週目以降は1日3〜5gを1回だけ<br>
+        ・それ以上は排出されるので無駄<br>
+        ここを押さえるだけで、夕方のガス欠は変わります。
+      </blockquote>
+    </section>
+
+    <section class="section">
+      <h2>補足つきで読む</h2>
+      <div class="grid">
+        <div class="claim">
+          <strong><span class="strike">クレアチンローディングで失敗する人がめちゃくちゃ多い</span></strong>
+          <p class="muted">これは投稿者の印象で、この投稿内では頻度の根拠までは示されていない。</p>
+        </div>
+        <div class="claim">
+          <strong>初週 <code>20g/日</code> を <code>5g × 4回</code> に分ける</strong>
+          <p class="muted">概ね一般的なローディング法の範囲。ただしローディングは必須ではなく、<code>3〜5g/日</code> を継続して約4週間かけて飽和させる方法でもよい。</p>
+        </div>
+        <div class="claim">
+          <strong>一気飲みで胃腸症状が出やすい</strong>
+          <p class="muted">概ね妥当。消化器症状が気になる人は、ローディングを避ける、食事と一緒に飲む、少量分割にするなどが現実的。</p>
+        </div>
+        <div class="claim">
+          <strong>2週目以降 <code>3〜5g/日</code></strong>
+          <p class="muted">維持量として概ね妥当。体格ベースでは <code>0.03g/kg/日</code> 程度が目安とされることがある。</p>
+        </div>
+        <div class="claim">
+          <strong><span class="strike">それ以上は排出されるので無駄</span></strong>
+          <p class="muted">一般的な維持目的では <code>3〜5g/日</code> で十分なことが多いが、「多めはすべて無意味」とまでは言い切れない。</p>
+        </div>
+        <div class="claim">
+          <strong><span class="strike">ここを押さえるだけで、夕方のガス欠は変わる</span></strong>
+          <p class="muted">脳のエネルギー代謝や認知機能への研究はあるが、健康成人の「夕方のガス欠」改善がこの方法だけで広く確認されているとは言いにくい。個人体験として読むのが安全。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>コメント抜粋</h2>
+      <ol>
+        <li><strong>@sinchiikawaemon</strong> 「失敗ってなんだろう。あとどうやってめちゃくちゃ多い事を確認できるんだこれ？」</li>
+        <li><strong>@Yuki_Mall</strong> 「クレアルカリンと通常のクレアチンは別物なのでしょうか？」</li>
+        <li><strong>@testo_tara</strong> 「朝5gですら気持ち悪くなります。空腹で飲むのは禁止ですか？」</li>
+        <li><strong>@shuhe1_yoshida</strong> 「僕は1スクープ5gで下痢するので、少し少な目で安定してます。」</li>
+      </ol>
     </section>
 
     <section class="section">
