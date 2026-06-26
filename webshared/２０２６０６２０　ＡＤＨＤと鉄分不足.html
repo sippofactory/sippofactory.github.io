@@ -62,22 +62,27 @@
       letter-spacing: 0.02em;
     }
     h1, h2, h3 { line-height: 1.25; margin: 0; }
-    h1 {
+    .hero h1 {
       font-size: clamp(1.9rem, 4vw, 2.8rem);
       margin-top: 6px;
-      color: #f8fbff;
-      text-shadow: 0 6px 24px rgba(96, 165, 250, 0.16);
+      color: #f8fbff !important;
+      text-shadow: 0 6px 24px rgba(96, 165, 250, 0.18);
     }
-    h2 {
+    .section h2 {
       font-size: 1.18rem;
       margin-bottom: 14px;
-      color: #dbeafe;
-      text-shadow: 0 4px 18px rgba(96, 165, 250, 0.14);
+      color: #dbeafe !important;
+      text-shadow: 0 4px 18px rgba(96, 165, 250, 0.18);
     }
-    h3 {
+    .card h3 {
       font-size: 1rem;
       margin-bottom: 8px;
-      color: #f3f7ff;
+      color: #f3f7ff !important;
+    }
+    .diagram text:first-of-type,
+    .diagram text[font-size="24"],
+    .diagram text[font-size="23"] {
+      fill: #f8fbff;
     }
     p { margin: 0.7rem 0; }
     .lead { color: #d7e2f0; max-width: 72ch; }
