@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>クレアチンの正しいローディング方法</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b0f14;
+      --panel: #111827;
+      --panel-strong: #0f172a;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --accent: #60a5fa;
+      --accent-2: #34d399;
+      --line: #243244;
+      --warn: #f59e0b;
+      --danger: #f87171;
+      --radius-lg: 24px;
+      --radius-md: 20px;
+      --radius-sm: 16px;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "BIZ UDPGothic", "Hiragino Sans", "Yu Gothic", sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(96, 165, 250, 0.14), transparent 28%),
+        radial-gradient(circle at top left, rgba(52, 211, 153, 0.1), transparent 24%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    main {
+      width: min(960px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 32px 0 64px;
+    }
+
+    .hero,
+    .section {
+      background: rgba(17, 24, 39, 0.9);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+
+    .hero h1,
+    .section h2 {
+      margin: 0 0 12px;
+      line-height: 1.25;
+    }
+
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.02rem;
+    }
+
+    .meta,
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      background: rgba(15, 23, 42, 0.8);
+      font-size: 0.92rem;
+    }
+
+    .section {
+      padding: 28px;
+      margin-bottom: 20px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .card {
+      padding: 18px;
+      border-radius: var(--radius-sm);
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.96), rgba(17, 24, 39, 0.92));
+      border: 1px solid var(--line);
+    }
+
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+    }
+
+    .card p,
+    .card ul {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    ul,
+    ol {
+      padding-left: 1.2em;
+    }
+
+    li + li {
+      margin-top: 8px;
+    }
+
+    strong {
+      color: #f8fafc;
+    }
+
+    code {
+      background: rgba(96, 165, 250, 0.12);
+      border: 1px solid rgba(96, 165, 250, 0.2);
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-family: Consolas, monospace;
+      color: #bfdbfe;
+    }
+
+    .diagram {
+      margin-top: 16px;
+      padding: 16px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--line);
+      background: rgba(15, 23, 42, 0.9);
+      overflow-x: auto;
+    }
+
+    .note {
+      border-left: 4px solid var(--accent);
+      padding: 14px 16px;
+      background: rgba(96, 165, 250, 0.08);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      color: var(--muted);
+    }
+
+    .warn {
+      border-left-color: var(--warn);
+      background: rgba(245, 158, 11, 0.08);
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .footer-links a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+
+    .mini {
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    @media (max-width: 760px) {
+      main {
+        width: min(100% - 20px, 960px);
+        padding-top: 20px;
+      }
+
+      .hero,
+      .section {
+        padding: 20px;
+      }
+
+      .grid-3,
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <div class="pill-row">
+        <span class="pill">サプリメント</span>
+        <span class="pill">クレアチン</span>
+        <span class="pill">ローディング</span>
+      </div>
+      <h1>クレアチンの正しいローディング方法</h1>
+      <p>投稿内容をベースに、クレアチンのローディング期の基本手順、やりがちな失敗、ローディングなしで進める選択肢を図解つきで整理した単体 HTML ノート。</p>
+      <div class="meta">
+        <span class="pill">出典: ayumu_clinic</span>
+        <span class="pill">投稿日: 2026-06-19</span>
+        <span class="pill">形式: standalone HTML</span>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>要点</h2>
+      <div class="grid grid-3">
+        <article class="card">
+          <h3>1. 初週</h3>
+          <p><code>20g/日</code> を <code>5g × 4回</code> に分ける案が標準的な範囲として紹介されている。</p>
+        </article>
+        <article class="card">
+          <h3>2. 維持期</h3>
+          <p>2週目以降は <code>3〜5g/日</code>。体格ベースでは <code>0.03g/kg/日</code> が目安とされることがある。</p>
+        </article>
+        <article class="card">
+          <h3>3. 注意点</h3>
+          <p>一気飲みは胃腸症状につながりやすい。胃腸が弱い人はローディングなしも選択肢。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>流れの図解</h2>
+      <p class="muted">ローディングをする場合のシンプルな流れ。</p>
+      <div class="diagram">
+        <svg viewBox="0 0 880 260" width="100%" role="img" aria-label="クレアチンローディングの流れ図">
+          <defs>
+            <linearGradient id="boxBlue" x1="0" x2="1">
+              <stop offset="0%" stop-color="#0f172a"></stop>
+              <stop offset="100%" stop-color="#132238"></stop>
+            </linearGradient>
+            <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+              <path d="M0,0 L10,5 L0,10 z" fill="#60a5fa"></path>
+            </marker>
+          </defs>
+          <rect x="20" y="54" width="180" height="120" rx="24" fill="url(#boxBlue)" stroke="#243244"></rect>
+          <text x="110" y="92" fill="#e5e7eb" text-anchor="middle" font-size="22" font-weight="700">初週</text>
+          <text x="110" y="126" fill="#94a3b8" text-anchor="middle" font-size="16">20g/日</text>
+          <text x="110" y="152" fill="#94a3b8" text-anchor="middle" font-size="16">5g × 4回に分割</text>
+
+          <line x1="200" y1="114" x2="340" y2="114" stroke="#60a5fa" stroke-width="4" marker-end="url(#arrow)"></line>
+
+          <rect x="340" y="54" width="200" height="120" rx="24" fill="url(#boxBlue)" stroke="#243244"></rect>
+          <text x="440" y="92" fill="#e5e7eb" text-anchor="middle" font-size="22" font-weight="700">胃腸トラブル回避</text>
+          <text x="440" y="126" fill="#94a3b8" text-anchor="middle" font-size="16">一気飲みを避ける</text>
+          <text x="440" y="152" fill="#94a3b8" text-anchor="middle" font-size="16">必要なら食後に寄せる</text>
+
+          <line x1="540" y1="114" x2="680" y2="114" stroke="#34d399" stroke-width="4" marker-end="url(#arrow)"></line>
+
+          <rect x="680" y="54" width="180" height="120" rx="24" fill="url(#boxBlue)" stroke="#243244"></rect>
+          <text x="770" y="92" fill="#e5e7eb" text-anchor="middle" font-size="22" font-weight="700">維持期</text>
+          <text x="770" y="126" fill="#94a3b8" text-anchor="middle" font-size="16">3〜5g/日</text>
+          <text x="770" y="152" fill="#94a3b8" text-anchor="middle" font-size="16">以後は継続</text>
+        </svg>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>ローディングあり / なし</h2>
+      <div class="diagram">
+        <svg viewBox="0 0 880 360" width="100%" role="img" aria-label="ローディングありなしの分岐図">
+          <defs>
+            <marker id="arrow2" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+              <path d="M0,0 L10,5 L0,10 z" fill="#60a5fa"></path>
+            </marker>
+          </defs>
+          <rect x="320" y="20" width="240" height="72" rx="20" fill="#0f172a" stroke="#243244"></rect>
+          <text x="440" y="52" fill="#e5e7eb" text-anchor="middle" font-size="20" font-weight="700">クレアチンを始める</text>
+          <text x="440" y="76" fill="#94a3b8" text-anchor="middle" font-size="14">まずは胃腸耐性と目的を確認</text>
+
+          <line x1="440" y1="92" x2="440" y2="138" stroke="#60a5fa" stroke-width="4" marker-end="url(#arrow2)"></line>
+          <rect x="340" y="138" width="200" height="64" rx="18" fill="#111827" stroke="#243244"></rect>
+          <text x="440" y="177" fill="#e5e7eb" text-anchor="middle" font-size="18">早く飽和させたい？</text>
+
+          <line x1="340" y1="170" x2="160" y2="170" stroke="#34d399" stroke-width="4" marker-end="url(#arrow2)"></line>
+          <line x1="540" y1="170" x2="720" y2="170" stroke="#60a5fa" stroke-width="4" marker-end="url(#arrow2)"></line>
+
+          <rect x="40" y="120" width="220" height="116" rx="20" fill="#0f172a" stroke="#243244"></rect>
+          <text x="150" y="154" fill="#e5e7eb" text-anchor="middle" font-size="20" font-weight="700">いいえ</text>
+          <text x="150" y="184" fill="#94a3b8" text-anchor="middle" font-size="15">3〜5g/日を継続</text>
+          <text x="150" y="206" fill="#94a3b8" text-anchor="middle" font-size="15">約4週間で飽和が目安</text>
+
+          <rect x="620" y="120" width="220" height="116" rx="20" fill="#0f172a" stroke="#243244"></rect>
+          <text x="730" y="154" fill="#e5e7eb" text-anchor="middle" font-size="20" font-weight="700">はい</text>
+          <text x="730" y="184" fill="#94a3b8" text-anchor="middle" font-size="15">初週 20g/日を分割</text>
+          <text x="730" y="206" fill="#94a3b8" text-anchor="middle" font-size="15">2週目以降は 3〜5g/日</text>
+
+          <line x1="150" y1="236" x2="150" y2="304" stroke="#34d399" stroke-width="4" marker-end="url(#arrow2)"></line>
+          <line x1="730" y1="236" x2="730" y2="304" stroke="#60a5fa" stroke-width="4" marker-end="url(#arrow2)"></line>
+
+          <rect x="20" y="304" width="260" height="40" rx="16" fill="#112032" stroke="#243244"></rect>
+          <rect x="600" y="304" width="260" height="40" rx="16" fill="#112032" stroke="#243244"></rect>
+          <text x="150" y="330" fill="#e5e7eb" text-anchor="middle" font-size="14">胃腸が弱い人はこちらが無難</text>
+          <text x="730" y="330" fill="#e5e7eb" text-anchor="middle" font-size="14">短期で飽和させたい人向け</text>
+        </svg>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>失敗しやすいポイント</h2>
+      <div class="grid grid-2">
+        <article class="card">
+          <h3>一気飲みする</h3>
+          <ul>
+            <li>胃もたれ、腹痛、下痢につながりやすい</li>
+            <li><code>5g</code> 程度に分けるほうが胃腸への負担を抑えやすい</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>多ければ多いほど効くと思う</h3>
+          <ul>
+            <li>維持目的では <code>3〜5g/日</code> で十分なことが多い</li>
+            <li>過量がそのまま上乗せ効果になるとは言いにくい</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>ローディング必須と思う</h3>
+          <ul>
+            <li>必須ではない</li>
+            <li>低用量継続でも時間をかけて飽和できる</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>体感を一般化する</h3>
+          <ul>
+            <li>「夕方のガス欠改善」は個人体験寄り</li>
+            <li>誰にでも同じように効くとは限らない</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>読み取り</h2>
+      <div class="note">
+        投稿の中核は妥当だが、効果の強い言い切りや頻度表現には注意が必要。運用としては「標準的なローディング法の紹介」として読むのが無難。
+      </div>
+      <div class="grid grid-2" style="margin-top: 16px;">
+        <article class="card">
+          <h3>概ね妥当</h3>
+          <ul>
+            <li>初週 <code>20g/日</code> を分割する案</li>
+            <li>維持期 <code>3〜5g/日</code></li>
+            <li>胃腸症状があるなら分割や食後に寄せる工夫</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>慎重に読む点</h3>
+          <ul>
+            <li>「失敗する人がめちゃくちゃ多い」には根拠提示なし</li>
+            <li>「夕方のガス欠が変わる」は広く確立した表現とは言いにくい</li>
+            <li>個人差や目的差を無視した断定は避けたい</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>用語と関連</h2>
+      <div class="grid grid-2">
+        <article class="card">
+          <h3>用語</h3>
+          <ul>
+            <li>[[クレアチン]]</li>
+            <li>[[クレアチンローディング]]</li>
+            <li>[[クレアチンモノハイドレート]]</li>
+            <li>[[クレアルカリン]]</li>
+          </ul>
+        </article>
+        <article class="card footer-links">
+          <h3>出典</h3>
+          <p class="mini">元投稿: <a href="https://x.com/ayumu_clinic/status/2067927250180436429">https://x.com/ayumu_clinic/status/2067927250180436429</a></p>
+          <p class="mini">参考: <a href="https://www.ausport.gov.au/ais/nutrition/supplements/group_a/performance-supplements2/creatine">Australian Sports Commission / AIS: Creatine</a></p>
+          <p class="mini">参考: <a href="https://link.springer.com/article/10.1186/s12970-017-0173-z">ISSN position stand: creatine supplementation</a></p>
+          <p class="mini">取得日: 2026-06-20</p>
+          <p class="mini">取得方式: fetch-x (Playwright, visible browser, --body-first --instant)</p>
+        </article>
+      </div>
+      <div class="note warn" style="margin-top: 16px;">
+        この HTML は元ノートの要約・再構成であり、医療判断の代替ではない。体調、腎機能、既往歴、服薬状況が絡む場合は個別確認が必要。
+      </div>
+    </section>
+  </main>
+</body>
+</html>
