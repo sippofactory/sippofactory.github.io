@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>デンタルフロスを一気に結ぶ小ワザ</title>
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --panel: #111827;
+      --panel-2: #0f172a;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --accent: #60a5fa;
+      --accent-2: #34d399;
+      --border: #243244;
+      --shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 14% 10%, rgba(96, 165, 250, 0.12), transparent 28%),
+        radial-gradient(circle at 88% 12%, rgba(52, 211, 153, 0.10), transparent 26%),
+        linear-gradient(180deg, #0a0e13 0%, var(--bg) 100%);
+      font-family: "Segoe UI", "Hiragino Sans", "Yu Gothic UI", sans-serif;
+      line-height: 1.75;
+    }
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+    }
+    .hero, .section, .card {
+      background: linear-gradient(180deg, rgba(17, 24, 39, 0.98), rgba(15, 23, 42, 0.98));
+      border: 1px solid rgba(36, 50, 68, 0.96);
+      box-shadow: var(--shadow);
+    }
+    .hero {
+      border-radius: 24px;
+      padding: 28px;
+      margin-bottom: 18px;
+    }
+    .section {
+      border-radius: 20px;
+      padding: 22px;
+      margin-top: 16px;
+    }
+    .pill {
+      display: inline-block;
+      padding: 3px 10px;
+      margin-right: 8px;
+      margin-bottom: 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(96, 165, 250, 0.30);
+      background: rgba(96, 165, 250, 0.12);
+      color: #bfdbfe;
+      font-size: 12px;
+      letter-spacing: 0.02em;
+    }
+    h1, h2, h3 { line-height: 1.25; margin: 0; }
+    .hero h1 {
+      font-size: clamp(2rem, 4vw, 2.9rem);
+      margin-top: 6px;
+      color: #f8fbff;
+      text-shadow: 0 6px 24px rgba(96, 165, 250, 0.18);
+    }
+    .section h2 {
+      font-size: 1.2rem;
+      margin-bottom: 14px;
+      color: #dbeafe;
+      text-shadow: 0 4px 18px rgba(96, 165, 250, 0.18);
+    }
+    .card h3 {
+      font-size: 1rem;
+      margin-bottom: 8px;
+      color: #f3f7ff;
+    }
+    p { margin: 0.7rem 0; }
+    .lead { color: #d7e2f0; max-width: 72ch; }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 14px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-top: 14px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+    }
+    .card {
+      border-radius: 18px;
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.03);
+    }
+    .tagline {
+      display: inline-block;
+      margin-bottom: 10px;
+      color: var(--accent-2);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+    }
+    .muted { color: var(--muted); }
+    .accent { color: #bfdbfe; }
+    a { color: #93c5fd; }
+    ul {
+      margin: 0.5rem 0 0;
+      padding-left: 1.2rem;
+    }
+    li { margin: 0.45rem 0; }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-top: 10px;
+    }
+    .gallery figure {
+      margin: 0;
+      padding: 10px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(36, 50, 68, 0.96);
+    }
+    .gallery img {
+      width: 100%;
+      display: block;
+      border-radius: 14px;
+      object-fit: cover;
+      background: #0a0e13;
+    }
+    .gallery figcaption {
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-top: 8px;
+    }
+    .diagram {
+      margin-top: 12px;
+      border-radius: 20px;
+      border: 1px solid rgba(36, 50, 68, 0.96);
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .footer {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-top: 18px;
+    }
+    @media (max-width: 640px) {
+      main { padding: 20px 14px 44px; }
+      .hero, .section { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <span class="pill">Threads clip</span>
+      <span class="pill">Photo post</span>
+      <span class="pill">小ワザ</span>
+      <h1>デンタルフロスを一気に結ぶ小ワザ</h1>
+      <p class="lead">
+        投稿の主旨は、<span class="accent">デンタルフロスを1本ずつ広げて結ぶのではなく、まとめて扱うやり方</span> が
+        「え、こんな簡単なの？」と思うほど手軽だった、という驚き。
+        コメント欄でも「知らなかった」「学校で教えてほしい」と反応が集まっている。
+      </p>
+      <div class="meta">
+        <div>元URL: <a href="https://www.threads.com/@kae.de902/post/DZziPKtGJWq">threads.com/@kae.de902/post/DZziPKtGJWq</a></div>
+        <div>公開日: 2026-06-20</div>
+        <div>投稿者: [[@kae.de902]]</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>要点</h2>
+      <div class="grid">
+        <div class="card">
+          <div class="tagline">Point</div>
+          <h3>1本ずつ結ばない</h3>
+          <p class="muted">従来の面倒な手順を、もっとまとめて処理する方法として受け取られている。</p>
+        </div>
+        <div class="card">
+          <div class="tagline">Reaction</div>
+          <h3>初見で驚く系</h3>
+          <p class="muted">「天才」「義務教育で教えてほしい」といった、生活知識としての驚きが中心。</p>
+        </div>
+        <div class="card">
+          <div class="tagline">Format</div>
+          <h3>写真で伝える投稿</h3>
+          <p class="muted">今回の価値は文章より、写真で順序や手元の形が分かる点にある。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Threads埋め込み</h2>
+      <div class="card">
+        <blockquote
+          class="text-post-media"
+          data-text-post-permalink="https://www.threads.com/@kae.de902/post/DZziPKtGJWq?utm_source=ig_embed&amp;utm_campaign=loading"
+          data-text-post-version="0"
+          style="background:#101827; border:1px solid #243244; border-radius:18px; margin:0; max-width:100%; min-width:0; padding:0; width:100%;">
+        </blockquote>
+        <p class="muted">
+          埋め込みが表示されない環境では、
+          <a href="https://www.threads.com/@kae.de902/post/DZziPKtGJWq">元投稿を開く</a>
+          で確認できる。
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>写真</h2>
+      <div class="gallery">
+        <figure>
+          <img src="https://scontent-itm1-1.cdninstagram.com/v/t51.71878-15/727057577_993836113389656_6711240951868889025_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=1&ig_cache_key=MzkyMzYzMDA2NzE4NDI5NzQ1MA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuNjQwLnNkci52aWRlb19kZWZhdWx0X2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=bbohZl4s1EcQ7kNvwHptQdx&_nc_oc=AdqoBcCodJkCYqYKKzzWGHwy11F_yqM1xR7_6iWUu43oBh8dP8sX_WGO4-NbRdNp_XM&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-itm1-1.cdninstagram.com&_nc_gid=YW08wDaO0SH7FmdD8ltPFQ&_nc_ss=7a22e&oh=00_Af-OwbWGjKNEC8VwpGzwKfJDB1MUIby8G9o8ql2seuL0bA&oe=6A3D04B2" alt="投稿の1枚目">
+          <figcaption>1枚目。道具や束ね方の全体像が見える。</figcaption>
+        </figure>
+        <figure>
+          <img src="https://scontent-itm1-1.cdninstagram.com/v/t51.82787-15/727479308_18105935662915569_179890659736049390_n.webp?_nc_cat=1&ig_cache_key=MzkyMzYzMDAxNDg4MjE1NzUyMQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuNjk4LnNkci5yZWd1bGFyX3Bob3RvLkMzIn0%3D&_nc_ohc=-4IenYvmBqIQ7kNvwGCOYg6&_nc_oc=AdoadjKaRoTG3nGUkEokIWM_q-brblpy8vkEVgaRhrLQHdeziy0GhxttNKhNDuPnvIo&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-itm1-1.cdninstagram.com&_nc_gid=YW08wDaO0SH7FmdD8ltPFQ&_nc_ss=7a22e&oh=00_Af-m5PL-cC7v-b_VYG_-UwX7IhkuKWvj4j4Of4eHahl8uw&oe=6A3D0E94" alt="投稿の2枚目">
+          <figcaption>2枚目。手順の途中や束ね方のポイントが分かる。</figcaption>
+        </figure>
+        <figure>
+          <img src="https://scontent-itm1-1.cdninstagram.com/v/t51.82787-15/725879710_18105935653915569_618308567025479451_n.webp?_nc_cat=1&ig_cache_key=MzkyMzYzMDAxMjkzNTQ5MzM5MQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuNjk0LnNkci5yZWd1bGFyX3Bob3RvLkMzIn0%3D&_nc_ohc=jTLyhIUDa6UQ7kNvwE8dVSj&_nc_oc=Adq66nwuX1whWB0Qr_SKf9csbNqmG8cNBMkrlZIPtcj9YywB7qqM-1hOPVE9B-YrmFU&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-itm1-1.cdninstagram.com&_nc_gid=YW08wDaO0SH7FmdD8ltPFQ&_nc_ss=7a22e&oh=00_Af9bwZo0Sbj28Fb_bXXP5r4_ffDrK5dn2WY8ZI6NQ-GIHQ&oe=6A3CEA8E" alt="投稿の3枚目">
+          <figcaption>3枚目。仕上がりや結び方の完成形を確認できる。</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>流れの理解</h2>
+      <div class="diagram">
+        <svg viewBox="0 0 920 240" width="100%" role="img" aria-label="デンタルフロス小ワザの流れ">
+          <rect x="34" y="62" width="240" height="86" rx="22" fill="#122338" stroke="#60a5fa" stroke-opacity="0.55"/>
+          <text x="60" y="97" fill="#f8fbff" font-size="24" font-family="Segoe UI, sans-serif">束のまま扱う発想</text>
+          <text x="60" y="126" fill="#dbeafe" font-size="16" font-family="Segoe UI, sans-serif">1本ずつ広げて結ぶ前提を外す</text>
+
+          <rect x="338" y="62" width="240" height="86" rx="22" fill="#14302d" stroke="#34d399" stroke-opacity="0.55"/>
+          <text x="364" y="97" fill="#f8fbff" font-size="24" font-family="Segoe UI, sans-serif">手順が一気に短くなる</text>
+          <text x="364" y="126" fill="#d9fff1" font-size="16" font-family="Segoe UI, sans-serif">写真だけでも理解しやすい</text>
+
+          <rect x="642" y="62" width="240" height="86" rx="22" fill="#3b2a13" stroke="#f59e0b" stroke-opacity="0.55"/>
+          <text x="668" y="97" fill="#f8fbff" font-size="24" font-family="Segoe UI, sans-serif">生活の知恵として刺さる</text>
+          <text x="668" y="126" fill="#ffe7bf" font-size="16" font-family="Segoe UI, sans-serif">コメント欄の反応も強い</text>
+
+          <path d="M274 104 C296 104, 314 104, 338 104" fill="none" stroke="#60a5fa" stroke-width="4"/>
+          <polygon points="332,96 352,104 332,112" fill="#60a5fa"/>
+          <path d="M578 104 C600 104, 618 104, 642 104" fill="none" stroke="#34d399" stroke-width="4"/>
+          <polygon points="636,96 656,104 636,112" fill="#34d399"/>
+        </svg>
+      </div>
+      <p class="muted">
+        この投稿は、細かな理屈より <span class="accent">写真で一瞬にして理解できる生活改善ネタ</span> として見ると整理しやすい。
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>コメントの反応</h2>
+      <ul>
+        <li>「天才。でもいざという時忘れて使えない」</li>
+        <li>「こういう事は義務教育で教えてほしい」</li>
+        <li>「クルクル遊んでるのかと思った」</li>
+        <li>「むしろ一本ずつ広げて縛る方法を知らなかった」</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>参考</h2>
+      <ul>
+        <li>元投稿: <a href="https://www.threads.com/@kae.de902/post/DZziPKtGJWq">https://www.threads.com/@kae.de902/post/DZziPKtGJWq</a></li>
+        <li>関連ノート候補: [[デンタルフロス]], [[生活の小ワザ]], [[口腔ケア]]</li>
+      </ul>
+      <p class="footer">この HTML は 1 ファイル完結で、`DESIGN.md` の黒背景・高コントラスト見出しルールに合わせて作成。</p>
+    </section>
+  </main>
+  <script async src="https://www.threads.net/embed.js"></script>
+</body>
+</html>
