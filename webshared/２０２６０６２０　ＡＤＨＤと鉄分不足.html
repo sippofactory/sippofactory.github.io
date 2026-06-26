@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ＡＤＨＤと鉄分不足</title>
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --panel: #111827;
+      --panel-2: #0f172a;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --accent: #60a5fa;
+      --accent-2: #34d399;
+      --warn: #f59e0b;
+      --danger: #f87171;
+      --border: #243244;
+      --shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 12% 8%, rgba(96, 165, 250, 0.14), transparent 28%),
+        radial-gradient(circle at 88% 12%, rgba(52, 211, 153, 0.11), transparent 24%),
+        linear-gradient(180deg, #0a0e13 0%, var(--bg) 100%);
+      font-family: "Segoe UI", "Hiragino Sans", "Yu Gothic UI", sans-serif;
+      line-height: 1.75;
+    }
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 32px 20px 64px;
+    }
+    .hero, .section, .card, .diagram {
+      background: linear-gradient(180deg, rgba(17, 24, 39, 0.98), rgba(15, 23, 42, 0.98));
+      border: 1px solid rgba(36, 50, 68, 0.96);
+      box-shadow: var(--shadow);
+    }
+    .hero {
+      border-radius: 24px;
+      padding: 30px;
+      margin-bottom: 18px;
+    }
+    .section {
+      border-radius: 20px;
+      padding: 22px;
+      margin-top: 16px;
+    }
+    .pill {
+      display: inline-block;
+      padding: 3px 10px;
+      margin-right: 8px;
+      margin-bottom: 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(96, 165, 250, 0.30);
+      background: rgba(96, 165, 250, 0.12);
+      color: #bfdbfe;
+      font-size: 12px;
+      letter-spacing: 0.02em;
+    }
+    h1, h2, h3 { line-height: 1.25; margin: 0; }
+    h1 { font-size: clamp(1.9rem, 4vw, 2.8rem); margin-top: 6px; }
+    h2 { font-size: 1.18rem; margin-bottom: 14px; }
+    h3 { font-size: 1rem; margin-bottom: 8px; }
+    p { margin: 0.7rem 0; }
+    .lead { color: #d7e2f0; max-width: 72ch; }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 14px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-top: 14px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+    }
+    .card {
+      border-radius: 18px;
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.03);
+    }
+    .tagline {
+      display: inline-block;
+      margin-bottom: 10px;
+      color: var(--accent-2);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+    }
+    .muted { color: var(--muted); }
+    .strong { color: #fef3c7; }
+    .accent { color: #bfdbfe; }
+    .warn { color: #fde68a; }
+    .danger { color: #fca5a5; }
+    ul {
+      margin: 0.5rem 0 0;
+      padding-left: 1.2rem;
+    }
+    li { margin: 0.45rem 0; }
+    a { color: #93c5fd; }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.95em;
+      background: rgba(148, 163, 184, 0.12);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      border-radius: 6px;
+      padding: 0.08rem 0.35rem;
+    }
+    .diagram {
+      border-radius: 20px;
+      padding: 16px;
+      margin-top: 12px;
+      overflow: hidden;
+    }
+    .footer {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-top: 18px;
+    }
+    .linklist a {
+      display: block;
+      padding: 10px 12px;
+      margin-top: 8px;
+      border-radius: 14px;
+      text-decoration: none;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(36, 50, 68, 0.96);
+    }
+    .linklist small {
+      display: block;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+    @media (max-width: 640px) {
+      main { padding: 20px 14px 44px; }
+      .hero, .section { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <span class="pill">X clip</span>
+      <span class="pill">Fact check</span>
+      <span class="pill">ADHD</span>
+      <span class="pill">Iron</span>
+      <h1>ＡＤＨＤと鉄分不足</h1>
+      <p class="lead">
+        元クリップの主張は <span class="strong">「ＡＤＨＤと鉄の関連は示唆されている」</span> という点では概ね妥当。
+        ただし、<span class="warn">成人ＡＤＨＤで研究が十分に固まっているわけではない</span>。
+        また、鉄フライパンや宅食は補助手段であり、検査なしの自己判断で鉄剤を増やす話とは分けて考えたい。
+      </p>
+      <div class="meta">
+        <div>元URL: <a href="https://x.com/i/status/2068109819375239433">x.com/i/status/2068109819375239433</a></div>
+        <div>公開日: 2026-06-19</div>
+        <div>HTML化: 2026-06-26</div>
+        <div>出典ノート: [[awawa_adhd]]</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>3行で結論</h2>
+      <div class="grid">
+        <div class="card">
+          <div class="tagline">Supported</div>
+          <h3>関連はある</h3>
+          <p class="muted">系統レビューでは、ＡＤＨＤ群でフェリチンが低い傾向が報告されている。</p>
+        </div>
+        <div class="card">
+          <div class="tagline">Limited</div>
+          <h3>成人の根拠はまだ薄い</h3>
+          <p class="muted">研究の中心は小児で、成人ＡＤＨＤにそのまま一般化するのは慎重さが必要。</p>
+        </div>
+        <div class="card">
+          <div class="tagline">Caution</div>
+          <h3>補給法は別問題</h3>
+          <p class="muted">鉄フライパンは摂取量を少し増やしうるが、効果は条件依存で治療そのものではない。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>関係のイメージ</h2>
+      <div class="diagram">
+        <svg viewBox="0 0 900 360" width="100%" role="img" aria-label="ADHDと鉄分の関係図">
+          <defs>
+            <linearGradient id="boxBlue" x1="0" x2="1">
+              <stop offset="0%" stop-color="#10233a" />
+              <stop offset="100%" stop-color="#16324e" />
+            </linearGradient>
+            <linearGradient id="boxGreen" x1="0" x2="1">
+              <stop offset="0%" stop-color="#0f2d2a" />
+              <stop offset="100%" stop-color="#163c38" />
+            </linearGradient>
+            <linearGradient id="boxAmber" x1="0" x2="1">
+              <stop offset="0%" stop-color="#382812" />
+              <stop offset="100%" stop-color="#4d3515" />
+            </linearGradient>
+          </defs>
+          <rect x="28" y="34" width="245" height="92" rx="22" fill="url(#boxBlue)" stroke="#60a5fa" stroke-opacity="0.45"/>
+          <text x="52" y="72" fill="#e5e7eb" font-size="24" font-family="Segoe UI, sans-serif">鉄不足の可能性</text>
+          <text x="52" y="102" fill="#94a3b8" font-size="16" font-family="Segoe UI, sans-serif">低フェリチン・食事不足・月経・吸収不良 など</text>
+
+          <rect x="328" y="34" width="245" height="92" rx="22" fill="url(#boxGreen)" stroke="#34d399" stroke-opacity="0.45"/>
+          <text x="353" y="72" fill="#e5e7eb" font-size="24" font-family="Segoe UI, sans-serif">認知・疲労に影響</text>
+          <text x="353" y="102" fill="#94a3b8" font-size="16" font-family="Segoe UI, sans-serif">集中低下・だるさ・睡眠悪化と重なりやすい</text>
+
+          <rect x="628" y="34" width="244" height="92" rx="22" fill="url(#boxAmber)" stroke="#f59e0b" stroke-opacity="0.45"/>
+          <text x="652" y="72" fill="#e5e7eb" font-size="24" font-family="Segoe UI, sans-serif">ＡＤＨＤ症状と混線</text>
+          <text x="652" y="102" fill="#94a3b8" font-size="16" font-family="Segoe UI, sans-serif">不注意・疲れやすさ・実行機能低下が重なる</text>
+
+          <path d="M273 80 C298 80, 308 80, 328 80" fill="none" stroke="#60a5fa" stroke-width="4"/>
+          <polygon points="322,72 342,80 322,88" fill="#60a5fa"/>
+          <path d="M573 80 C598 80, 608 80, 628 80" fill="none" stroke="#34d399" stroke-width="4"/>
+          <polygon points="622,72 642,80 622,88" fill="#34d399"/>
+
+          <rect x="120" y="208" width="290" height="96" rx="22" fill="#101827" stroke="#243244"/>
+          <text x="145" y="245" fill="#e5e7eb" font-size="23" font-family="Segoe UI, sans-serif">食事・調理での補助</text>
+          <text x="145" y="274" fill="#94a3b8" font-size="16" font-family="Segoe UI, sans-serif">鉄を含む食品、ビタミンC、鉄鍋・鉄器は補助候補</text>
+
+          <rect x="492" y="208" width="290" height="96" rx="22" fill="#101827" stroke="#243244"/>
+          <text x="517" y="245" fill="#e5e7eb" font-size="23" font-family="Segoe UI, sans-serif">検査と切り分け</text>
+          <text x="517" y="274" fill="#94a3b8" font-size="16" font-family="Segoe UI, sans-serif">フェリチン、貧血、睡眠、他の要因も見る</text>
+
+          <path d="M410 256 C435 256, 458 256, 492 256" fill="none" stroke="#94a3b8" stroke-width="3" stroke-dasharray="8 8"/>
+          <polygon points="486,248 506,256 486,264" fill="#94a3b8"/>
+        </svg>
+      </div>
+      <p class="muted">
+        ポイントは、<span class="accent">「ＡＤＨＤだから必ず鉄不足」ではなく、症状が重なって見えやすい</span> こと。
+        そのため、関連がありそうでも診断や補充の判断は切り分けが要る。
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>クリップのどこが妥当か</h2>
+      <ul>
+        <li>フェリチン低値とＡＤＨＤの関連は、複数のレビューやメタ解析で繰り返し検討されている。</li>
+        <li>小児中心ではあるが、鉄欠乏が注意・疲労・睡眠と絡みうるという方向性は筋が通っている。</li>
+        <li>鉄製調理器具が食品中の鉄量を増やしうること自体は、介入研究やレビューで示されている。</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>そのまま信じすぎない方がいい点</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>成人データは限定的</h3>
+          <p class="muted">この分野は小児研究が多い。成人ＡＤＨＤで「研究で分かってる」と強く言い切るのは少し盛っている。</p>
+        </div>
+        <div class="card">
+          <h3>フェリチンと血清鉄は別</h3>
+          <p class="muted">関連が比較的一貫しているのはフェリチン。血清鉄そのものは一貫しない報告もある。</p>
+        </div>
+        <div class="card">
+          <h3>鉄フライパンは補助手段</h3>
+          <p class="muted">酸性食品や調理条件で差が出る。十分な補充になる場合もあれば、ほぼ差が出ない場合もある。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>実務的な読み替え</h2>
+      <div class="grid">
+        <div class="card">
+          <div class="tagline">1</div>
+          <h3>「ＡＤＨＤ症状だけ」の話にしない</h3>
+          <p class="muted">疲労感、集中困難、睡眠不良、月経、食生活なども一緒に見る。</p>
+        </div>
+        <div class="card">
+          <div class="tagline">2</div>
+          <h3>鉄は足りなければ重要</h3>
+          <p class="muted">不足がある人には意味が大きいが、十分な人に増やせばよいとは限らない。</p>
+        </div>
+        <div class="card">
+          <div class="tagline">3</div>
+          <h3>生活面の補助は現実的</h3>
+          <p class="muted">鉄を含む食事、吸収を助ける工夫、継続しやすい宅食は実践しやすい。</p>
+        </div>
+      </div>
+      <p class="muted">
+        つまりこのクリップは、<span class="strong">「ＡＤＨＤっぽい不調の背景に鉄不足が混ざることがある」</span> と読むのがちょうどいい。
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>参考と関連リンク</h2>
+      <div class="linklist">
+        <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0169145">Iron Status in Attention-Deficit/Hyperactivity Disorder: A Systematic Review and Meta-Analysis
+          <small>フェリチン低値との関連をまとめたメタ解析</small>
+        </a>
+        <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8266402/">Effect of cooking food in iron-containing cookware on increase in blood hemoglobin level and iron content of the food
+          <small>鉄鍋・鉄器と鉄摂取に関するレビュー</small>
+        </a>
+        <a href="https://pubmed.ncbi.nlm.nih.gov/12859709/">Food prepared in iron cooking pots as an intervention for reducing iron deficiency anaemia
+          <small>鉄鍋介入の古典的レビュー</small>
+        </a>
+        <a href="https://sippofactory.github.io/#/webshared/%EF%BC%92%EF%BC%90%EF%BC%92%EF%BC%96%EF%BC%90%EF%BC%96%EF%BC%91%EF%BC%99_%E3%82%AF%E3%83%AC%E3%82%A2%E3%83%81%E3%83%B3%E3%83%AD%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%81%AE%E6%AD%A3%E3%81%97%E3%81%84%E6%91%82%E5%8F%96%E6%B3%95.html">関連公開ページ: クレアチンローディングの正しい摂取法
+          <small>ＡＤＨＤ周辺の補助栄養という観点で近い話題</small>
+        </a>
+      </div>
+      <p class="footer">
+        関連ノート: [[ADHD]] / [[鉄分不足]] / [[栄養と精神疾患]]
+      </p>
+    </section>
+  </main>
+</body>
+</html>
