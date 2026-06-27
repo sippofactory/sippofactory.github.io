@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>ML・AI 入門 — 板を見て「上がる?下がる?」を当てる(中学生向け)</title>
+<style>
+  :root{--bg:#0e1116;--bg2:#161b22;--panel:#1f2730;--text:#e6edf3;--muted:#9aa4af;--accent:#ff9800;--accent2:#ffd54f;--up:#ff6b6b;--down:#5a9bff;--good:#00d27a;--bad:#ff5252;--border:#30363d;}
+  *{box-sizing:border-box;}
+  body{margin:0 auto;padding:30px;background:var(--bg);color:var(--text);font-family:"Yu Gothic UI","Hiragino Sans",system-ui,sans-serif;line-height:1.9;max-width:980px;font-size:16px;}
+  h1{font-size:1.9em;border-bottom:3px solid var(--accent);padding-bottom:10px;margin-top:0;}
+  h2{font-size:1.4em;background:var(--panel);border-left:6px solid var(--accent);padding:8px 14px;margin-top:46px;border-radius:0 6px 6px 0;}
+  h3{font-size:1.12em;color:var(--accent2);margin-top:26px;}
+  .meta{color:var(--muted);margin-bottom:24px;}
+  .panel{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin:16px 0;}
+  .fig{background:#0b0e13;border:1px solid var(--border);border-radius:10px;padding:14px;margin:18px 0;text-align:center;}
+  .fig svg{max-width:100%;height:auto;}
+  .cap{color:var(--muted);font-size:0.9em;margin-top:8px;}
+  .tato{background:#10261c;border-left:5px solid var(--good);padding:10px 14px;border-radius:6px;margin:14px 0;}
+  .tato b{color:var(--good);}
+  .warn{background:#2a0e0e;border-left:5px solid var(--bad);padding:10px 14px;border-radius:6px;margin:14px 0;}
+  .key{background:#2d1f12;border-left:5px solid var(--accent);padding:10px 14px;border-radius:6px;margin:14px 0;}
+  table{border-collapse:collapse;width:100%;margin:12px 0;background:var(--bg2);}
+  th,td{border:1px solid var(--border);padding:8px 12px;text-align:left;}
+  th{background:var(--panel);}
+  code{background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:1px 6px;font-family:Consolas,monospace;}
+  .big{font-size:1.15em;font-weight:700;color:var(--accent2);}
+  .toc{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:14px 22px;}
+  .toc a{color:#7fc1ff;text-decoration:none;} .toc a:hover{text-decoration:underline;}
+  .up{color:var(--up);font-weight:700;} .down{color:var(--down);font-weight:700;}
+</style>
+</head>
+<body>
+<h1>板を見て「上がる? 下がる?」を当てる ― ML・AI 超入門</h1>
+<div class="meta">2026-06-27 / 中学生にも分かるように、たとえ話と図でゼロから。miura(板を見る作戦)の"頭脳"を AI で作るための教科書。</div>
+
+<div class="toc"><strong>もくじ</strong>
+<ol>
+<li><a href="#s1">何をやりたいの?</a></li>
+<li><a href="#s2">機械学習(ML)ってなに?</a></li>
+<li><a href="#s3">大事な3つの言葉</a></li>
+<li><a href="#s4">一番かんたんなAI(S字カーブ)</a></li>
+<li><a href="#s5">やってみた → 当たらなかった(超大事)</a></li>
+<li><a href="#s6">"丸暗記"のワナ = 過学習</a></li>
+<li><a href="#s7">分足と板(ミリ秒)はぜんぜん違う</a></li>
+<li><a href="#s8">AIの階段</a></li>
+<li><a href="#s9">ディープラーニング(DL)ってなに?</a></li>
+<li><a href="#s10">これからの進み方</a></li>
+<li><a href="#s11">チャートの「ML予測」の見方</a></li>
+</ol>
+</div>
+
+<h2 id="s1">1. 何をやりたいの?</h2>
+<div class="panel">
+<p>天気予報に似ています。空(=雲や風)を見て「雨が降るかな?」を当てるように、<br>
+<b>「板(いた)」と値段の動きを見て、これから数十秒〜数分で <span class="up">上がる↑</span> か <span class="down">下がる↓</span> かを当てたい。</b></p>
+<p>「板」とは、買いたい人・売りたい人の注文がずらっと並んだ一覧表のことです。</p>
+<div class="fig">
+<svg viewBox="0 0 760 150" xmlns="http://www.w3.org/2000/svg" font-family="Yu Gothic UI" font-size="15">
+  <rect x="20" y="35" width="170" height="80" rx="8" fill="#161b22" stroke="#4ea3ff"/>
+  <text x="105" y="25" fill="#9aa4af" text-anchor="middle">板＋値動き</text>
+  <text x="105" y="70" fill="#e6edf3" text-anchor="middle">注文の並び</text>
+  <text x="105" y="95" fill="#e6edf3" text-anchor="middle">ローソク</text>
+  <line x1="195" y1="75" x2="285" y2="75" stroke="#ffd54f" stroke-width="2.5" marker-end="url(#a)"/>
+  <rect x="290" y="35" width="180" height="80" rx="8" fill="#1f2730" stroke="#ff9800" stroke-width="2"/>
+  <text x="380" y="25" fill="#9aa4af" text-anchor="middle">AI(頭脳)</text>
+  <text x="380" y="82" fill="#ffd54f" text-anchor="middle" font-size="22">🧠 学んで判断</text>
+  <line x1="475" y1="75" x2="565" y2="75" stroke="#ffd54f" stroke-width="2.5" marker-end="url(#a)"/>
+  <rect x="570" y="35" width="170" height="80" rx="8" fill="#161b22" stroke="#30363d"/>
+  <text x="655" y="25" fill="#9aa4af" text-anchor="middle">予測</text>
+  <text x="655" y="72" text-anchor="middle"><tspan fill="#ff6b6b" font-size="22">↑70%</tspan></text>
+  <text x="655" y="98" text-anchor="middle"><tspan fill="#5a9bff" font-size="16">↓30%</tspan></text>
+  <defs><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#ffd54f"/></marker></defs>
+</svg>
+<div class="cap">板と値動きを入れたら、AIが「上がる確率」を出してくれる ― これが目標。</div>
+</div>
+</div>
+
+<h2 id="s2">2. 機械学習(ML)ってなに?</h2>
+<div class="panel">
+<p><b>たくさんの例から、コンピュータが自分でルールを見つけること</b>です。</p>
+<div class="tato"><b>たとえ:</b> ネコの写真を1万枚見せると、子どもは「耳がとがってる・ひげがある…」と自分でネコの見分け方を覚えますよね。教えてないのに。MLも同じで、<b>過去のデータを大量に見て「上がる前の形」を自分で覚えます。</b></div>
+<div class="fig">
+<svg viewBox="0 0 760 130" xmlns="http://www.w3.org/2000/svg" font-family="Yu Gothic UI" font-size="14">
+  <rect x="20" y="30" width="200" height="70" rx="8" fill="#161b22" stroke="#30363d"/>
+  <text x="120" y="20" fill="#9aa4af" text-anchor="middle">① 過去の例(大量)</text>
+  <text x="120" y="60" fill="#e6edf3" text-anchor="middle">板の形 → 実際どうなった</text>
+  <text x="120" y="84" fill="#9aa4af" text-anchor="middle">を何千・何万回</text>
+  <line x1="225" y1="65" x2="300" y2="65" stroke="#ffd54f" stroke-width="2.5" marker-end="url(#b)"/>
+  <rect x="305" y="30" width="150" height="70" rx="8" fill="#1f2730" stroke="#ff9800" stroke-width="2"/>
+  <text x="380" y="20" fill="#9aa4af" text-anchor="middle">② 学習</text>
+  <text x="380" y="72" fill="#ffd54f" text-anchor="middle">ルールを自動調整</text>
+  <line x1="460" y1="65" x2="535" y2="65" stroke="#ffd54f" stroke-width="2.5" marker-end="url(#b)"/>
+  <rect x="540" y="30" width="200" height="70" rx="8" fill="#161b22" stroke="#00d27a"/>
+  <text x="640" y="20" fill="#9aa4af" text-anchor="middle">③ 本番</text>
+  <text x="640" y="72" fill="#00d27a" text-anchor="middle">新しい板 → 予測</text>
+  <defs><marker id="b" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#ffd54f"/></marker></defs>
+</svg>
+</div>
+<p>「AI」は大きな言葉で、その中の代表的な方法が「機械学習(ML)」、さらにその一種が「ディープラーニング(DL)」です。</p>
+</div>
+
+<h2 id="s3">3. 大事な3つの言葉</h2>
+<div class="panel">
+<table>
+<tr><th>言葉</th><th>かんたんに言うと</th><th>例(たとえ)</th></tr>
+<tr><td class="big">特徴量<br>(とくちょうりょう)</td><td>判断の<b>ヒント</b>になる数字</td><td>テスト前の「勉強時間」「睡眠時間」</td></tr>
+<tr><td class="big">ラベル</td><td>当てたい<b>正解</b></td><td>テストに「受かった/落ちた」</td></tr>
+<tr><td class="big">学習と検証</td><td>過去で<b>練習</b>し、別の期間で<b>本番テスト</b></td><td>過去問で勉強→新しい問題で実力チェック</td></tr>
+</table>
+<div class="key"><b>今回の中身:</b> 特徴量=「最近の値動き」、ラベル=「次に上がったか」。過去の値動き(特徴量)と、その後どうなったか(ラベル)をAIに見せて学習させました。</div>
+</div>
+
+<h2 id="s4">4. 一番かんたんなAI ― S字カーブ</h2>
+<div class="panel">
+<p>一番やさしいAIは <b>「ヒントを足し算して、S字カーブで 0〜100% に変える」</b>だけです(名前は<i>ロジスティック回帰</i>)。</p>
+<div class="fig">
+<svg viewBox="0 0 720 230" xmlns="http://www.w3.org/2000/svg" font-family="Yu Gothic UI" font-size="14">
+  <!-- left: weighted sum -->
+  <text x="120" y="30" fill="#9aa4af" text-anchor="middle">ヒントを重み付きで足す</text>
+  <text x="40" y="70" fill="#e6edf3">ヒント1 ×重み</text>
+  <text x="40" y="100" fill="#e6edf3">ヒント2 ×重み</text>
+  <text x="40" y="130" fill="#e6edf3">ヒント3 ×重み</text>
+  <text x="120" y="165" fill="#ffd54f" text-anchor="middle" font-size="18">合計 = 点数 z</text>
+  <line x1="235" y1="120" x2="300" y2="120" stroke="#ffd54f" stroke-width="2.5" marker-end="url(#c)"/>
+  <!-- right: sigmoid curve -->
+  <g transform="translate(330,30)">
+    <line x1="20" y1="160" x2="360" y2="160" stroke="#8b949e"/>
+    <line x1="190" y1="10" x2="190" y2="170" stroke="#8b949e" stroke-dasharray="3,3"/>
+    <text x="190" y="185" fill="#9aa4af" text-anchor="middle" font-size="12">点数 z (0)</text>
+    <text x="0" y="20" fill="#ff6b6b" font-size="12">100%(上)</text>
+    <text x="0" y="158" fill="#5a9bff" font-size="12">0%(下)</text>
+    <path d="M20,158 C120,158 150,150 190,90 C230,30 260,22 360,22" fill="none" stroke="#ffd54f" stroke-width="3"/>
+    <text x="250" y="120" fill="#ffd54f" font-size="13">S字カーブ</text>
+  </g>
+  <defs><marker id="c" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#ffd54f"/></marker></defs>
+</svg>
+<div class="cap">ヒントを足して「点数」を作り、S字カーブで「上がる確率(0〜100%)」に変換する。</div>
+</div>
+<div class="tato"><b>たとえ:</b> 「勉強時間×2 + 睡眠×1 ＝ 合格しやすさの点数」。点数が高いほど合格確率100%に近づく。点数を確率に直すのがS字カーブ。<b>学習とは、この"重み(×いくつ)"を、よく当たるように少しずつ調整すること。</b></div>
+</div>
+
+<h2 id="s5">5. やってみた → 当たらなかった ★超大事</h2>
+<div class="panel">
+<p>実際に「最近の値動き」だけで「次に上がるか」をこのAIに学習させました。結果:</p>
+<div class="fig">
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Yu Gothic UI" font-size="14">
+  <line x1="60" y1="160" x2="600" y2="160" stroke="#8b949e"/>
+  <!-- bar 1: model -->
+  <rect x="120" y="72" width="120" height="88" fill="#4ea3ff"/>
+  <text x="180" y="60" fill="#e6edf3" text-anchor="middle">AIの正解率</text>
+  <text x="180" y="120" fill="#fff" text-anchor="middle" font-size="18">55.4%</text>
+  <!-- bar 2: baseline -->
+  <rect x="380" y="72" width="120" height="88" fill="#8b949e"/>
+  <text x="440" y="60" fill="#e6edf3" text-anchor="middle">じゃんけんグー出し続け</text>
+  <text x="440" y="120" fill="#fff" text-anchor="middle" font-size="18">55.4%</text>
+  <text x="320" y="185" fill="#ff6b6b" text-anchor="middle" font-size="15">→ 同じ! = AIは何も賢くなっていない</text>
+</svg>
+<div class="cap">正解率55%でも、「ずっと多数派に賭ける」のと同じ。＝当てられていない。</div>
+</div>
+<div class="warn"><b>レッスン1:</b> <span class="big">55%という数字にだまされるな。</span> かならず「何も考えない予測(ベースライン)」と<b>くらべる</b>。同じなら価値ゼロ。</div>
+<div class="warn"><b>レッスン2:</b> <b>値動きだけでは、次の方向は当たらない</b>(相場は手ごわい)。だから miura は<b>「板」</b>(注文の偏りなど、もっと細かい情報)を見る。値動きより手がかりが多い。</div>
+<div class="tato"><b>でもこれは良い失敗:</b> 高価なディープラーニングに飛びつく前に、安いAIで「そもそも当てられる手がかりが在るか」を先に確かめられた。無いならどんな高級AIでもムリ(AIは"在る手がかりを引き出す"道具で、無を有にはしない)。</div>
+</div>
+
+<h2 id="s6">6. "丸暗記"のワナ = 過学習(かがくしゅう)</h2>
+<div class="panel">
+<div class="tato"><b>たとえ:</b> 過去問の<b>答えを丸暗記</b>したら、過去問は満点。でも本番の<b>新しい問題</b>は解けない。AIも同じで、練習データを丸暗記すると本番でズッコケる。これを<b>過学習</b>といい、<b>AIの一番の死因</b>です。</div>
+<div class="fig">
+<svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" font-family="Yu Gothic UI" font-size="13">
+  <!-- good: smooth -->
+  <text x="170" y="22" fill="#00d27a" text-anchor="middle">◎ 理解(なめらか)</text>
+  <g>
+   <circle cx="60" cy="120" r="4" fill="#9aa4af"/><circle cx="110" cy="100" r="4" fill="#9aa4af"/><circle cx="160" cy="110" r="4" fill="#9aa4af"/><circle cx="210" cy="80" r="4" fill="#9aa4af"/><circle cx="260" cy="90" r="4" fill="#9aa4af"/>
+   <path d="M55,125 C120,105 180,95 270,80" fill="none" stroke="#00d27a" stroke-width="3"/>
+  </g>
+  <text x="170" y="165" fill="#9aa4af" text-anchor="middle">本番でも当たる</text>
+  <line x1="350" y1="30" x2="350" y2="175" stroke="#30363d"/>
+  <!-- bad: overfit wiggly -->
+  <text x="530" y="22" fill="#ff5252" text-anchor="middle">✗ 丸暗記(ガタガタ)</text>
+  <g>
+   <circle cx="420" cy="120" r="4" fill="#9aa4af"/><circle cx="470" cy="100" r="4" fill="#9aa4af"/><circle cx="520" cy="110" r="4" fill="#9aa4af"/><circle cx="570" cy="80" r="4" fill="#9aa4af"/><circle cx="620" cy="90" r="4" fill="#9aa4af"/>
+   <path d="M420,120 L470,100 L520,110 L570,80 L620,90" fill="none" stroke="#ff5252" stroke-width="3"/>
+  </g>
+  <text x="530" y="165" fill="#9aa4af" text-anchor="middle">点は完璧→本番で外す</text>
+</svg>
+<div class="cap">点(練習データ)に合わせすぎるとガタガタに。なめらかな線の方が、新しい点(本番)に強い。</div>
+</div>
+<div class="key">だから<b>練習(学習)とは別の期間でテスト(検証)</b>する。練習の点が良くても、検証が悪ければダメ。</div>
+</div>
+
+<h2 id="s7">7. 分足(ふんあし)と板(ミリ秒)はぜんぜん違う</h2>
+<div class="panel">
+<p>今回の練習は<b>1分ごと</b>の値段(分足)を使いました。でも<b>miura が本当に見たいのは「板」をミリ秒(1秒の1000分の1)単位</b>で見ること。情報の細かさが桁ちがいです。</p>
+<div class="fig">
+<svg viewBox="0 0 720 170" xmlns="http://www.w3.org/2000/svg" font-family="Yu Gothic UI" font-size="13">
+  <text x="160" y="28" fill="#9aa4af" text-anchor="middle">分足 = 1分に1コマ(粗い)</text>
+  <line x1="30" y1="60" x2="320" y2="60" stroke="#8b949e"/>
+  <g fill="#5a9bff"><circle cx="60" cy="60" r="5"/><circle cx="150" cy="60" r="5"/><circle cx="240" cy="60" r="5"/><circle cx="310" cy="60" r="5"/></g>
+  <text x="160" y="92" fill="#9aa4af" text-anchor="middle" font-size="11">パラパラ漫画が4枚</text>
+
+  <text x="540" y="28" fill="#9aa4af" text-anchor="middle">板ms = 1秒に何コマも(細かい)</text>
+  <line x1="400" y1="60" x2="700" y2="60" stroke="#8b949e"/>
+  <g fill="#ff6b6b"><circle cx="410" cy="60" r="4"/><circle cx="425" cy="60" r="4"/><circle cx="440" cy="60" r="4"/><circle cx="455" cy="60" r="4"/><circle cx="470" cy="60" r="4"/><circle cx="485" cy="60" r="4"/><circle cx="500" cy="60" r="4"/><circle cx="515" cy="60" r="4"/><circle cx="530" cy="60" r="4"/><circle cx="545" cy="60" r="4"/><circle cx="560" cy="60" r="4"/><circle cx="575" cy="60" r="4"/><circle cx="590" cy="60" r="4"/><circle cx="605" cy="60" r="4"/><circle cx="620" cy="60" r="4"/><circle cx="635" cy="60" r="4"/><circle cx="650" cy="60" r="4"/><circle cx="665" cy="60" r="4"/><circle cx="685" cy="60" r="4"/></g>
+  <text x="540" y="92" fill="#9aa4af" text-anchor="middle" font-size="11">なめらかな動画 + 注文の中身も見える</text>
+  <text x="360" y="135" fill="#ffd54f" text-anchor="middle">細かいほど「上がる直前の気配」が見えるかも → ここが miura のねらい</text>
+</svg>
+</div>
+<div class="key"><b>同じAIの手順で、入れるデータを「分足」→「板ms」に変えるのが本番。</b> その細かい板データを今ためているところ(GMOサブ秒板・収集中)。</div>
+</div>
+
+<h2 id="s8">8. AIの階段</h2>
+<div class="panel">
+<div class="fig">
+<svg viewBox="0 0 720 230" xmlns="http://www.w3.org/2000/svg" font-family="Yu Gothic UI" font-size="13">
+  <g>
+   <rect x="40" y="170" width="150" height="40" fill="#1f2730" stroke="#30363d"/><text x="115" y="195" fill="#e6edf3" text-anchor="middle">① S字カーブ(今回)</text>
+   <rect x="190" y="130" width="150" height="40" fill="#1f2730" stroke="#30363d"/><text x="265" y="155" fill="#e6edf3" text-anchor="middle">② 決定木の集合</text>
+   <rect x="340" y="90" width="150" height="40" fill="#1f2730" stroke="#30363d"/><text x="415" y="115" fill="#e6edf3" text-anchor="middle">③ ニューラルネット</text>
+   <rect x="490" y="50" width="190" height="40" fill="#2d1f12" stroke="#ff9800" stroke-width="2"/><text x="585" y="75" fill="#ffd54f" text-anchor="middle">④ ディープラーニング</text>
+  </g>
+  <text x="360" y="225" fill="#9aa4af" text-anchor="middle">右ほど賢いが、必要なデータ・手間・過学習リスクも増える</text>
+</svg>
+</div>
+<p>下から順に登ります。<b>②決定木の集合(勾配ブースティング)</b>は、表のようなデータではとても強く、「板に手がかりが在るか?」の最初の本格チェックに向いています。<b>いきなり④はムリ</b>(データも手間も大量)。</p>
+</div>
+
+<h2 id="s9">9. ディープラーニング(DL)ってなに?</h2>
+<div class="panel">
+<p><b>網(あみ)を何枚も重ねたAI</b>です。人がヒントを作らなくても、<b>生のデータから大事なヒントを自分で見つける</b>のが強み。</p>
+<div class="fig">
+<svg viewBox="0 0 720 210" xmlns="http://www.w3.org/2000/svg" font-family="Yu Gothic UI" font-size="13">
+  <!-- board frames stack -->
+  <g>
+   <rect x="30" y="60" width="90" height="90" fill="#161b22" stroke="#5a9bff"/>
+   <rect x="42" y="48" width="90" height="90" fill="#161b22" stroke="#5a9bff"/>
+   <rect x="54" y="36" width="90" height="90" fill="#161b22" stroke="#5a9bff"/>
+   <text x="99" y="170" fill="#9aa4af" text-anchor="middle">板の動画</text>
+  </g>
+  <line x1="150" y1="80" x2="195" y2="80" stroke="#ffd54f" stroke-width="2" marker-end="url(#d)"/>
+  <!-- layers -->
+  <g fill="#ff9800">
+   <circle cx="230" cy="50" r="7"/><circle cx="230" cy="85" r="7"/><circle cx="230" cy="120" r="7"/>
+   <circle cx="320" cy="60" r="7"/><circle cx="320" cy="95" r="7"/><circle cx="320" cy="130" r="7"/>
+   <circle cx="410" cy="85" r="7"/><circle cx="410" cy="120" r="7"/>
+  </g>
+  <g stroke="#3a4350">
+   <line x1="237" y1="50" x2="313" y2="60"/><line x1="237" y1="85" x2="313" y2="95"/><line x1="237" y1="120" x2="313" y2="130"/>
+   <line x1="237" y1="50" x2="313" y2="95"/><line x1="237" y1="85" x2="313" y2="130"/>
+   <line x1="327" y1="60" x2="403" y2="85"/><line x1="327" y1="95" x2="403" y2="120"/><line x1="327" y1="130" x2="403" y2="85"/>
+  </g>
+  <text x="320" y="170" fill="#9aa4af" text-anchor="middle">何層もの網(=深い)</text>
+  <line x1="425" y1="100" x2="470" y2="100" stroke="#ffd54f" stroke-width="2" marker-end="url(#d)"/>
+  <rect x="475" y="70" width="160" height="60" rx="8" fill="#161b22" stroke="#00d27a"/>
+  <text x="555" y="95" fill="#ff6b6b" text-anchor="middle" font-size="16">↑65%</text>
+  <text x="555" y="118" fill="#5a9bff" text-anchor="middle">↓35%</text>
+  <defs><marker id="d" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#ffd54f"/></marker></defs>
+</svg>
+<div class="cap">板の「動画」を深い網に通して、上がる確率を出す(DeepLOB という有名な研究がこの形)。</div>
+</div>
+<div class="warn"><b>正直な難しさ:</b> ①データが超大量に要る ②過学習しやすい ③作るのが大変。<b>大きくて長い挑戦</b>。だから階段を一段ずつ。</div>
+</div>
+
+<h2 id="s10">10. これからの進み方</h2>
+<div class="panel">
+<table>
+<tr><th>段</th><th>やること</th><th>状態</th></tr>
+<tr><td>1</td><td>チャートにAI予測を出して、仕組みを体で覚える(値動きのS字カーブ・当たらないけど練習)</td><td>✅ 今ここ</td></tr>
+<tr><td>2</td><td>板データ(ミリ秒)を数日ためる</td><td>収集中</td></tr>
+<tr><td>3</td><td>板のヒントで「②決定木」を使い、<b>そもそも当てられるか</b>を安く確かめる(ベースライン比較)</td><td>これから</td></tr>
+<tr><td>4</td><td>当てられそうなら④DLへ。ダメならきれいに撤退</td><td>未定</td></tr>
+</table>
+</div>
+
+<h2 id="s11">11. チャートの「ML予測」の見方</h2>
+<div class="panel">
+<p>チャート上の「ML」ボタンをONにすると、一番下に「上がる確率」が色おびで出ます。</p>
+<table>
+<tr><td><span class="up">■ 赤</span></td><td>上がる確率が高い</td></tr>
+<tr><td><span class="down">■ 青</span></td><td>下がる確率が高い</td></tr>
+<tr><td><span style="color:#9aa4af">■ 灰</span></td><td>五分五分(自信なし)</td></tr>
+</table>
+<div class="warn"><b>大事:</b> いまの版(v1)は<b>値動きだけ</b>＝§5のとおり当たりません。色はほぼ<b>灰色</b>になります。これは<b>「仕組みを見るための練習表示」</b>で、<b>これで売買はしません。</b> 段3で板のヒントを足して初めて意味が出ます。</div>
+</div>
+
+<hr style="border:none;border-top:1px solid var(--border);margin:30px 0;">
+<div class="meta">関連: <a href="メイカーとテイカー.html">メイカーとテイカー.html</a> / <a href="トレンドとフェード.html">トレンドとフェード.html</a> / 板はサブ秒の世界(GMOサブ秒板 収集中)</div>
+</body>
+</html>
