@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ネットでお小遣い稼ぎ 1000選 — テストページ</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0b0f14;
+    --panel: #111827;
+    --text: #e5e7eb;
+    --muted: #94a3b8;
+    --accent: #60a5fa;
+    --accent2: #34d399;
+    --line: #243244;
+  }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    line-height: 1.8;
+    padding: 40px 20px 80px;
+  }
+  main { max-width: 960px; margin: 0 auto; }
+
+  .hero {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    padding: 40px 32px;
+    margin-bottom: 32px;
+  }
+  .hero .pill {
+    display: inline-block;
+    font-size: 12px;
+    color: var(--accent2);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 4px 12px;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-size: 30px;
+    color: #dbeafe;
+    line-height: 1.4;
+    margin-bottom: 12px;
+  }
+  .hero p { color: var(--muted); font-size: 15px; }
+  .hero .meta {
+    margin-top: 18px;
+    font-size: 13px;
+    color: var(--muted);
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .hero .meta b { color: var(--accent); font-weight: 600; }
+
+  section {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 28px;
+    margin-bottom: 24px;
+  }
+  section h2 {
+    font-size: 20px;
+    color: #bfdbfe;
+    margin-bottom: 16px;
+    border-left: 4px solid var(--accent);
+    padding-left: 12px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 14px;
+  }
+  .card {
+    background: #0d1420;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 16px;
+  }
+  .card .tag {
+    font-size: 12px;
+    color: var(--accent2);
+    font-weight: 600;
+  }
+  .card h3 { font-size: 15px; margin: 6px 0 4px; color: var(--text); }
+  .card p { font-size: 13px; color: var(--muted); }
+
+  ul.ideas { list-style: none; }
+  ul.ideas li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 14px;
+  }
+  ul.ideas li:last-child { border-bottom: none; }
+  ul.ideas li b { color: var(--accent); }
+  ul.ideas li span { color: var(--muted); font-size: 13px; }
+
+  code {
+    background: #1e293b;
+    color: #93c5fd;
+    padding: 2px 7px;
+    border-radius: 6px;
+    font-size: 13px;
+  }
+
+  .status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--accent2);
+  }
+  .status .dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--accent2);
+    box-shadow: 0 0 10px var(--accent2);
+  }
+
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 40px;
+  }
+  a { color: var(--accent); }
+</style>
+</head>
+<body>
+<main>
+
+  <div class="hero">
+    <span class="pill">TEST PAGE</span>
+    <h1>ネットでお小遣い稼ぎ 1000選</h1>
+    <p>アイデアフォルダ発の副業ブレインストーミング。まずは公開表示の動作確認用テストページです。</p>
+    <div class="meta">
+      <span>収録アイデア <b>1118件</b></span>
+      <span>分野 <b>8カテゴリ</b></span>
+      <span>公開パス <b>/money/</b></span>
+    </div>
+  </div>
+
+  <section>
+    <h2>表示テスト</h2>
+    <div class="status"><span class="dot"></span> このページが黒背景で表示されていれば、GitHub Pages 公開は正常です。</div>
+    <p style="margin-top:12px; color:var(--muted); font-size:14px;">
+      DESIGN.md 準拠（背景 <code>#0b0f14</code>・inline style・1ファイル完結）で作成しています。
+    </p>
+  </section>
+
+  <section>
+    <h2>8つの分野</h2>
+    <div class="grid">
+      <div class="card"><div class="tag">A</div><h3>スキル販売・在宅ワーク</h3><p>ライティング、翻訳、デザイン、事務代行など</p></div>
+      <div class="card"><div class="tag">B</div><h3>コンテンツ発信</h3><p>ブログ、YouTube、SNS、Kindle など</p></div>
+      <div class="card"><div class="tag">C</div><h3>デジタル素材販売</h3><p>写真、BGM、テンプレ、LINEスタンプ など</p></div>
+      <div class="card"><div class="tag">D</div><h3>物販・せどり</h3><p>メルカリ、輸入輸出、ハンドメイド など</p></div>
+      <div class="card"><div class="tag">E</div><h3>ポイ活・軽作業</h3><p>アンケート、モニター、自己アフィリ など</p></div>
+      <div class="card"><div class="tag">F</div><h3>AI・技術</h3><p>AI生成、bot開発、ノーコード、SaaS など</p></div>
+      <div class="card"><div class="tag">G</div><h3>投資・シェアリング</h3><p>株、暗号資産、レンタル、スペース貸し など</p></div>
+      <div class="card"><div class="tag">H</div><h3>コミュニティ・ゲーム</h3><p>サロン運営、配信、コーチング など</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>ピックアップ例</h2>
+    <ul class="ideas">
+      <li><b>マンガの英語翻訳</b> — <span>日本発ウェブ漫画をローカライズ</span></li>
+      <li><b>無音の作業用BGMライブチャンネル</b> — <span>24時間ローファイ配信</span></li>
+      <li><b>飲食店メニュー用の料理写真</b> — <span>シズル感重視の素材販売</span></li>
+      <li><b>絶版技術書のプレミアせどり</b> — <span>廃版の専門書を高値で</span></li>
+      <li><b>AI生成ペット肖像画販売</b> — <span>写真から油絵風に変換</span></li>
+      <li><b>高配当株の配当金狙い</b> — <span>利回りの高い銘柄を長期保有</span></li>
+    </ul>
+  </section>
+
+  <footer>
+    しっぽ工場 / money — テストページ ・ 2026-07-04
+  </footer>
+
+</main>
+</body>
+</html>
