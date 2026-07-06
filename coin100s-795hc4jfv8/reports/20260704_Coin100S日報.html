@@ -1,0 +1,44 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>Coin100S 取引日報 2026-07-04</title>
+<style>
+/* デザイン指針: C:\Sync\Obsidian\DESIGN.md(黒背景ベース・共通トークン・単独完結)§496で準拠化 */
+body{font-family:'Segoe UI','Yu Gothic UI',sans-serif;max-width:900px;margin:24px auto;padding:0 16px;background:#0b0f14;color:#e5e7eb;line-height:1.6}
+h1{color:#bfdbfe;border-bottom:3px solid #60a5fa;padding-bottom:6px}
+h2{color:#93c5fd;border-left:5px solid #60a5fa;padding-left:10px;margin-top:28px}
+table{border-collapse:collapse;width:100%;margin:8px 0;font-size:14px}
+th,td{border:1px solid #243244;padding:6px 8px;text-align:left}
+th{background:#1e293b;color:#bfdbfe}
+td{background:#111827}
+.cards{display:flex;gap:12px;flex-wrap:wrap;margin:12px 0}
+.card{flex:1;min-width:160px;background:#111827;border:1px solid #243244;border-radius:16px;padding:12px}
+.card .v{font-size:22px;font-weight:700;color:#60a5fa}
+.soukatsu{background:#111827;border:1px solid #60a5fa;border-radius:16px;padding:12px}
+pre{background:#111827;color:#e5e7eb;border:1px solid #243244;padding:12px;border-radius:16px;overflow:auto;font-size:13px}
+.meta{color:#94a3b8;font-size:13px}
+ul li{margin:2px 0}
+</style></head><body>
+<h1>Coin100S 取引日報 — 2026-07-04（取引日）</h1>
+<p class="meta">期間: 2026-07-04 06:00 〜 07-05 06:00（取引日境界=朝6:00） / 生成: 2026-07-05 06:06:14</p>
+<div class="cards">
+<div class="card">実取引<div class="v">新規1 / 決済2</div></div>
+<div class="card">実現損益<div class="v">+0円</div></div>
+<div class="card">BW600M仮想<div class="v">0決済 —</div></div>
+<div class="card">却下 / 警告<div class="v">0 / 2</div></div>
+</div>
+<h2>総括</h2><div class="soukatsu">実取引: 新規1件/決済2件、実現損益 +0円。⚠警告/エラー 2件（要確認）。</div>
+<h2>発注構成（実発注ON / ドライラン）</h2><ul><li>（[構成] ログなし＝§503以前の起動）</li></ul>
+<p class="meta">⚠ ドライラン＝判定のみで発注しないレッグ。実弾化はレッグ一覧の「発注」をON。</p>
+<h2>実取引明細</h2><table><tr><th>時刻</th><th>種別</th><th>内容</th></tr><tr><td>15:23:03</td><td>新規</td><td>●新規FAK BUY BTC_JPY 数量=0.001 指値=10060353</td></tr><tr><td>11:11:26</td><td>決済</td><td>●決済FAK建玉 BUY SOL_JPY pos=287880864 数量=0.7 指値=13272</td></tr><tr><td>22:21:04</td><td>決済</td><td>●決済FAK建玉 SELL BTC_JPY pos=287943287 数量=0.001 指値=10081708</td></tr></table>
+<h2>BW600M_REV 前進検証（仮想ログ）</h2><table><tr><th>時刻</th><th>内容</th></tr><tr><td colspan=2>仮想シグナルなし</td></tr></table>
+<h2>全レッグBT成績（直近7日・悲観・ライブ同一ゲート）</h2><table><tr><th>レッグ</th><th>取引</th><th>勝率</th><th>純pnl</th></tr><tr><td>SD120M_5M</td><td>8</td><td>75%</td><td>+518円</td></tr><tr><td>BW20M3a_5M</td><td>12</td><td>67%</td><td>-143円</td></tr><tr><td>BW10M3_5M</td><td>14</td><td>50%</td><td>-136円</td></tr><tr><td><b>合算</b></td><td>34</td><td>-</td><td><b>+240円</b></td></tr></table><p class='meta'>BT楽観に注意: 悲観フィル済みだがlive未実証の参考値。</p>
+<h2>シグナル却下（レッグ×理由）</h2><table><tr><th>件数</th><th>レッグ</th><th>理由</th></tr><tr><td colspan=3>却下なし</td></tr></table>
+<h2>⚠ 警告/孤児/エラー</h2><ul><li>22:21:07 {&quot;status&quot;:1,&quot;messages&quot;:[{&quot;message_code&quot;:&quot;ERR-254&quot;,&quot;message_string&quot;:&quot;Not found position.&quot;}],&quot;responsetime&quot;:&quot;2026-07-04T13</li><li>22:21:07 利確指値: ERR-254(建玉が既に消滅=決済済)→ 既決済とみなしカウント除外</li></ul>
+<h2>宿題（BACKLOG 未完了）</h2><ul><li>⏰ <b>[期日付きリマインド]</b> SD120M_5M 削除判定(期日=2026-07中旬 or 方向のみ構成でlive10取引) — 入場がBW20M3a/BW10M3と重なる(±300秒Jaccard高)なら削除・分散なら残置。補助=悲観回復0.36がBW系(1.26/1.62)に見劣り続きなら削除寄り。正本=[[sd120m5m-shrink-ki</li><li><b>[期日付きリマインド]</b> §494「方向のみ」構成の効果観測(数日〜) — 入場頻度が3本合算≈2.3件/日に近づくか・SD120M_5MのDD拡大に注意。✅07-02 12:52 却下ログが「トレンド方向ゲート(1440分傾き)」で出ることは確認済み。§509(07-02 23:29〜)で2窓化(転換720x1440)=転換期の入場が増えるは</li><li><b>[期日付きリマインド]</b> §470-479/§490/§497 のログ文言観察(取引発生の都度) — 残り=ブレーカー決済例外(§470)・取消限定(§471)・実現=表記(§490・実行系の次の決済)・実行系の勝率/約定タブレッグ列(§497・次の約定から)。✅確認済み(07-02): [建値補正]§477(10:51 BW10M3)・勝ちギ</li><li><b>[期日付きリマインド]</b> 【休止中・データ収集待ち 2026-07-05確定】レッグ仕掛けアイデア1000の消化(2026-07-04起票) — 正本=`docs/アイデア/レッグ仕掛け1000.md`(25系統×40個・トリアージ方針付き)。次手=①ユーザーの目利きで◎付け(user-hypotheses-first) ②即BT可能群(A/B</li><li><b>[期日付きリマインド]</b> 各レッグの小波バリエーションの再検討(2026-07-02 ユーザー指示) — §518で第一弾完了(B1差分/B2σスパイク×3レッグ・28/56日): 現行SD±2σが両期間合算首位(+2,453/+2,492円)・B1全滅・インクロスも棄却(§517)。唯一の生き残り=BW20M3aのみ子をB2σ30s/1.2σ</li><li><b>[判定待ち(ユーザー承認・売買パラメータ)]</b> BW600M_TRD 再編(§530・2026-07-04) — 3軸スイープでBTC/ETH真逆判明。推奨=①TRD_BTCをDRY化(実弾停止・全55構成両半期×) ②TRD_ETHをσ1.8/MaxEntryLv5へ再チューニング(現行σ1.5/Lv2-9 +2,958→σ1.8/Lv2-5 +10,867円・P</li><li><b>[観測中(能動アクション不要・条件成立で動く)]</b> RELVAL_SELL 観測(§548・2026-07-05開始): アルト相対過熱売りの前向きDRY検証。§551分解で選別アルファ=0が確定(残るはタイミング成分のみ・点推定+42bps/日・非有意)。観測は継続(無料)だが実弾化ハードルは大幅上昇。仮に実弾化するなら「シグナル日にバスケット売り」へ単純化すべき</li><li><b>[観測中(能動アクション不要・条件成立で動く)]</b> TENKI5D_REV 観測(§538-540・2026-07-04開始): 毎朝6:00にzスコア版お天気で判定・仮想取引をログ/レッグ行に記録。数日分貯まったら正本BT(+17.0bps/取引・勝率54%)との整合確認→実弾化判断(ユーザー専権)。実発注OFF・判定有効ON</li><li><b>[観測中(能動アクション不要・条件成立で動く)]</b> Coin100完全退役(§532): CoinDriveS単独の分足書き込みが24h健全なら CoinDrive/CoinLib削除→C:\Coin100掃除→CoinStart.vbsのCoinDrive起動部除去</li><li><b>[観測中(能動アクション不要・条件成立で動く)]</b> BW600M_TRD σ1.8/Lv5(§531)・ETH実弾/BTC DRY: 新設定での取引を観測(BT: ETH +10,867円/90日)</li><li><b>[観測中(能動アクション不要・条件成立で動く)]</b> σfade境界テスト(armed・初弾SOL売り07-03 19:55・残9/10) — 10発消化後に結果評価→レッグ化 or 撤退判定。出口は現行(反対スパイク)維持が§529で確定(手前利食いは全水準赤字)</li><li><b>[観測中(能動アクション不要・条件成立で動く)]</b> BW600M_REV育成(BTC/ETH独立§525・各投入1.2万円から・勝ちで仕掛+1) — live実績が貯まったら増額を再検討(§455共有プール方式への復帰はBT再検証+ユーザー判断)</li><li><b>[観測中(能動アクション不要・条件成立で動く)]</b> BW10M3_5M 増額後の観測(2026-07-02 16時台〜 投入11,000→22,000円=0.001→0.002BTC・ユーザー実施) — 根拠=両期間で唯一黒字(7日+4.85円/取引 n=20・30日+2.68円/取引 n=25)。以後の成績比較は必ずbps/取引(サイズ混在で合計円比較は無効・ユーザー</li><li><b>[観測中(能動アクション不要・条件成立で動く)]</b> zigzag=中波検知器(研究アイデア・[[coin100s-leg-improvement-ideas]] §4) — 中波まわりの検証着手時に想起</li><li><b>[観測中(能動アクション不要・条件成立で動く)]</b> アイデア3本の研究(暇なとき・ユーザー指示 2026-07-02) — `docs/アイデア/` の 余力分散/機会損失回避/レッグ増強 を手隙時に着手。各資料末尾に優先順位記載済み。✅§3a余力不足却下は実測ゼロ+算術で現サイズでは起こり得ないと確認(07-03)。✅silent returnログは§512bで配備済</li></ul>
+<h2>現在の建玉スナップショット（生成時点）</h2><pre># 建玉スナップショット 2026-07-05 06:04:51
+flat=true
+建玉数=0
+取引余力=*** 資産総額=*** 評価損益=0円 本日損益=0円
+--- 建玉一覧(symbol side size @price 含損益 owner posId ts) ---
+(建玉なし=flat)</pre>
+<hr><p class="meta">自動生成: tools/daily_report.py（§458）。実弾はBW600M通貨別トグル＋Trade実発注が両ONの時のみ。</p>
+</body></html>
