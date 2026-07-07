@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>立花証券e支店 — 個人向け無料APIを持つ希少なネット証券</title>
+<style>
+  :root{
+    --bg:#0b0f14; --panel:#111827; --fg:#e5e7eb; --dim:#94a3b8;
+    --acc:#60a5fa; --acc2:#34d399; --line:#243244; --warn:#fbbf24;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--bg); color:var(--fg); font-family:"Segoe UI","Yu Gothic UI",sans-serif; line-height:1.8; padding:24px 16px;}
+  main{max-width:960px; margin:0 auto;}
+  .hero{background:var(--panel); border:1px solid var(--line); border-radius:24px; padding:28px 32px; margin-bottom:24px;}
+  .hero h1{color:#bfdbfe; font-size:1.6em; margin-bottom:8px;}
+  .hero p{color:var(--dim);}
+  .pill{display:inline-block; background:#1e293b; border:1px solid var(--line); border-radius:999px; padding:2px 14px; font-size:.8em; color:var(--acc); margin-right:8px;}
+  .pill.green{color:var(--acc2);}
+  section{background:var(--panel); border:1px solid var(--line); border-radius:20px; padding:24px 28px; margin-bottom:20px;}
+  h2{color:#93c5fd; font-size:1.25em; margin-bottom:12px; border-bottom:1px solid var(--line); padding-bottom:8px;}
+  h3{color:#a5b4fc; font-size:1.05em; margin:14px 0 6px;}
+  table{border-collapse:collapse; width:100%; margin:8px 0;}
+  th,td{border:1px solid var(--line); padding:8px 12px; text-align:left; vertical-align:top;}
+  th{background:#0f172a; color:var(--acc); white-space:nowrap;}
+  a{color:var(--acc); text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  code{background:#1e293b; color:#fbbf24; border-radius:6px; padding:1px 8px; font-size:.9em;}
+  .dim{color:var(--dim); font-size:.9em;}
+  .good{color:var(--acc2); font-weight:bold;}
+  .bad{color:#f87171; font-weight:bold;}
+  .warn{color:var(--warn);}
+  ul{padding-left:1.4em; margin:8px 0;}
+  li{margin:4px 0;}
+</style>
+</head>
+<body>
+<main>
+
+<div class="hero">
+  <span class="pill">証券会社</span><span class="pill green">個人向け無料API</span>
+  <h1>立花証券 e支店</h1>
+  <p>立花証券(東証上場の老舗証券)のネット取引専用支店。国内株の現物・信用に特化し、
+  <b style="color:#e5e7eb">個人が無料で使える公式の株API</b>を提供する、国内では希少な証券会社。
+  システムトレード・自動売買をやる個人にとって有力な選択肢。</p>
+  <p class="dim" style="margin-top:8px">公式: <a href="https://www.e-shiten.jp/">e-shiten.jp</a>(数値は2026-07-07時点の公式ページ確認値)</p>
+</div>
+
+<section>
+  <h2>メリット</h2>
+
+  <h3>① 無料の日本株API — 最大の特徴</h3>
+  <ul>
+    <li>個人向け<b class="good">無料</b>の公式API(<a href="https://www.e-shiten.jp/api/">e支店API</a>)。<b style="color:#e5e7eb">口座さえあれば追加条件なしで無料</b></li>
+    <li>できること: <b class="good">リアルタイム時価・板情報</b>(最大120銘柄)/<b class="good">プッシュ配信</b>(WebSocket対応)/<b class="good">日足20年分</b>/発注・約定照会・残高/銘柄マスタ</li>
+    <li>対象: 国内株の現物+信用(先物・オプション・米株は非対応)</li>
+    <li>板・歩み値をプログラムから合法かつ安定的に取れる=自作の売買システム/データ分析の土台になる</li>
+  </ul>
+
+  <h3>② 信用取引のコストが安い(公式数値)</h3>
+  <table>
+    <tr><th>項目</th><th>立花 e支店</th></tr>
+    <tr><td>信用 取引手数料</td><td><b class="good">0円</b>(約定代金・建玉残高によらず)</td></tr>
+    <tr><td>買方金利(制度/一般)</td><td>年 2.50%</td></tr>
+    <tr><td>貸株料(制度)</td><td>年 1.15%</td></tr>
+    <tr><td>信用管理費</td><td>無料</td></tr>
+  </table>
+  <p class="dim">現引・現渡は550円/件が別途かかる点だけ注意。</p>
+
+  <h3>③ 現物手数料も低廉</h3>
+  <table>
+    <tr><th colspan="2">個別手数料コース(1注文ごと)</th><th colspan="2">定額コース(1日合計)</th></tr>
+    <tr><td>〜10万円</td><td>77円</td><td>〜12万円</td><td><b class="good">無料</b></td></tr>
+    <tr><td>〜20万円</td><td>99円</td><td>〜20万円</td><td>176円</td></tr>
+    <tr><td>〜50万円</td><td>187円</td><td>〜100万円</td><td>506円</td></tr>
+    <tr><td>〜100万円</td><td>341円</td><td>〜500万円</td><td>1,518円</td></tr>
+    <tr><td>〜300万円</td><td>473円</td><td>〜1,000万円</td><td>2,783円</td></tr>
+  </table>
+  <p class="dim">出金手数料は会社負担(入金の振込手数料は自己負担)。NISA成長投資枠にも対応。</p>
+
+  <h3>④ 現物+信用に特化したシンプルさ</h3>
+  <ul>
+    <li>投信・FX・先物などを持たない=画面・API仕様がシンプルで自動化と相性が良い</li>
+    <li>コスト還元優先の設計思想。手厚いサポートより安さを取る人向け</li>
+  </ul>
+</section>
+
+<section>
+  <h2>デメリット・注意点</h2>
+  <ul>
+    <li><span class="bad">商品が国内株のみ</span> — 先物・オプション・米株・投信は不可(つみたてNISA枠も使えない)</li>
+    <li><span class="bad">制度信用は最長6ヶ月</span> — 長期保有には一般信用か現物で</li>
+    <li><span class="warn">ログインに電話番号認証が必須(2025-07〜)</span> — 完全自動運用を組む場合はAPI認証との関係を要確認</li>
+    <li><span class="warn">APIの癖</span> — JSONだが文字コードは <code>ShiftJIS</code>・独自の仮想URL方式。ドキュメントとサンプルは公式にあり</li>
+    <li>サポートは最小限(電話サポート薄・帳票発行1,650円/件)。強制決済・電話受注は約定代金×0.77%(最低5,500円)と高額</li>
+    <li class="dim">ネット記事の「信用金利1.6%」は古い情報。公式(2026-07時点)は買方2.50%</li>
+  </ul>
+</section>
+
+<section>
+  <h2>API 4インターフェース早見</h2>
+  <table>
+    <tr><th>I/F</th><th>役割</th><th>方式</th></tr>
+    <tr><td><code>REQUEST</code></td><td>発注・注文/約定照会・残高・入出金</td><td>HTTPS GET/POST</td></tr>
+    <tr><td><code>MASTER</code></td><td>銘柄マスタ・各種マスタ</td><td>HTTPS GET/POST</td></tr>
+    <tr><td><code>PRICE</code></td><td>時価・板(最大120銘柄/回)</td><td>HTTPS GET/POST</td></tr>
+    <tr><td><code>EVENT</code></td><td>プッシュ配信(時価/板/約定通知)</td><td>HTTP1.1 Chunk / WebSocket(RFC6455)</td></tr>
+  </table>
+  <p class="dim">認証=ID/PASS → セッションハンドル+仮想URL取得。最新バージョン v4r8(2025-09-27・POST対応)。</p>
+</section>
+
+<section>
+  <h2>参考リンク(公式)</h2>
+  <ul>
+    <li>トップ: <a href="https://www.e-shiten.jp/">https://www.e-shiten.jp/</a></li>
+    <li>APIサービス: <a href="https://www.e-shiten.jp/api/">https://www.e-shiten.jp/api/</a></li>
+    <li>API仕様: <a href="https://www.e-shiten.jp/e_api/mfds_json_api_menu.html">仕様メニュー</a> / <a href="https://www.e-shiten.jp/e_api/mfds_json_api_sample.html">サンプル</a></li>
+    <li>手数料: <a href="https://www.e-shiten.jp/TorihikiRule/cost/">手数料一覧</a> / <a href="https://www.e-shiten.jp/TorihikiRule/margin3/shinyo_13.html">信用取引の諸経費</a></li>
+    <li>口座開設の流れ: <a href="https://www.e-shiten.jp/Service/flow.html">Service/flow</a></li>
+  </ul>
+  <p class="dim">手数料・金利は改定され得るため、口座開設・利用時は公式で最新を確認してください。</p>
+</section>
+
+</main>
+</body>
+</html>
