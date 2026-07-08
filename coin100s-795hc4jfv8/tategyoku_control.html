@@ -1,0 +1,100 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>建玉コントロール手法(ポジション操作の体系)</title></head>
+<body style="font-family:'Segoe UI','Yu Gothic UI',sans-serif;max-width:960px;margin:16px auto;padding:0 12px;background:#0b0f14;color:#e5e7eb;line-height:1.7">
+<h1 style="color:#bfdbfe;border-bottom:3px solid #60a5fa;padding-bottom:6px;font-size:1.3em">建玉コントロール手法の体系(2026-07-09)</h1>
+<p style="color:#94a3b8;font-size:13px">入場シグナル・出口とは独立に「建玉の数量・構成を操作する」手法の悉皆。関連: <a href="ポジションサイジング.html" style="color:#60a5fa">ポジションサイジング</a>(初期サイズの決め方)/<a href="出場手法.html" style="color:#60a5fa">出場手法</a>(いつ閉じるか)。検証状態タグ: ◎=採用 ○=有力 ✗=棄却 未=未検証(出典=Coin100S docs/90)</p>
+
+<h2 style="color:#93c5fd;border-left:5px solid #60a5fa;padding-left:10px;font-size:1.1em">全体マップ(3層)</h2>
+<p><b>層1=1トレード内</b>(建玉を育てる/削る/裏返す)→ <b>層2=トレード間</b>(勝敗系列でサイズを変える)→ <b>層3=ポートフォリオ横断</b>(複数レッグ・複数銘柄の総量管理)。層が違えば独立に併用できる。</p>
+
+<h2 style="color:#93c5fd;border-left:5px solid #60a5fa;padding-left:10px;font-size:1.1em">層1: 1トレード内のコントロール</h2>
+<table style="border-collapse:collapse;width:100%;font-size:13px">
+<tr><th style="border:1px solid #243244;padding:6px 8px;background:#1e293b;color:#bfdbfe">手法</th><th style="border:1px solid #243244;padding:6px 8px;background:#1e293b;color:#bfdbfe">機構</th><th style="border:1px solid #243244;padding:6px 8px;background:#1e293b;color:#bfdbfe">性質と検証状態</th></tr>
+<tr><td style="border:1px solid #243244;padding:6px 8px;background:#111827"><b>順行ピラミッディング</b>(anti-martingale)</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">順行(含み益)が閾値に達するたび追加。閾値=TP距離×q(下の専用節で全面検証)</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827"><b style="color:#34d399">◎ §651b採用(BW600M_REVP)</b>: 負け建玉に追加が起きない=損失サイド/DD/最悪単発が完全不変で総益+112%。「勝ちに足す」の代表</td></tr>
+<tr><td style="border:1px solid #243244;padding:6px 8px;background:#111827"><b>ナンピン</b>(逆行建増し・averaging down)</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">逆行(含み損)で追加=平均建値を有利化</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827"><b style="color:#f87171">✗ §535棄却</b>: 浅い帯はレジーム依存の蜃気楼・深い帯はSLに轢かれる分が上回り純マイナス。最悪単発が約2倍化</td></tr>
+<tr><td style="border:1px solid #243244;padding:6px 8px;background:#111827"><b>時間分割スケールイン</b>(TWAP/等分割)</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">価格条件でなく時間で分割入場=インパクト削減</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">未(#847)。現サイズ(万円級)ではインパクト無視可=優先度低</td></tr>
+<tr><td style="border:1px solid #243244;padding:6px 8px;background:#111827"><b>スケールアウト</b>(分割利食い・partialTP)</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">目標の一部到達で建玉の一部を利食い</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827"><b style="color:#f87171">数理的限界(§607)</b>: 平均リターンは「TP付き」と「無し」の凸結合=単独最良に決して勝てない。価値は分散低減のみ</td></tr>
+<tr><td style="border:1px solid #243244;padding:6px 8px;background:#111827"><b>減玉</b>(部分手仕舞い・デリスク)</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">時間経過・イベント前・ボラ急変で一部を閉じる</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">未。スケールアウトの条件付き版=同じ凸結合の限界に注意(閉じる条件に情報が無ければ期待は下がるだけ)</td></tr>
+<tr><td style="border:1px solid #243244;padding:6px 8px;background:#111827"><b>ドテン</b>(途転・stop &amp; reverse)</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">建玉を閉じて同時に反対方向へ建てる</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827"><b style="color:#34d399">○ §648暫定合格(#1012 TOTEN)</b>: fade失敗の証明(波Cnt≥3再点火)→トレンド方向4h。原典=Coin90 途転_BigWave(2025-10実運用)</td></tr>
+<tr><td style="border:1px solid #243244;padding:6px 8px;background:#111827"><b>両建て</b>(ヘッジ・つなぎ売り)</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">反対建玉で敞口を一時ゼロ化(税・手数料・レバ費用の二重払い)</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">未(GMOレバは両建て可だが建玉費用二重)。実質は「閉じて再入場」の高コスト版=原則不採用。相対ペア(βヘッジ)は§646cで棄却</td></tr>
+<tr><td style="border:1px solid #243244;padding:6px 8px;background:#111827"><b>建値ストップ昇格</b>(free-ride化)</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">含み益到達後にSLを建値へ=「タダ乗り」化してから保有継続/追加</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">未(出場手法.html拡張メモ)。実質タイトTS化=タイトTS全滅法則と衝突見込み</td></tr>
+<tr><td style="border:1px solid #243244;padding:6px 8px;background:#111827"><b>ロール</b>(乗り換え)</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">建玉を別限月/別銘柄へ移す(先物・レバ費用回避)</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">対象外(GMOレバに限月なし)。レバ手数料4bps/日の長期保有は事実上のロール判断=保有日数上限が代替</td></tr>
+</table>
+
+<h2 style="color:#93c5fd;border-left:5px solid #60a5fa;padding-left:10px;font-size:1.1em">層2: トレード間のコントロール(勝敗系列)</h2>
+<table style="border-collapse:collapse;width:100%;font-size:13px">
+<tr><th style="border:1px solid #243244;padding:6px 8px;background:#1e293b;color:#bfdbfe">手法</th><th style="border:1px solid #243244;padding:6px 8px;background:#1e293b;color:#bfdbfe">機構</th><th style="border:1px solid #243244;padding:6px 8px;background:#1e293b;color:#bfdbfe">性質と検証状態</th></tr>
+<tr><td style="border:1px solid #243244;padding:6px 8px;background:#111827"><b>マーチンゲール</b></td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">負けるたび倍賭け=1勝で全回収</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827"><b style="color:#f87171">原理的に不採用</b>: 有限資金では破産確率1に収束する設計。エッジの無さをサイズで隠す装置</td></tr>
+<tr><td style="border:1px solid #243244;padding:6px 8px;background:#111827"><b>パーレー</b>(勝ち後増額・複利)</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">勝ちの利益を次の賭けに上乗せ</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">未(トレード間版anti-martingale)。#153の知見=直近勝敗に自己相関なし → 期待値は不変で分散だけ動く。固定フラクション複利で足りる</td></tr>
+<tr><td style="border:1px solid #243244;padding:6px 8px;background:#111827"><b>残機システム</b>(勝敗ギミック)</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">負けで当日残機-1・0で打ち止め/勝ちで翌日仕掛+1(上限)</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827"><b style="color:#34d399">◎ 実装済(§491)</b>: 期待値でなく「悪い日の出血制限」=保険として運用。連敗クールダウン(§369)も同族</td></tr>
+<tr><td style="border:1px solid #243244;padding:6px 8px;background:#111827"><b>資産曲線フィルタ</b>(equity curve trading)</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">自レッグの資産曲線がMA割れ等で減額/停止・回復で復帰</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">未。#153(PnL無記憶)より期待値改善は見込めず「保険として可」。レジーム変化の検知器としてなら意味が出る可能性</td></tr>
+<tr><td style="border:1px solid #243244;padding:6px 8px;background:#111827"><b>ボラ連動サイジング</b>(vol-target)</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">サイズ∝1/予測ボラ=リスク金額一定化</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827"><b style="color:#f87171">✗ fade系は§638棄却</b>: エッジ自体がボラ比例のためエッジごと均す。トレンドフォロー系でのみ検討価値</td></tr>
+<tr><td style="border:1px solid #243244;padding:6px 8px;background:#111827"><b>イベント条件付き増額</b>(合議増し玉)</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">僚レッグの同方向保有・イベント進行中だけサイズ×K</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827"><b style="color:#34d399">○ 配備済(§637・トグルOFF)</b>: σfade×REV同方向=×2で加重avg+10.5%・DD不変。TENKI買い×RELVAL保有(§639+168bps)も同族候補。#1007=REVイベント連動サイジング</td></tr>
+<tr><td style="border:1px solid #243244;padding:6px 8px;background:#111827"><b>負け学習フィルタ</b>(サイズ版)</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">負け取引の特徴帯でサイズ半減(除外でなく減額)</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">未(#1004の弱毒化版のさらにソフト版)。過剰適合の温床=月次BTレビュー経由のみ</td></tr>
+</table>
+
+<h2 style="color:#93c5fd;border-left:5px solid #60a5fa;padding-left:10px;font-size:1.1em">層3: ポートフォリオ横断のコントロール</h2>
+<table style="border-collapse:collapse;width:100%;font-size:13px">
+<tr><th style="border:1px solid #243244;padding:6px 8px;background:#1e293b;color:#bfdbfe">手法</th><th style="border:1px solid #243244;padding:6px 8px;background:#1e293b;color:#bfdbfe">機構</th><th style="border:1px solid #243244;padding:6px 8px;background:#1e293b;color:#bfdbfe">性質と検証状態</th></tr>
+<tr><td style="border:1px solid #243244;padding:6px 8px;background:#111827"><b>波単位の総エクスポージャ管理</b></td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">同一イベント(横断波)に同方向で張る枚数の上限=「銘柄分散」でなく「同時被弾数」で数える</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827"><b style="color:#fbbf24">○ §649で必要性実証・未実装</b>: BW600M_REVの最大DD9,217円=2銘柄同時被弾1イベント。増額判断の必須視点(memory=sl-design-from-dd-distribution)</td></tr>
+<tr><td style="border:1px solid #243244;padding:6px 8px;background:#111827"><b>余力ガード</b></td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">全レッグ建玉総額+新規≦余力×安全係数で新規を見送り</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827"><b style="color:#34d399">◎ 実装済(§512b)</b></td></tr>
+<tr><td style="border:1px solid #243244;padding:6px 8px;background:#111827"><b>健全度リバランス</b></td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">毎朝スプレッド健全度で銘柄別サイズを縮小(拡大はしない)</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827"><b style="color:#34d399">○ §455検証済(allocMode=1・DD微減+ライブ保護)</b>・現行は固定サイズ運用</td></tr>
+<tr><td style="border:1px solid #243244;padding:6px 8px;background:#111827"><b>リスクパリティ/相関ネッティング</b></td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">レッグ間の相関を見て合成リスクが一定になるよう配分</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">未。前提=各レッグのエッジ実証が先(現状はレッグ数が少なく手動配分で十分)</td></tr>
+<tr><td style="border:1px solid #243244;padding:6px 8px;background:#111827"><b>防衛シャットダウン</b></td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">当日損失上限・連敗クールダウンで全体を止める</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827"><b style="color:#34d399">◎ 実装済(§369)</b>: 自動の緊急停止(手動介入プロトコルRULES_介入.mdの前提)</td></tr>
+</table>
+
+<h2 style="color:#93c5fd;border-left:5px solid #60a5fa;padding-left:10px;font-size:1.1em">建て増しパラメータの決め方(条件・金額・比率)</h2>
+<p><b style="color:#fbbf24">重要な方法論(§651b・ユーザー指摘「なぜ原典が正しい?全て疑え」)</b>: 建て増し比率を「原典Coin90が利格1/3だから」で採用したのは検証の放棄だった。原典比率は<b>弱い事前分布であって証明ではない</b>。「伝統だから」も「BTでこの値が最高だから」も両方とも過剰適合の逃げ道。正しくは<b>リスク構造が壊れる崖を実測し、その上に安全マージンを取って原理で置く</b>。</p>
+
+<h3 style="color:#93c5fd;font-size:15px;margin-top:1rem">① 建て増し条件(いつ足すか)</h3>
+<table style="border-collapse:collapse;width:100%;font-size:13px">
+<tr><th style="border:1px solid #243244;padding:6px 8px;background:#1e293b;color:#bfdbfe">条件</th><th style="border:1px solid #243244;padding:6px 8px;background:#1e293b;color:#bfdbfe">中身</th><th style="border:1px solid #243244;padding:6px 8px;background:#1e293b;color:#bfdbfe">状態</th></tr>
+<tr><td style="border:1px solid #243244;padding:6px 8px;background:#111827"><b>順行幅トリガー</b></td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">含み益が「TP距離×q×(既追加数+1)」に到達で+1単位。追加ごとに閾値が上がる(2q,3q…)</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827"><b style="color:#34d399">◎ 採用(§651b)</b>。値幅を波(TP距離)に正規化=固定bpsにしない</td></tr>
+<tr><td style="border:1px solid #243244;padding:6px 8px;background:#111827">波再点火トリガー</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">横断BigWave Cntの再点火で追加(途転#1012と同系の合図)</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">未。途転はドテンに使用・建て増しトリガーとしては未検証</td></tr>
+<tr><td style="border:1px solid #243244;padding:6px 8px;background:#111827">時間経過トリガー</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">入場からN分順行を維持したら追加</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">未。順行幅より弱い(値でなく時間=情報が薄い)</td></tr>
+<tr><td style="border:1px solid #243244;padding:6px 8px;background:#111827">イベント条件付き</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">僚レッグ同方向保有・レジーム一致の時だけ追加(合議増し玉§637の建玉内版)</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">未(層2の合議増し玉は配備済)</td></tr>
+</table>
+
+<h3 style="color:#93c5fd;font-size:15px;margin-top:1rem">② 建て増し金額(いくら足すか)</h3>
+<ul>
+<li><b>等量(1単位ずつ)◎採用</b>: 初期と同じ数量を追加。ピラミッド型(上ほど細く=減量追加)も理論上あるが、REVは1単位等量で十分・単純が頑健</li>
+<li>回数上限 maxAdds: <b>DDでなく資本が律速</b>。各追加の閾値は2q,3q…と上がり「より確認された勝ち玉」に乗るので追加ごとに<b>per-addは安全</b>。q0.12でmax1→+42,846/max2→+52,599/max3→+57,416(DD全て不変)。採用=<b>max2</b>(保守・max3はlive資本と集中度確認後)。最大同時=3銘柄×(1+2)=9単位×1.2万=10.8万≪余力51万</li>
+</ul>
+
+<h3 style="color:#93c5fd;font-size:15px;margin-top:1rem">③ 建て増し比率 q(どこで足すか)— 崖検証の全結果</h3>
+<p>gate2・330日・maxAdds=1・全q値でDD・両半期を実測(BW600M_REV):</p>
+<div style="overflow-x:auto"><table style="border-collapse:collapse;font-size:13px">
+<tr><th style="border:1px solid #243244;padding:5px 8px;background:#1e293b;color:#bfdbfe">q</th><th style="border:1px solid #243244;padding:5px 8px;background:#1e293b;color:#bfdbfe">総益(円)</th><th style="border:1px solid #243244;padding:5px 8px;background:#1e293b;color:#bfdbfe">最大DD</th><th style="border:1px solid #243244;padding:5px 8px;background:#1e293b;color:#bfdbfe">判定</th></tr>
+<tr><td style="border:1px solid #243244;padding:5px 8px;background:#111827">0.02</td><td style="border:1px solid #243244;padding:5px 8px;background:#111827">+39,714</td><td style="border:1px solid #243244;padding:5px 8px;background:#4a1b0c;color:#f5c4b3">18,666</td><td style="border:1px solid #243244;padding:5px 8px;background:#111827">✗ 崖の下(負け玉に建増)</td></tr>
+<tr><td style="border:1px solid #243244;padding:5px 8px;background:#111827">0.05</td><td style="border:1px solid #243244;padding:5px 8px;background:#111827">+41,732</td><td style="border:1px solid #243244;padding:5px 8px;background:#4a1b0c;color:#f5c4b3">14,522</td><td style="border:1px solid #243244;padding:5px 8px;background:#111827">✗ 崖の下</td></tr>
+<tr><td style="border:1px solid #243244;padding:5px 8px;background:#111827">0.08</td><td style="border:1px solid #243244;padding:5px 8px;background:#111827">+45,207</td><td style="border:1px solid #243244;padding:5px 8px;background:#111827">9,217</td><td style="border:1px solid #243244;padding:5px 8px;background:#111827">崖の縁(最良だが危険)</td></tr>
+<tr><td style="border:1px solid #243244;padding:5px 8px;background:#111827"><b>0.12</b></td><td style="border:1px solid #243244;padding:5px 8px;background:#111827"><b>+42,846</b></td><td style="border:1px solid #243244;padding:5px 8px;background:#111827"><b>9,217</b></td><td style="border:1px solid #243244;padding:5px 8px;background:#04342c;color:#9fe1cb"><b>◎採用(崖から50%上)</b></td></tr>
+<tr><td style="border:1px solid #243244;padding:5px 8px;background:#111827">0.333</td><td style="border:1px solid #243244;padding:5px 8px;background:#111827">+30,725</td><td style="border:1px solid #243244;padding:5px 8px;background:#111827">9,217</td><td style="border:1px solid #243244;padding:5px 8px;background:#111827">原典値=安全域の最悪端(エッジ45%捨て)</td></tr>
+<tr><td style="border:1px solid #243244;padding:5px 8px;background:#111827">0.50</td><td style="border:1px solid #243244;padding:5px 8px;background:#111827">+23,037</td><td style="border:1px solid #243244;padding:5px 8px;background:#111827">9,217</td><td style="border:1px solid #243244;padding:5px 8px;background:#111827">遅すぎ</td></tr>
+</table></div>
+<p><b>読み</b>: ①総益は<b>qが小さいほど単調増加(内部最適点なし)</b>=グリッド最良を選ぶのは無意味 ②DDは<b>q≥0.08で構造的に9,217円不変</b>(最大DD=同時被弾の負け玉=建増ゼロ) ③<b>崖はq≈0.06</b>(下でDD急増) ④全q両半期プラス。<b>決定=崖の1.5〜2倍上のq0.12</b>(単調面では「崖からのマージン」が唯一の非過剰適合な決め方)。原典1/3は安全だが最も臆病だった。</p>
+
+<h2 style="color:#93c5fd;border-left:5px solid #60a5fa;padding-left:10px;font-size:1.1em">原典リファレンス: Kabu90の建玉コントロール(継続研究)</h2>
+<p>ユーザー運用のKabu90(US30 CFD・順張りStreak)は「<b>初動=最小単位で様子見 → 順行かつトレンド継続なら段階建増</b>」の完成形。Coin100Sの現行REVP(§651b=損益閾値建増のみ)より要素が多く、順張りレッグへの移植が継続課題(docs/研究/建玉コントロール研究.md)。</p>
+<table style="border-collapse:collapse;width:100%;font-size:13px">
+<tr><th style="border:1px solid #243244;padding:6px 8px;background:#1e293b;color:#bfdbfe">Kabu90の要素</th><th style="border:1px solid #243244;padding:6px 8px;background:#1e293b;color:#bfdbfe">中身</th><th style="border:1px solid #243244;padding:6px 8px;background:#1e293b;color:#bfdbfe">Coin100S転用</th></tr>
+<tr><td style="border:1px solid #243244;padding:6px 8px;background:#111827">初動=最小単位様子見</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">Streak開始で0.5枚だけ</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">◎ REVP=1単位入場で同思想</td></tr>
+<tr><td style="border:1px solid #243244;padding:6px 8px;background:#111827">建増=トレンド生存条件</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">Streak継続中のみ足す(死んだ動きに足さない)</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">✗REVPで中立(§652・逆張りは損益閾値で十分)/未BWDEEP順張り(本命)</td></tr>
+<tr><td style="border:1px solid #243244;padding:6px 8px;background:#111827">σ較正の建増閾値</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">建増開始=SPREAD+SD300×6(実現ボラ較正)</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">未(REVPは波%較正)=T2で比較</td></tr>
+<tr><td style="border:1px solid #243244;padding:6px 8px;background:#111827">流動性窓スケールの最大建玉</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">時間帯で上限可変(ロンドン重複で最大4段)+資本キャップ(総額/7万)</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">未=T3(cryptoボラ時間帯)</td></tr>
+<tr><td style="border:1px solid #243244;padding:6px 8px;background:#111827">建増+スケールアウト対</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">σTP半分利食い→初動だけ残す(ランナー)</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">未=T4(§607凸結合限界と要整合)</td></tr>
+<tr><td style="border:1px solid #243244;padding:6px 8px;background:#111827">加速的ハードル・時間間隔</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">閾値×建玉数量/建増は5分以上あけて</td><td style="border:1px solid #243244;padding:6px 8px;background:#111827">部分実装(§651b=×既追加数+1)/T6時間間隔は未</td></tr>
+</table>
+<p style="color:#94a3b8;font-size:13px">継続研究の核心: 建玉コントロールの価値は「負けを増やさず勝ちを増幅」。損失サイド/DDが動いたら設計ミス。パラメータは崖検証(§651b)で置く。</p>
+
+<h2 style="color:#93c5fd;border-left:5px solid #60a5fa;padding-left:10px;font-size:1.1em">設計原則(実証済みの法則)</h2>
+<ul>
+<li><b style="color:#34d399">勝ちに足し、負けに足さない</b>: 順行ピラミッディング◎ vs ナンピン✗ の非対称が核心。「追加が起きる条件」が損失サイドに触れない設計なら、DDを増やさず期待だけ上げられる(§651)</li>
+<li><b>追加の物差しは波(TP距離)に正規化する</b>: 固定bpsでなくトレードのスケールに比例させる</li>
+<li><b>パラメータは伝統もグリッド最良も疑う(§651b)</b>: 「原典が1/3だから」も「BTでq0.08が最高だから」も両方過剰適合の逃げ道。<b>リスク構造の崖を実測→崖の上に安全マージンで置く</b>のが唯一の非過剰適合な決め方(単調面では特に)</li>
+<li><b>トレード間の勝敗にエッジ情報はない</b>(#153): 層2の増減は期待値でなく保険/出血制限として設計する</li>
+<li><b>リスクは波単位で集計</b>(§649): 銘柄を増やす=分散ではなく同時被弾の枚数。層3の総量管理が最後の砦</li>
+<li><b>検証はエンジン内・同一スケールで</b>(§650): 後付けオーバーレイのスケール混在は改善を捏造する</li>
+</ul>
+<hr style="border-color:#243244"><p style="color:#94a3b8;font-size:13px">出典: Coin100S docs/90 §369/§455/§491/§535/§607/§637-639/§648-651・Coin90原典(利格/建増/撤退/DotenCnt)・memory/reframe-until-breakthrough(建増し全レッグ横断考察=宿題)</p>
+</body></html>
