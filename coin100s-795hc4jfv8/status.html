@@ -12,24 +12,42 @@ th{background:#1e293b;color:#bfdbfe} td{background:#111827}
 img{max-width:100%;border:1px solid #243244;border-radius:8px}
 a{color:#60a5fa;text-decoration:none} a:hover{text-decoration:underline}
 .meta{color:#94a3b8;font-size:13px}</style>
-<script>setTimeout(function(){location.replace(location.pathname+"?t="+Date.now());},300000);</script></head><body>
+<script>
+function bust(){var t=Date.now();
+ document.querySelectorAll('img[data-live]').forEach(function(im){im.src=im.getAttribute('data-live')+'?t='+t;});
+ fetch('status_snapshot.json?t='+t).then(function(r){return r.json();}).then(function(s){
+  var cls=function(v){return v&&v[0]==='+'?'pos':v&&v[0]==='-'?'neg':'';};
+  document.getElementById('live-cards').innerHTML=
+   '<div class="cards"><div class="card">建玉数<div class="v">'+s.count+'</div></div>'+
+   '<div class="card">本日損益<div class="v '+cls(s.dayPnl)+'">'+s.dayPnl+'</div></div>'+
+   '<div class="card">評価損益<div class="v '+cls(s.evalPnl)+'">'+s.evalPnl+'</div></div></div>'+
+   (s.breaker?'<p class="neg">★発注ブレーカー作動中</p>':'');
+  var rows=(s.positions||[]).map(function(p){return '<tr><td>'+p.sym+'</td><td>'+p.side+'</td><td>'+p.size+
+   '</td><td>'+p.price+'</td><td class="'+cls(p.pnl)+'">'+p.pnl+'</td><td>'+p.owner+'</td></tr>';}).join('')
+   ||'<tr><td colspan=6>建玉なし(flat)</td></tr>';
+  document.getElementById('live-pos').innerHTML=
+   '<table><tr><th>銘柄</th><th>側</th><th>数量</th><th>建値</th><th>含損益</th><th>レッグ</th></tr>'+rows+'</table>';
+  document.getElementById('live-ts').textContent='スナップショット: '+s.ts+'(約5分毎更新・自動)';
+ }).catch(function(){});}
+document.addEventListener('DOMContentLoaded',bust);setInterval(bust,300000);
+</script></head><body>
 <h1>Coin100S 運用状況</h1>
-<p class="meta">スナップショット: 2026-07-25 08:26:13 / ページ生成: 2026-07-29 12:11:05(自動リロード・最新化) / <a href="index.html">目次へ</a></p>
-<div class="cards">
-<div class="card">建玉数<div class="v">0</div></div>
-<div class="card">本日損益<div class="v neg">-3,477円</div></div>
-<div class="card">評価損益<div class="v ">?</div></div>
-</div>
+<p class="meta"><span id="live-ts">スナップショット: 2026-07-29 10:51:14</span> / <a href="index.html">目次へ</a></p>
+<div id="live-cards"><div class="cards">
+<div class="card">建玉数<div class="v">5</div></div>
+<div class="card">本日損益<div class="v pos">+690円</div></div>
+<div class="card">評価損益<div class="v pos">+795円</div></div>
+</div></div>
 <h2>資産推移(直近30日)</h2>
-<p class='meta'>(資産推移PNG未生成=アプリ稼働待ち)</p>
+<img data-live="status_equity.png" src="status_equity.png?t=1051" alt="equity">
 <h2>取引チャート(直近24h)</h2>
-<img src="status_chart.png?t=1211" alt="chart">
+<img data-live="status_chart.png" src="status_chart.png?t=1051" alt="chart">
 <h2>建玉一覧</h2>
-<table><tr><th>銘柄</th><th>側</th><th>数量</th><th>建値</th><th>含損益</th><th>レッグ</th></tr><tr><td colspan=6>建玉なし(flat)</td></tr></table>
-<h2>実現決済履歴(直近15件・OrderId単位)</h2>
-<table><tr><th>決済時刻</th><th>レッグ</th><th>銘柄</th><th>実現損益</th></tr><tr><td>07-25 06:08</td><td>RELVALP_SELL</td><td>ETH</td><td class="pos">+382円</td></tr><tr><td>07-25 06:08</td><td>RELVALP_SELL</td><td>ETH</td><td class="pos">+72円</td></tr><tr><td>07-25 06:08</td><td>RELVALP_SELL</td><td>LINK</td><td class="pos">+342円</td></tr><tr><td>07-25 06:08</td><td>RELVALP_SELL</td><td>ETH</td><td class="pos">+72円</td></tr><tr><td>07-25 06:08</td><td>RELVALP_SELL</td><td>LINK</td><td class="pos">+54円</td></tr><tr><td>07-25 06:08</td><td>RELVALP_SL700</td><td>LINK</td><td class="pos">+228円</td></tr><tr><td>07-25 06:08</td><td>RELVALP_SELL</td><td>ETH</td><td class="pos">+290円</td></tr><tr><td>07-25 06:08</td><td>RELVALP_SL700</td><td>ETH</td><td class="pos">+190円</td></tr><tr><td>07-25 06:08</td><td>RELVALP_SELL</td><td>LINK</td><td class="pos">+189円</td></tr><tr><td>07-25 06:08</td><td>RELVALP_SL700</td><td>LINK</td><td class="pos">+162円</td></tr><tr><td>07-25 06:01</td><td>TENKI5D_REV_BTC</td><td>BTC</td><td class="neg">-921円</td></tr><tr><td>07-25 06:01</td><td>TENKI5D_REV_DOGE</td><td>DOGE</td><td class="neg">-611円</td></tr><tr><td>07-25 06:01</td><td>TENKI5D_REV_BTC</td><td>BTC</td><td class="neg">-691円</td></tr><tr><td>07-25 06:01</td><td>TENKI5D_REV_SOL</td><td>SOL</td><td class="neg">-1,376円</td></tr><tr><td>07-25 06:01</td><td>TENKI5D_REV_DOGE</td><td>DOGE</td><td class="neg">-1円</td></tr></table>
+<div id="live-pos"><table><tr><th>銘柄</th><th>側</th><th>数量</th><th>建値</th><th>含損益</th><th>レッグ</th></tr><tr><td>BTC_JPY</td><td>SELL</td><td>0.004</td><td>@10,445,023</td><td>+18円</td><td>SIGFADE_BTC</td></tr><tr><td>ETH_JPY</td><td>SELL</td><td>0.05</td><td>@313,487</td><td>+46円</td><td>SIGFADE_ETH</td></tr><tr><td>ETH_JPY</td><td>SELL</td><td>0.1</td><td>@313,502</td><td>+94円</td><td>SIGFADE_ETH</td></tr><tr><td>SOL_JPY</td><td>SELL</td><td>0.8</td><td>@12,172</td><td>+128円</td><td>SIGFADE_SOL</td></tr><tr><td>SOL_JPY</td><td>SELL</td><td>3.1</td><td>@12,175</td><td>+508円</td><td>SIGFADE_SOL</td></tr></table></div>
+<h2>実現決済履歴(直近15件・OrderId単位)<span class="meta">※この節とレジームのみページ生成時点(07-29 10:51)の値</span></h2>
+<table><tr><th>決済時刻</th><th>レッグ</th><th>銘柄</th><th>実現損益</th></tr><tr><td>07-29 06:08</td><td>RELVALP_SL700</td><td>LINK</td><td class="pos">+270円</td></tr><tr><td>07-29 06:08</td><td>RELVALP_SELL</td><td>LINK</td><td class="pos">+420円</td></tr><tr><td>07-29 00:27</td><td>BW10M3_5M</td><td>BTC</td><td class="neg">-42円</td></tr><tr><td>07-29 00:25</td><td>BW600M_REVP_XRP</td><td>XRP</td><td class="pos">+144円</td></tr><tr><td>07-29 00:25</td><td>BW600M_REVP_XRP</td><td>XRP</td><td class="pos">+77円</td></tr><tr><td>07-29 00:25</td><td>BW600M_REVP_XRP</td><td>XRP</td><td class="pos">+6円</td></tr><tr><td>07-29 00:25</td><td>BW600M_REVP_BTC</td><td>BTC</td><td class="pos">+145円</td></tr><tr><td>07-29 00:25</td><td>BW600M_REVP_XRP</td><td>XRP</td><td class="pos">+50円</td></tr><tr><td>07-29 00:25</td><td>BW600M_REVP_BTC</td><td>BTC</td><td class="pos">+141円</td></tr><tr><td>07-29 00:25</td><td>BW600M_REVP_XRP</td><td>XRP</td><td class="pos">+146円</td></tr><tr><td>07-29 00:25</td><td>BW600M_REVP_BTC</td><td>BTC</td><td class="pos">+122円</td></tr><tr><td>07-28 14:22</td><td>BW600M_REVP_ETH</td><td>ETH</td><td class="pos">+11円</td></tr><tr><td>07-28 14:22</td><td>BW600M_REVP_ETH</td><td>ETH</td><td class="pos">+37円</td></tr><tr><td>07-28 14:22</td><td>BW600M_REVP_ETH</td><td>ETH</td><td class="pos">+4円</td></tr><tr><td>07-28 14:22</td><td>BW600M_REVP_ETH</td><td>ETH</td><td class="pos">+62円</td></tr></table>
 <!-- §799c 「本取引日の実取引(6:00起点)」テーブルは公開ページから削除(ユーザー指示2026-07-15・数量/指値まで晒す情報漏れ)。建玉/実現損益は許可・実発注の生取引明細は非公開 -->
 <h2>現在レジーム(3軸・§570c)</h2>
-<ul><li>アルト対BTC 5日: <b>+90bps</b>(アルト優越=RELVAL逆風)</li><li>BTC ER240m: <b>0.056</b>(閾値0.25→レンジ(fade順風/BWTRD逆風))</li><li>BTC実現ボラ240m: <b>4.92</b> bps/分</li></ul>
+<p class='meta'>(レジーム計算失敗)</p>
 <hr><p class="meta">自動生成: tools/web_publish.py(§580・読み取り専用)。売買判断はアプリ本体。</p>
 </body></html>
