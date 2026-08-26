@@ -12,24 +12,42 @@ th{background:#1e293b;color:#bfdbfe} td{background:#111827}
 img{max-width:100%;border:1px solid #243244;border-radius:8px}
 a{color:#60a5fa;text-decoration:none} a:hover{text-decoration:underline}
 .meta{color:#94a3b8;font-size:13px}</style>
-<script>setTimeout(function(){location.replace(location.pathname+"?t="+Date.now());},300000);</script></head><body>
+<script>
+function bust(){var t=Date.now();
+ document.querySelectorAll('img[data-live]').forEach(function(im){im.src=im.getAttribute('data-live')+'?t='+t;});
+ fetch('status_snapshot.json?t='+t).then(function(r){return r.json();}).then(function(s){
+  var cls=function(v){return v&&v[0]==='+'?'pos':v&&v[0]==='-'?'neg':'';};
+  document.getElementById('live-cards').innerHTML=
+   '<div class="cards"><div class="card">建玉数<div class="v">'+s.count+'</div></div>'+
+   '<div class="card">本日損益<div class="v '+cls(s.dayPnl)+'">'+s.dayPnl+'</div></div>'+
+   '<div class="card">評価損益<div class="v '+cls(s.evalPnl)+'">'+s.evalPnl+'</div></div></div>'+
+   (s.breaker?'<p class="neg">★発注ブレーカー作動中</p>':'');
+  var rows=(s.positions||[]).map(function(p){return '<tr><td>'+p.sym+'</td><td>'+p.side+'</td><td>'+p.size+
+   '</td><td>'+p.price+'</td><td class="'+cls(p.pnl)+'">'+p.pnl+'</td><td>'+p.owner+'</td></tr>';}).join('')
+   ||'<tr><td colspan=6>建玉なし(flat)</td></tr>';
+  document.getElementById('live-pos').innerHTML=
+   '<table><tr><th>銘柄</th><th>側</th><th>数量</th><th>建値</th><th>含損益</th><th>レッグ</th></tr>'+rows+'</table>';
+  document.getElementById('live-ts').textContent='スナップショット: '+s.ts+'(約5分毎更新・自動)';
+ }).catch(function(){});}
+document.addEventListener('DOMContentLoaded',bust);setInterval(bust,300000);
+</script></head><body>
 <h1>Coin100S 運用状況</h1>
-<p class="meta"><span id="live-ts">スナップショット: 2026-08-26 06:20:05</span> / <a href="index.html">目次へ</a></p>
+<p class="meta"><span id="live-ts">スナップショット: 2026-08-27 06:20:25</span> / <a href="index.html">目次へ</a></p>
 <div id="live-cards"><div class="cards">
-<div class="card">建玉数<div class="v">1</div></div>
+<div class="card">建玉数<div class="v">0</div></div>
 <div class="card">本日損益<div class="v ">?</div></div>
-<div class="card">評価損益<div class="v pos">+168円</div></div>
+<div class="card">評価損益<div class="v ">?</div></div>
 </div></div>
 <h2>資産推移(直近30日)</h2>
 <img data-live="status_equity.png" src="status_equity.png?t=0620" alt="equity">
 <h2>取引チャート(直近24h)</h2>
 <img data-live="status_chart.png" src="status_chart.png?t=0620" alt="chart">
 <h2>建玉一覧</h2>
-<div id="live-pos"><table><tr><th>銘柄</th><th>側</th><th>数量</th><th>建値</th><th>含損益</th><th>レッグ</th></tr><tr><td>SOL_JPY</td><td>BUY</td><td>10.5</td><td>@15,374</td><td>+157円</td><td>SIGFADE_SOL</td></tr></table></div>
-<h2>実現決済履歴(直近15件・OrderId単位)<span class="meta">※この節とレジームのみページ生成時点(08-26 06:20)の値</span></h2>
-<table><tr><th>決済時刻</th><th>レッグ</th><th>銘柄</th><th>実現損益</th></tr><tr><td>08-26 01:02</td><td>BW600M_REVP_XRP</td><td>XRP</td><td class="pos">+89円</td></tr><tr><td>08-26 01:02</td><td>BW600M_REVP_XRP</td><td>XRP</td><td class="pos">+109円</td></tr><tr><td>08-26 01:02</td><td>BW600M_REVP_XRP</td><td>XRP</td><td class="pos">+6円</td></tr><tr><td>08-25 22:28</td><td>SIGFADE_SOL</td><td>SOL</td><td class="neg">-4,376円</td></tr><tr><td>08-25 09:12</td><td>BW600M_REVP_XRP</td><td>XRP</td><td class="pos">+19円</td></tr><tr><td>08-25 09:12</td><td>BW600M_REVP_XRP</td><td>XRP</td><td class="pos">+66円</td></tr><tr><td>08-25 09:12</td><td>BW600M_REVP_XRP</td><td>XRP</td><td class="pos">+39円</td></tr><tr><td>08-25 09:12</td><td>BW600M_REVP_XRP</td><td>XRP</td><td class="pos">+128円</td></tr><tr><td>08-24 20:34</td><td>SIGFADE_SOL</td><td>SOL</td><td class="pos">+176円</td></tr><tr><td>08-24 20:34</td><td>SIGFADE_SOL</td><td>SOL</td><td class="pos">+226円</td></tr><tr><td>08-24 20:34</td><td>SIGFADE_SOL</td><td>SOL</td><td class="pos">+319円</td></tr><tr><td>08-24 18:27</td><td>BW600M_REVP_XRP</td><td>XRP</td><td class="pos">+24円</td></tr><tr><td>08-24 18:27</td><td>BW600M_REVP_XRP</td><td>XRP</td><td class="pos">+17円</td></tr><tr><td>08-24 18:27</td><td>BW600M_REVP_XRP</td><td>XRP</td><td class="pos">+3円</td></tr><tr><td>08-24 18:27</td><td>BW600M_REVP_XRP</td><td>XRP</td><td class="pos">+84円</td></tr></table>
+<div id="live-pos"><table><tr><th>銘柄</th><th>側</th><th>数量</th><th>建値</th><th>含損益</th><th>レッグ</th></tr><tr><td colspan=6>建玉なし(flat)</td></tr></table></div>
+<h2>実現決済履歴(直近15件・OrderId単位)<span class="meta">※この節とレジームのみページ生成時点(08-27 06:20)の値</span></h2>
+<table><tr><th>決済時刻</th><th>レッグ</th><th>銘柄</th><th>実現損益</th></tr><tr><td>08-26 19:48</td><td>SIGFADE_SOL</td><td>SOL</td><td class="pos">+1,785円</td></tr><tr><td>08-26 10:02</td><td>BW600M_REVP_XRP</td><td>XRP</td><td class="pos">+156円</td></tr><tr><td>08-26 10:02</td><td>BW600M_REVP_XRP</td><td>XRP</td><td class="pos">+192円</td></tr><tr><td>08-26 10:02</td><td>BW600M_REVP_XRP</td><td>XRP</td><td class="pos">+42円</td></tr><tr><td>08-26 01:02</td><td>BW600M_REVP_XRP</td><td>XRP</td><td class="pos">+89円</td></tr><tr><td>08-26 01:02</td><td>BW600M_REVP_XRP</td><td>XRP</td><td class="pos">+109円</td></tr><tr><td>08-26 01:02</td><td>BW600M_REVP_XRP</td><td>XRP</td><td class="pos">+6円</td></tr><tr><td>08-25 22:28</td><td>SIGFADE_SOL</td><td>SOL</td><td class="neg">-4,376円</td></tr><tr><td>08-25 09:12</td><td>BW600M_REVP_XRP</td><td>XRP</td><td class="pos">+19円</td></tr><tr><td>08-25 09:12</td><td>BW600M_REVP_XRP</td><td>XRP</td><td class="pos">+66円</td></tr><tr><td>08-25 09:12</td><td>BW600M_REVP_XRP</td><td>XRP</td><td class="pos">+39円</td></tr><tr><td>08-25 09:12</td><td>BW600M_REVP_XRP</td><td>XRP</td><td class="pos">+128円</td></tr><tr><td>08-24 20:34</td><td>SIGFADE_SOL</td><td>SOL</td><td class="pos">+176円</td></tr><tr><td>08-24 20:34</td><td>SIGFADE_SOL</td><td>SOL</td><td class="pos">+226円</td></tr><tr><td>08-24 20:34</td><td>SIGFADE_SOL</td><td>SOL</td><td class="pos">+319円</td></tr></table>
 <!-- §799c 「本取引日の実取引(6:00起点)」テーブルは公開ページから削除(ユーザー指示2026-07-15・数量/指値まで晒す情報漏れ)。建玉/実現損益は許可・実発注の生取引明細は非公開 -->
 <h2>現在レジーム(3軸・§570c)</h2>
-<ul><li>アルト対BTC 5日: <b>+185bps</b>(アルト優越=RELVAL逆風)</li><li>BTC ER240m: <b>0.077</b>(閾値0.25→レンジ(fade順風/BWTRD逆風))</li><li>BTC実現ボラ240m: <b>6.00</b> bps/分</li></ul>
+<ul><li>アルト対BTC 5日: <b>-9bps</b>(アルト劣後=RELVAL順風)</li><li>BTC ER240m: <b>0.067</b>(閾値0.25→レンジ(fade順風/BWTRD逆風))</li><li>BTC実現ボラ240m: <b>4.29</b> bps/分</li></ul>
 <hr><p class="meta">自動生成: tools/web_publish.py(§580・読み取り専用)。売買判断はアプリ本体。</p>
 </body></html>
