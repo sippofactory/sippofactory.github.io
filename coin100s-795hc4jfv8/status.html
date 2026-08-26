@@ -12,25 +12,7 @@ th{background:#1e293b;color:#bfdbfe} td{background:#111827}
 img{max-width:100%;border:1px solid #243244;border-radius:8px}
 a{color:#60a5fa;text-decoration:none} a:hover{text-decoration:underline}
 .meta{color:#94a3b8;font-size:13px}</style>
-<script>
-function bust(){var t=Date.now();
- document.querySelectorAll('img[data-live]').forEach(function(im){im.src=im.getAttribute('data-live')+'?t='+t;});
- fetch('status_snapshot.json?t='+t).then(function(r){return r.json();}).then(function(s){
-  var cls=function(v){return v&&v[0]==='+'?'pos':v&&v[0]==='-'?'neg':'';};
-  document.getElementById('live-cards').innerHTML=
-   '<div class="cards"><div class="card">建玉数<div class="v">'+s.count+'</div></div>'+
-   '<div class="card">本日損益<div class="v '+cls(s.dayPnl)+'">'+s.dayPnl+'</div></div>'+
-   '<div class="card">評価損益<div class="v '+cls(s.evalPnl)+'">'+s.evalPnl+'</div></div></div>'+
-   (s.breaker?'<p class="neg">★発注ブレーカー作動中</p>':'');
-  var rows=(s.positions||[]).map(function(p){return '<tr><td>'+p.sym+'</td><td>'+p.side+'</td><td>'+p.size+
-   '</td><td>'+p.price+'</td><td class="'+cls(p.pnl)+'">'+p.pnl+'</td><td>'+p.owner+'</td></tr>';}).join('')
-   ||'<tr><td colspan=6>建玉なし(flat)</td></tr>';
-  document.getElementById('live-pos').innerHTML=
-   '<table><tr><th>銘柄</th><th>側</th><th>数量</th><th>建値</th><th>含損益</th><th>レッグ</th></tr>'+rows+'</table>';
-  document.getElementById('live-ts').textContent='スナップショット: '+s.ts+'(約5分毎更新・自動)';
- }).catch(function(){});}
-document.addEventListener('DOMContentLoaded',bust);setInterval(bust,300000);
-</script></head><body>
+<script>setTimeout(function(){location.replace(location.pathname+"?t="+Date.now());},300000);</script></head><body>
 <h1>Coin100S 運用状況</h1>
 <p class="meta"><span id="live-ts">スナップショット: 2026-08-26 06:20:05</span> / <a href="index.html">目次へ</a></p>
 <div id="live-cards"><div class="cards">
