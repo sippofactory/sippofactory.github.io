@@ -1,6 +1,8 @@
 # 公開ページ トップ
 
 ## いろいろまとめ
+[味噌かつ来店メモ（テスト版）](webshared/miso-katsu-memo-test.html)
+
 [ＡＤＨＤと鉄分不足](<webshared/20260620 ADHDと鉄分不足.html>)
 
 [デンタルフロスを一気に結ぶ小ワザ](<webshared/20260620 デンタルフロスを一気に結ぶ小ワザ.html>)

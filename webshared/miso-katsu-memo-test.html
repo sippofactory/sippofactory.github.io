@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b0f14">
+  <title>味噌かつ来店メモ - テスト</title>
+  <style>
+    :root{--bg:#0b0f14;--panel:#111827;--soft:#172235;--text:#e5e7eb;--muted:#94a3b8;--line:#243244;--blue:#7dd3fc;--green:#34d399;--red:#fb7185}
+    *{box-sizing:border-box}body{margin:0;color:var(--text);background:radial-gradient(circle at 90% 0%,rgba(52,211,153,.14),transparent 28rem),linear-gradient(145deg,#0b0f14,#0e1722 58%,#0b0f14);font-family:"Yu Gothic","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;line-height:1.6}a{color:#7dd3fc}a:visited{color:#c4b5fd}main{width:min(100%,760px);margin:auto;padding:max(18px,env(safe-area-inset-top)) 14px 34px}header{padding:14px 2px 22px}.eyebrow{margin:0;color:var(--green);font-size:.76rem;font-weight:700;letter-spacing:.12em}h1,h2,h3{margin:0;color:#f8fafc;line-height:1.3}h1{font-size:clamp(1.9rem,8vw,3rem)}h2{font-size:1.1rem}header p:last-child{margin:10px 0 0;color:var(--muted)}.panel{border:1px solid var(--line);border-radius:18px;background:rgba(17,24,39,.92);box-shadow:0 18px 50px #0004}.panel h2{padding:17px 16px 10px}.body{padding:0 16px 16px}form{display:grid;gap:14px}.field{display:grid;gap:5px}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}label{font-size:.85rem;font-weight:700;color:#cbd5e1}input,textarea,select{width:100%;border:1px solid #334155;border-radius:11px;padding:11px 12px;color:var(--text);background:#0d1520;font:inherit;outline:0}input:focus,textarea:focus,select:focus{border-color:var(--blue);box-shadow:0 0 0 3px #60a5fa29}textarea{min-height:110px;resize:vertical}input[type=file]{padding:8px}input[type=file]::file-selector-button{border:0;border-radius:7px;padding:6px 8px;margin-right:6px;background:var(--blue);color:#082f49;font-weight:700}.preview{display:none;max-height:230px;width:100%;object-fit:cover;border-radius:11px;border:1px solid var(--line)}.actions{display:flex;gap:9px;flex-wrap:wrap}.button{min-height:44px;border:1px solid #36506d;border-radius:11px;padding:9px 14px;color:var(--text);background:#162538;font-weight:700}.primary{border-color:#10b981;background:var(--green);color:#052e2b}.hint,.status,.privacy{margin:0;color:var(--muted);font-size:.78rem}.status{min-height:23px;color:var(--green)}.status.error{color:var(--red)}.list{display:grid;gap:9px;margin-top:16px}.memo{display:grid;grid-template-columns:72px 1fr;gap:10px;padding:11px;border:1px solid var(--line);border-radius:13px;background:rgba(23,34,53,.75)}.memo img,.placeholder{width:72px;height:72px;border-radius:9px;object-fit:cover;background:#0d1520}.placeholder{display:grid;place-items:center;color:#64748b;font-size:.75rem}.memo h3{font-size:.97rem}.meta{margin:3px 0;color:var(--muted);font-size:.77rem}.note{margin:0;color:#cbd5e1;font-size:.82rem;white-space:pre-wrap}.memo button{border:0;padding:0;background:transparent;color:#fda4af;font-size:.75rem}.privacy{margin:14px 2px 0;color:#64748b}@media(max-width:520px){.row{grid-template-columns:1fr}.button{flex:1}}
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">MISO KATSU FIELD NOTES / TEST</p>
+      <h1>味噌かつ来店メモ</h1>
+      <p>スマホ入力の公開テスト版です。入力内容はこのブラウザ内だけに保存されます。</p>
+    </header>
+    <section class="panel">
+      <h2>新しいメモ</h2>
+      <div class="body">
+        <form id="form">
+          <div class="field"><label for="shop">店名 *</label><input id="shop" required placeholder="例: 矢場とん 本店" autocomplete="organization"></div>
+          <div class="field"><label for="address">住所・場所</label><input id="address" placeholder="例: 名古屋市中区大須 3-6-18" autocomplete="street-address"></div>
+          <div class="row"><div class="field"><label for="date">訪問日時</label><input id="date" type="datetime-local" required></div><div class="field"><label for="rating">評価</label><select id="rating"><option value="5">★★★★★ 5</option><option value="4">★★★★☆ 4</option><option value="3">★★★☆☆ 3</option><option value="2">★★☆☆☆ 2</option><option value="1">★☆☆☆☆ 1</option></select></div></div>
+          <div class="row"><div class="field"><label for="menu">メニュー</label><input id="menu" placeholder="例: ロースとんかつ定食"></div><div class="field"><label for="price">価格（円）</label><input id="price" type="number" min="0" step="10" inputmode="numeric" placeholder="1500"></div></div>
+          <div class="field"><label for="photo">写真</label><input id="photo" type="file" accept="image/*" capture="environment"><p class="hint">スマホではカメラ撮影または写真ライブラリを選択できます。</p><img id="preview" class="preview" alt="選択した写真のプレビュー"></div>
+          <div class="field"><label for="note">感想</label><textarea id="note" placeholder="味噌だれ、衣、キャベツ、お店の雰囲気など"></textarea></div>
+          <div class="actions"><button class="button primary" type="submit">保存する</button><button class="button" id="clear" type="button">入力をクリア</button></div>
+          <p class="status" id="status" role="status" aria-live="polite"></p>
+        </form>
+        <h2>保存したメモ</h2>
+        <div id="list" class="list"></div>
+        <p class="privacy">テスト版のため、Supabase同期・端末間共有・本番の写真保存は未接続です。</p>
+      </div>
+    </section>
+  </main>
+  <script>
+    (() => {
+      const key = "miso-katsu-public-test-v1";
+      const $ = (id) => document.getElementById(id);
+      let records = read();
+      let photo = "";
+      $("date").value = localDate(new Date());
+      draw();
+      $("photo").addEventListener("change", () => {
+        const file = $("photo").files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = () => { photo = String(reader.result); $("preview").src = photo; $("preview").style.display = "block"; };
+        reader.readAsDataURL(file);
+      });
+      $("form").addEventListener("submit", (event) => {
+        event.preventDefault();
+        records.unshift({id: `${Date.now()}-${Math.random()}`, shop: $("shop").value.trim(), address: $("address").value.trim(), date: $("date").value, rating: Number($("rating").value), menu: $("menu").value.trim(), price: Number($("price").value || 0), note: $("note").value.trim(), photo});
+        write();
+        $("form").reset(); photo = ""; $("preview").removeAttribute("src"); $("preview").style.display = "none"; $("date").value = localDate(new Date());
+        message("保存しました。", false); draw();
+      });
+      $("clear").addEventListener("click", () => { $("form").reset(); photo = ""; $("preview").removeAttribute("src"); $("preview").style.display = "none"; $("date").value = localDate(new Date()); message("入力をクリアしました。", false); });
+      $("list").addEventListener("click", (event) => { const button = event.target.closest("button[data-id]"); if (!button) return; records = records.filter((record) => record.id !== button.dataset.id); write(); draw(); message("削除しました。", false); });
+      function read() { try { const data = JSON.parse(localStorage.getItem(key) || "[]"); return Array.isArray(data) ? data : []; } catch { return []; } }
+      function write() { try { localStorage.setItem(key, JSON.stringify(records)); } catch { message("保存できませんでした。写真を小さくして試してください。", true); } }
+      function draw() { $("list").replaceChildren(); if (!records.length) { const empty = document.createElement("p"); empty.className = "hint"; empty.textContent = "まだメモがありません。最初の一軒を記録しましょう。"; $("list").append(empty); return; } records.forEach((record) => { const item = document.createElement("article"); item.className = "memo"; const media = record.photo ? Object.assign(document.createElement("img"), {src: record.photo, alt: `${record.shop}の写真`}) : Object.assign(document.createElement("div"), {className: "placeholder", textContent: "写真なし"}); const content = document.createElement("div"); const heading = document.createElement("h3"); heading.textContent = record.shop; const meta = document.createElement("p"); meta.className = "meta"; meta.textContent = [stars(record.rating), format(record.date), record.menu, record.price ? `${record.price.toLocaleString()}円` : ""].filter(Boolean).join(" / "); const note = document.createElement("p"); note.className = "note"; note.textContent = record.note || "感想は未入力"; const links = document.createElement("p"); links.className = "meta"; if (record.address) { const map = document.createElement("a"); map.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${record.shop} ${record.address}`)}`; map.target = "_blank"; map.rel = "noopener noreferrer"; map.textContent = "Google Maps"; links.append(map, " / "); } const remove = document.createElement("button"); remove.type = "button"; remove.dataset.id = record.id; remove.textContent = "削除"; links.append(remove); content.append(heading, meta, note, links); item.append(media, content); $("list").append(item); }); }
+      function stars(value) { return `${"★".repeat(value)}${"☆".repeat(5 - value)}`; }
+      function format(value) { const date = new Date(value); return Number.isNaN(date.getTime()) ? value : date.toLocaleString("ja-JP", {dateStyle: "medium", timeStyle: "short"}); }
+      function localDate(date) { const offset = date.getTimezoneOffset(); return new Date(date.getTime() - offset * 60000).toISOString().slice(0, 16); }
+      function message(text, error) { $("status").textContent = text; $("status").classList.toggle("error", error); }
+    })();
+  </script>
+</body>
+</html>
