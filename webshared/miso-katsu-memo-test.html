@@ -45,8 +45,9 @@
       $("date").value = localDate(new Date());
       draw();
       $("photo").addEventListener("change", () => {
-        photos = Array.from($("photo").files, readFile);
-        Promise.all(photos).then((values) => { photos = values; drawPreviews(); });
+        const newPhotos = Array.from($("photo").files, readFile);
+        Promise.all(newPhotos).then((values) => { photos.push(...values); drawPreviews(); });
+        $("photo").value = "";
       });
       $("form").addEventListener("submit", (event) => {
         event.preventDefault();
