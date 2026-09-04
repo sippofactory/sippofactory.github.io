@@ -1,1 +1,1 @@
-{"ts":"2026-09-04 18:04:52","flat":false,"count":2,"breaker":false,"evalPnl":"+47円","dayPnl":"-694円","positions":[{"sym":"XRP_JPY","side":"SELL","size":"80","price":"227","pnl":"-40円","owner":"RELVALP_SELL_XRP","ts":"09-04 07:09"},{"sym":"XRP_JPY","side":"SELL","size":"80","price":"229","pnl":"+90円","owner":"RELVALP_SELL_XRP","ts":"09-04 06:06"}]}
+{"ts":"2026-09-04 18:10:22","flat":true,"count":0,"breaker":false,"evalPnl":"0円","dayPnl":"-648円","positions":[]}
