@@ -1,1 +1,1 @@
-{"ts":"2026-09-06 18:06:03","flat":false,"count":2,"breaker":false,"evalPnl":"-406円","dayPnl":"-1,348円","positions":[{"sym":"LINK_JPY","side":"SELL","size":"10","price":"1,877","pnl":"-340円","owner":"RELVALP_SELL_LINK","ts":"09-06 06:06"},{"sym":"LTC_JPY","side":"SELL","size":"1","price":"8,403","pnl":"-66円","owner":"RELVALP_SELL_LTC","ts":"09-06 06:06"}]}
+{"ts":"2026-09-06 18:11:32","flat":true,"count":0,"breaker":false,"evalPnl":"0円","dayPnl":"-1,773円","positions":[]}
